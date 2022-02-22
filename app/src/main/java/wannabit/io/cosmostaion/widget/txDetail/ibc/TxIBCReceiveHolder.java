@@ -17,10 +17,7 @@ import ibc.core.channel.v1.Tx;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.base.BaseChain;
 import wannabit.io.cosmostaion.base.BaseData;
-import wannabit.io.cosmostaion.dao.Assets;
 import wannabit.io.cosmostaion.utils.WDp;
-import wannabit.io.cosmostaion.utils.WLog;
-import wannabit.io.cosmostaion.model.type.Coin;
 import wannabit.io.cosmostaion.utils.WUtil;
 import wannabit.io.cosmostaion.widget.txDetail.TxHolder;
 
@@ -59,6 +56,9 @@ public class TxIBCReceiveHolder extends TxHolder {
                 String ibcDenom = denom.split("/")[2];
                 divideDecimal = WDp.mainDivideDecimal(ibcDenom);
                 itemIbcAmountDenom.setText(ibcDenom.toUpperCase());
+            } else if (denom.contains("cw20")) {
+                divideDecimal = WUtil.getCw20CoinDecimal(baseData, denom);
+                itemIbcAmountDenom.setText(denom.toUpperCase());
             } else if (denom.startsWith("c")) {
                 divideDecimal = WUtil.getSifCoinDecimal(denom);
                 itemIbcAmountDenom.setText(denom.toUpperCase());

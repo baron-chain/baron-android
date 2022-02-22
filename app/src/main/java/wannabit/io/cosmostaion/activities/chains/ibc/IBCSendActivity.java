@@ -1,8 +1,10 @@
 package wannabit.io.cosmostaion.activities.chains.ibc;
 
+import static wannabit.io.cosmostaion.base.BaseConstant.CONST_PW_TX_IBC_CONTRACT;
+import static wannabit.io.cosmostaion.base.BaseConstant.CONST_PW_TX_IBC_TRANSFER;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,7 +15,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import wannabit.io.cosmostaion.R;
@@ -30,14 +31,9 @@ import wannabit.io.cosmostaion.fragment.chains.ibc.IBCSendStep1Fragment;
 import wannabit.io.cosmostaion.fragment.chains.ibc.IBCSendStep2Fragment;
 import wannabit.io.cosmostaion.fragment.chains.ibc.IBCSendStep4Fragment;
 import wannabit.io.cosmostaion.model.type.Coin;
-import wannabit.io.cosmostaion.model.type.Fee;
-
-import static wannabit.io.cosmostaion.base.BaseConstant.CONST_PW_TX_GDEX_SWAP;
-import static wannabit.io.cosmostaion.base.BaseConstant.CONST_PW_TX_IBC_TRANSFER;
 
 public class IBCSendActivity extends BaseBroadCastActivity {
 
-    private ImageView               mChainBg;
     private Toolbar                 mToolbar;
     private TextView                mTitle;
     private ImageView               mIvStep;
@@ -54,7 +50,6 @@ public class IBCSendActivity extends BaseBroadCastActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step);
-        mChainBg            = findViewById(R.id.chain_bg);
         mToolbar            = findViewById(R.id.tool_bar);
         mTitle              = findViewById(R.id.toolbar_title);
         mIvStep             = findViewById(R.id.send_step);
@@ -70,7 +65,14 @@ public class IBCSendActivity extends BaseBroadCastActivity {
         mAccount = getBaseDao().onSelectAccount(getBaseDao().getLastUser());
         mBaseChain = BaseChain.getChain(mAccount.baseChain);
         mToIbcDenom = getIntent().getStringExtra("sendTokenDenom");
-        mTxType = CONST_PW_TX_IBC_TRANSFER;
+        for (Coin coin: getBaseDao().mGrpcBalance) {
+            if (coin.denom.contains(mToIbcDenom)) {
+                mTxType = CONST_PW_TX_IBC_TRANSFER;
+                break;
+            } else {
+                mTxType = CONST_PW_TX_IBC_CONTRACT;
+            }
+        }
 
         mPageAdapter = new IbcSendPageAdapter(getSupportFragmentManager());
         mViewPager.setOffscreenPageLimit(4);
@@ -156,7 +158,7 @@ public class IBCSendActivity extends BaseBroadCastActivity {
 
     public void onStartIbcSend() {
         Intent intent = new Intent(IBCSendActivity.this, PasswordCheckActivity.class);
-        intent.putExtra(BaseConstant.CONST_PW_PURPOSE, CONST_PW_TX_IBC_TRANSFER);
+        intent.putExtra(BaseConstant.CONST_PW_PURPOSE, mTxType);
         intent.putExtra("toAddress", mToAddress);
         intent.putParcelableArrayListExtra("amount", mAmounts);
         intent.putExtra("channelId", mPath.channel_id);

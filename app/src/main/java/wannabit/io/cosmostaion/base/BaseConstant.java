@@ -211,6 +211,7 @@ public class BaseConstant {
     public final static int TASK_GRPC_GEN_TX_KAVA_REPAY_HARD            = 4344;
     public final static int TASK_GRPC_GEN_TX_KAVA_CLAIM_INCENTIVES      = 4345;
     public final static int TASK_GRPC_GEN_TX_EXECUTE_CONTRACT           = 4346;
+    public final static int TASK_GRPC_GEN_TX_IBC_CONTRACT               = 4347;
 
 
     public final static int TASK_GRPC_SIMULATE_DELEGATE                 = 4500;
@@ -258,6 +259,7 @@ public class BaseConstant {
     public final static int TASK_GRPC_SIMULATE_KAVA_REPAY_HARD          = 4544;
     public final static int TASK_GRPC_SIMULATE_KAVA_CLAIM_INCENTIVES    = 4545;
     public final static int TASK_GRPC_SIMULATE_EXECUTE_CONTRACT         = 4546;
+    public final static int TASK_GRPC_SIMULATE_IBC_CONTRACT             = 4547;
 
 
 
@@ -427,6 +429,7 @@ public class BaseConstant {
     public final static int CONST_PW_TX_PROFILE                             = 5057;
     public final static int CONST_PW_TX_LINK_ACCOUNT                        = 5058;
     public final static int CONST_PW_TX_EXECUTE_CONTRACT                    = 5059;
+    public final static int CONST_PW_TX_IBC_CONTRACT                        = 5060;
 
     public final static int ERROR_CODE_UNKNOWN              = 8000;
     public final static int ERROR_CODE_NETWORK              = 8001;

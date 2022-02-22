@@ -3,6 +3,8 @@ package wannabit.io.cosmostaion.cosmos;
 import static cosmos.tx.signing.v1beta1.Signing.SignMode.SIGN_MODE_DIRECT;
 import static wannabit.io.cosmostaion.utils.WUtil.integerToBytes;
 
+import android.util.Base64;
+
 import com.google.gson.Gson;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Duration;
@@ -17,6 +19,7 @@ import org.web3j.crypto.Sign;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 
@@ -39,11 +42,14 @@ import wannabit.io.cosmostaion.base.BaseChain;
 import wannabit.io.cosmostaion.base.BaseData;
 import wannabit.io.cosmostaion.crypto.Sha256;
 import wannabit.io.cosmostaion.dao.Account;
+import wannabit.io.cosmostaion.dao.Cw20IbcMsg;
+import wannabit.io.cosmostaion.dao.Cw20IbcTransferReq;
 import wannabit.io.cosmostaion.dao.Cw20TransferReq;
 import wannabit.io.cosmostaion.model.kava.IncentiveReward;
 import wannabit.io.cosmostaion.model.type.Coin;
 import wannabit.io.cosmostaion.model.type.Fee;
 import wannabit.io.cosmostaion.utils.WKey;
+import wannabit.io.cosmostaion.utils.WLog;
 import wannabit.io.cosmostaion.utils.WUtil;
 
 public class Signer {
@@ -1088,6 +1094,29 @@ public class Signer {
         String jsonData = new Gson().toJson(req);
         ByteString msg = ByteString.copyFromUtf8(jsonData);
         cosmwasm.wasm.v1.Tx.MsgExecuteContract msgExecuteContract = cosmwasm.wasm.v1.Tx.MsgExecuteContract.newBuilder().setSender(fromAddress).setContract(contractAddress).setMsg(msg).build();
+        msgAnys.add(Any.newBuilder().setTypeUrl("/cosmwasm.wasm.v1.MsgExecuteContract").setValue(msgExecuteContract.toByteString()).build());
+        return msgAnys;
+    }
+
+    public static ServiceOuterClass.BroadcastTxRequest getGrpcCw20IbcTransferReq(QueryOuterClass.QueryAccountResponse auth, String sender, String remote_address, String contractAddress, String contract, ArrayList<Coin> amount, String channelId, Fee fee, String memo, ECKey pKey, String chainId) {
+        return getSignTx(auth, getCw20IbcTransferMsg(sender, remote_address, contractAddress, contract, amount, channelId), fee, memo, pKey, chainId);
+    }
+
+    public static ServiceOuterClass.SimulateRequest getGrpcCw20IbcTransferSimulateReq(QueryOuterClass.QueryAccountResponse auth, String sender, String remote_address, String contractAddress, String contract, ArrayList<Coin> amount, String channelId, Fee fee, String memo, ECKey pKey, String chainId) {
+        return getSignSimulTx(auth, getCw20IbcTransferMsg(sender, remote_address, contractAddress, contract, amount, channelId), fee, memo, pKey, chainId);
+    }
+
+    public static ArrayList<Any> getCw20IbcTransferMsg(String sender, String remote_address, String contractAddress, String contract, ArrayList<Coin> amount, String channelId) {
+        ArrayList<Any> msgAnys = new ArrayList<>();
+
+        Cw20IbcMsg msgReq = new Cw20IbcMsg(channelId, remote_address);
+        byte[] msgData = new Gson().toJson(msgReq).getBytes(StandardCharsets.UTF_8);
+        String encodedMsg = Base64.encodeToString(msgData, Base64.NO_WRAP);
+
+        Cw20IbcTransferReq req = new Cw20IbcTransferReq(contract, amount.get(0).amount, encodedMsg);
+        String jsonData = new Gson().toJson(req);
+        ByteString msg = ByteString.copyFromUtf8(jsonData);
+        cosmwasm.wasm.v1.Tx.MsgExecuteContract msgExecuteContract = cosmwasm.wasm.v1.Tx.MsgExecuteContract.newBuilder().setSender(sender).setContract(contractAddress).setMsg(msg).build();
         msgAnys.add(Any.newBuilder().setTypeUrl("/cosmwasm.wasm.v1.MsgExecuteContract").setValue(msgExecuteContract.toByteString()).build());
         return msgAnys;
     }

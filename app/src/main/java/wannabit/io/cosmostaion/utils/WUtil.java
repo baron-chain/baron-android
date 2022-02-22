@@ -111,6 +111,7 @@ import wannabit.io.cosmostaion.dao.Assets;
 import wannabit.io.cosmostaion.dao.Balance;
 import wannabit.io.cosmostaion.dao.BnbTicker;
 import wannabit.io.cosmostaion.dao.ChainParam;
+import wannabit.io.cosmostaion.dao.Cw20Assets;
 import wannabit.io.cosmostaion.dao.IbcToken;
 import wannabit.io.cosmostaion.model.ExportStarName;
 import wannabit.io.cosmostaion.model.GDexManager;
@@ -1221,6 +1222,17 @@ public class WUtil {
             return 18;
         }
         return 18;
+    }
+
+    public static int getCw20CoinDecimal(BaseData baseData, String denom) {
+        String[] slice = denom.split(":");
+        String contract_address = slice[slice.length - 1];
+        for (Cw20Assets assets: baseData.getCw20sGrpc()) {
+            if (assets.contract_address.equalsIgnoreCase(contract_address)) {
+                return assets.decimal;
+            }
+        }
+        return 6;
     }
 
     public static int getCosmosCoinDecimal(BaseData baseData, String denom) {
@@ -3693,7 +3705,7 @@ public class WUtil {
                 return new BigDecimal(V1_GAS_AMOUNT_TOO_HIGH);
             } else if (txType == CONST_PW_TX_LINK_ACCOUNT) {
                 return new BigDecimal(V1_GAS_AMOUNT_TOO_HIGH);
-            } else if (txType == CONST_PW_TX_EXECUTE_CONTRACT) {
+            } else if (txType == CONST_PW_TX_EXECUTE_CONTRACT || txType == CONST_PW_TX_IBC_CONTRACT) {
                 return new BigDecimal(COSMOS_GAS_AMOUNT_EXECUTE_CONTRACT);
             }
         }

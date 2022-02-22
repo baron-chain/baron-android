@@ -24,9 +24,11 @@ import java.util.ArrayList;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.chains.ibc.IBCSendActivity;
 import wannabit.io.cosmostaion.base.BaseFragment;
+import wannabit.io.cosmostaion.dao.Cw20Assets;
 import wannabit.io.cosmostaion.dialog.Dialog_Empty_Warnning;
 import wannabit.io.cosmostaion.model.type.Coin;
 import wannabit.io.cosmostaion.utils.WDp;
+import wannabit.io.cosmostaion.utils.WLog;
 import wannabit.io.cosmostaion.utils.WUtil;
 
 public class IBCSendStep2Fragment extends BaseFragment implements View.OnClickListener {
@@ -96,7 +98,18 @@ public class IBCSendStep2Fragment extends BaseFragment implements View.OnClickLi
         final String mainDenom = WDp.mainDenom(getSActivity().mBaseChain);
         final BigDecimal feeAmount = WUtil.getEstimateGasFeeAmount(getContext(), getSActivity().mBaseChain, CONST_PW_TX_IBC_TRANSFER, 0);
 
-        mMaxAvailable = getBaseDao().getAvailable(getSActivity().mToIbcDenom);
+        for (Coin coin: getBaseDao().mGrpcBalance) {
+            if (coin.denom.contains(mToIbcDenom)) {
+                mMaxAvailable = getBaseDao().getAvailable(mToIbcDenom);
+            } else {
+                for (Cw20Assets assets: getBaseDao().getCw20sGrpc()) {
+                    if (assets.denom.equalsIgnoreCase(mToIbcDenom)) {
+                        mMaxAvailable = assets.getAmount();
+                        break;
+                    }
+                }
+            }
+        }
         if (mainDenom.equalsIgnoreCase(getSActivity().mToIbcDenom)) {
             mMaxAvailable = mMaxAvailable.subtract(feeAmount);
         }
