@@ -15,7 +15,7 @@
         app:cardPreventCornerOverlap="true"
         app:cardCornerRadius="@dimen/space_6"
         app:cardElevation="0dp"
-        app:cardBackgroundColor="@color/colorTransBgEvmos"
+        app:cardBackgroundColor="@color/colorTransBgCudos"
         app:cardUseCompatPadding="true">
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,18 +26,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:id="@+id/evmos_icon"
+                    android:id="@+id/cudos_icon"
                     android:layout_width="@dimen/space_20"
                     android:layout_height="@dimen/space_20"
-                    android:src="@drawable/token_evmos"/>
+                    android:src="@drawable/token_cudos"/>
 
                 <TextView
-                    style="@style/font_ss_14_evmos"
+                    style="@style/font_ss_14_cudos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/space_8"
-                    android:layout_toRightOf="@+id/evmos_icon"
-                    android:text="EVMOS" />
+                    android:layout_toRightOf="@+id/cudos_icon"
+                    android:text="CUDOS" />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -45,14 +45,14 @@
                     android:orientation="vertical"
                     android:gravity="right">
                     <TextView
-                        android:id="@+id/evmos_amount"
+                        android:id="@+id/cudos_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         android:text="-"
                         style="@style/font_ssm_17_white"/>
                     <TextView
-                        android:id="@+id/evmos_value"
+                        android:id="@+id/cudos_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="right"
@@ -77,7 +77,7 @@
                     android:text="@string/str_available"
                     style="@style/font_ss_12_gray1"/>
                 <TextView
-                    android:id="@+id/evmos_available"
+                    android:id="@+id/cudos_available"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -87,7 +87,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/evmos_vesting_layer"
+                android:id="@+id/cudos_vesting_layer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_8"
@@ -98,7 +98,7 @@
                     android:text="@string/str_vesting_amount"
                     style="@style/font_ss_12_gray1"/>
                 <TextView
-                    android:id="@+id/evmos_vesting"
+                    android:id="@+id/cudos_vesting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -117,7 +117,7 @@
                     android:text="@string/str_delegated"
                     style="@style/font_ss_12_gray1"/>
                 <TextView
-                    android:id="@+id/evmos_delegate"
+                    android:id="@+id/cudos_delegate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -136,7 +136,7 @@
                     android:text="@string/str_unbonding"
                     style="@style/font_ss_12_gray1"/>
                 <TextView
-                    android:id="@+id/evmos_unbonding"
+                    android:id="@+id/cudos_unbonding"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -155,7 +155,7 @@
                     android:text="@string/str_stake_reward"
                     style="@style/font_ss_12_gray1"/>
                 <TextView
-                    android:id="@+id/evmos_reward"
+                    android:id="@+id/cudos_reward"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -169,7 +169,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <RelativeLayout
-                    android:id="@+id/btn_evmos_reward"
+                    android:id="@+id/btn_cudos_reward"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="@dimen/space_40"
@@ -190,7 +190,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/btn_evmos_vote"
+                    android:id="@+id/btn_cudos_vote"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="@dimen/space_40"
