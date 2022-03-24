@@ -3547,6 +3547,217 @@ public class WDp {
         }
     }
 
+    public static void SetCoinMainDenom(Context c, Coin coin, TextView symbol, TextView fullName, ImageView imageView) {
+        if (coin.denom.equalsIgnoreCase(TOKEN_ATOM)) {
+            symbol.setText(c.getString(R.string.str_atom_c));
+            fullName.setText("Cosmos Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.atom_ic));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_IRIS)) {
+            symbol.setText(c.getString(R.string.str_iris_c));
+            fullName.setText("Iris Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.iris_toket_img));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_AKASH)) {
+            symbol.setText(c.getString(R.string.str_akt_c));
+            fullName.setText("Akash Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.akash_token_img));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_DVPN)) {
+            symbol.setText(c.getString(R.string.str_dvpn_c));
+            fullName.setText("Sentinel Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.tokensentinel));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_XPRT)) {
+            symbol.setText(c.getString(R.string.str_xprt_c));
+            fullName.setText("Persistence Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.tokenpersistence));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_CRO)) {
+            symbol.setText(c.getString(R.string.str_cro_c));
+            fullName.setText("Cronos");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.tokencrypto));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_OSMOSIS)) {
+            symbol.setText(c.getString(R.string.str_osmosis_c));
+            fullName.setText("Osmosis Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_osmosis));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_IOV)) {
+            symbol.setText(c.getString(R.string.str_iov_c));
+            fullName.setText("Starname Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_starname));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_SIF)) {
+            symbol.setText(c.getString(R.string.str_sif_c));
+            fullName.setText("Sif Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.tokensifchain));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_MEDI)) {
+            symbol.setText(c.getString(R.string.str_medi_c));
+            fullName.setText("Medibloc Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.tokenmedibloc));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_CERTIK)) {
+            symbol.setText(c.getString(R.string.str_ctk_c));
+            fullName.setText("Certik Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.certik_token_img));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_RIZON)) {
+            symbol.setText(c.getString(R.string.str_rizon_c));
+            fullName.setText("Rizon Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_rizon));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_ALTHEA)) {
+            symbol.setText(c.getString(R.string.str_althea_c));
+            fullName.setText("Althea Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_althea));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_UMEE)) {
+            symbol.setText(c.getString(R.string.str_umee_c));
+            fullName.setText("Umee Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_umee));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_NGM)) {
+            symbol.setText(c.getString(R.string.str_ngm_c));
+            fullName.setText("E-Money Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_emoney));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_FET)) {
+            symbol.setText(c.getString(R.string.str_fet_c));
+            fullName.setText("Fetch.ai Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.tokenfetchai));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_BAND)) {
+            symbol.setText(c.getString(R.string.str_band_c));
+            fullName.setText("Band Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_band));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_AXELAR)) {
+            symbol.setText(c.getString(R.string.str_axl_c));
+            fullName.setText("Axelar Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_axelar));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_JUNO)) {
+            symbol.setText(c.getString(R.string.str_juno_c));
+            fullName.setText("Juno Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_juno));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_REGEN)) {
+            symbol.setText(c.getString(R.string.str_regen_c));
+            fullName.setText("Regen Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_regen));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_BITCANNA)) {
+            symbol.setText(c.getString(R.string.str_bitcanna_c));
+            fullName.setText("Bitcanna Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_bitcanna));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_STARGAZE)) {
+            symbol.setText(c.getString(R.string.str_stargaze_c));
+            fullName.setText("Stargaze Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_stargaze));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_GRABRIDGE)) {
+            symbol.setText(c.getString(R.string.str_grabridge_c));
+            fullName.setText("G-Bridge Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_gravitybridge));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_KI)) {
+            symbol.setText(c.getString(R.string.str_ki_c));
+            fullName.setText("KiChain Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_kifoundation));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_COMDEX)) {
+            symbol.setText(c.getString(R.string.str_comdex_c));
+            fullName.setText("Comdex Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_comdex));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_SECRET)) {
+            symbol.setText(c.getString(R.string.str_scrt_c));
+            fullName.setText("Secret Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.tokensecret));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_INJ)) {
+            symbol.setText(c.getString(R.string.str_inj_c));
+            fullName.setText("Injective Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_injective));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_DESMOS)) {
+            symbol.setText(c.getString(R.string.str_desmos_c));
+            fullName.setText("Desmos Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_desmos));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_BITSONG)) {
+            symbol.setText(c.getString(R.string.str_bitsong_c));
+            fullName.setText("Bitsong Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_bitsong));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_LUM)) {
+            symbol.setText(c.getString(R.string.str_lum_c));
+            fullName.setText("Lum Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_lum));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_CHIHUAHUA)) {
+            symbol.setText(c.getString(R.string.str_chihuahua_c));
+            fullName.setText("Chihuahua Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_huahua));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_KAVA)) {
+            symbol.setText(c.getString(R.string.str_kava_c));
+            fullName.setText("Kava Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.kava_token_img));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_DARC)) {
+            symbol.setText(c.getString(R.string.str_konstellation_c));
+            fullName.setText("Konstellation Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_konstellation));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_EVMOS)) {
+            symbol.setText(c.getString(R.string.str_evmos_c));
+            fullName.setText("Evmos Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_evmos));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_CUDOS)) {
+            symbol.setText(c.getString(R.string.str_cudos_c));
+            fullName.setText("Cudos Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_cudos));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_HASH)) {
+            symbol.setText(c.getString(R.string.str_provenance_c));
+            fullName.setText("Provenance Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_hash));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_CRBRUS)) {
+            symbol.setText(c.getString(R.string.str_cerberus_c));
+            fullName.setText("Cerberus Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_cerberus));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_FLIX)) {
+            symbol.setText(c.getString(R.string.str_omniflix_c));
+            fullName.setText("Omniflix Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_omniflix));
+
+        }
+
+        else if (coin.denom.equalsIgnoreCase(TOKEN_COSMOS_TEST)) {
+            symbol.setText(c.getString(R.string.str_muon_c));
+            fullName.setText("Stargate Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.atom_ic));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_IRIS_TEST)) {
+            symbol.setText(c.getString(R.string.str_bif_c));
+            fullName.setText("Bifrost Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.iris_toket_img));
+
+        } else if (coin.denom.equalsIgnoreCase(TOKEN_CRESCENT_TEST)) {
+            symbol.setText(c.getString(R.string.str_cre_c));
+            fullName.setText("Crescent Staking Coin");
+            imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_crescent));
+
+        }
+    }
+
     public static String mainDenom(BaseChain chain) {
         if (chain.equals(COSMOS_MAIN)) {
             return TOKEN_ATOM;
