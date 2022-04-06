@@ -454,28 +454,18 @@
     <string name="str_with_text">Share Text</string>
     <string name="str_permission_qr">Need permission for SD Card for save your address QR code Image or wallet connect</string>
     <string name="str_permission_push">Need permission for Phone State for push alaram service</string>
-    <string name="str_gaia_12k">(testnet gaia - 12k)</string>
-    <string name="str_gaia_13k">(testnet gaia - 13k)</string>
     <string name="str_cosmos_hub" translatable="false">(Cosmos)</string>
-    <string name="str_cosmos_hub_2" translatable="false">Cosmos</string>
     <string name="str_cosmos_testnet" translatable="false">(Stargate Testnet)</string>
-    <string name="str_cosmos_testnet_2" translatable="false">Stargate Testnet</string>
     <string name="str_iris_net" translatable="false">(Iris)</string>
-    <string name="str_iris_net_2" translatable="false">Iris</string>
     <string name="str_iris_testnet" translatable="false">(Bifrost Testnet)</string>
     <string name="str_iris_testnet_2" translatable="false">Bifrost Testnet</string>
     <string name="str_binance_net" translatable="false">(Binance)</string>
     <string name="str_binance_net_2" translatable="false">Binance</string>
-    <string name="str_binance_test_net" translatable="false">(Binance Testnet)</string>
-    <string name="str_binance_test_net_2" translatable="false">Binance Testnet</string>
     <string name="str_iov_net" translatable="false">(Starname)</string>
-    <string name="str_iov_net_2" translatable="false">Starname</string>
     <string name="str_band_chain" translatable="false">(Band)</string>
-    <string name="str_band_chain_2" translatable="false">Band</string>
     <string name="str_kava_net" translatable="false">(Kava)</string>
     <string name="str_kava_net_2" translatable="false">Kava</string>
     <string name="str_ok_net" translatable="false">(OEC)</string>
-    <string name="str_ok_net2" translatable="false">OEC</string>
     <string name="str_certik_chain" translatable="false">(Certik)</string>
     <string name="str_certik_chain_2" translatable="false">Certik</string>
     <string name="str_secret_chain" translatable="false">(Secret)</string>
@@ -510,11 +500,8 @@
     <string name="str_cerberus_net" translatable="false">(Cerberus)</string>
     <string name="str_omniflix_net" translatable="false">(Omniflix)</string>
     <string name="str_althea_chain_test" translatable="false">(Althea Testnet)</string>
-    <string name="str_althea_chain_test_2" translatable="false">Althea Testnet</string>
     <string name="str_crescent_chain_test" translatable="false">(Crescent Testnet)</string>
-    <string name="str_crescent_chain_test_2" translatable="false">Crescent Testnet</string>
     <string name="str_emoney_net" translatable="false">(E-Money)</string>
-    <string name="str_emoney_net2" translatable="false">E-Money</string>
     <string name="str_cosmos" translatable="false">COSMOS</string>
     <string name="str_cosmos_test" translatable="false">STARGATE</string>
     <string name="str_iris_test" translatable="false">BIFORST</string>

@@ -39,6 +39,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import desmos.profiles.v1beta1.ModelsProfile;
+import wannabit.io.cosmostaion.Chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.chains.desmos.ProfileActivity;
 import wannabit.io.cosmostaion.activities.chains.desmos.ProfileDetailActivity;
@@ -200,7 +201,7 @@ public class MainActivity extends BaseActivity implements FetchCallBack {
             WDp.getChainImg(MainActivity.this, mBaseChain, mToolbarChainImg);
             WDp.getChainTitle(MainActivity.this, mBaseChain, mToolbarChainName);
             mToolbarChainName.setTextColor(WDp.getChainColor(MainActivity.this, mBaseChain));
-            WDp.getFloatBtn(MainActivity.this, mBaseChain, mFloatBtn);
+            ChainFactory.getChain(mBaseChain).setFloatBtn(MainActivity.this, mFloatBtn);
 
             mSelectedChain = mBaseChain;
             onChainSelect(mSelectedChain);

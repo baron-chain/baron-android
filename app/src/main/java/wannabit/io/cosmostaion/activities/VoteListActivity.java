@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import wannabit.io.cosmostaion.Chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.base.BaseActivity;
 import wannabit.io.cosmostaion.base.BaseChain;
@@ -61,7 +62,7 @@ public class VoteListActivity extends BaseActivity implements TaskListener {
 
         mAccount                = getBaseDao().onSelectAccount(getBaseDao().getLastUser());
         mBaseChain              = BaseChain.getChain(mAccount.baseChain);
-        mChain                  = WDp.getChainNameByBaseChain(mBaseChain);
+        mChain                  = ChainFactory.getChain(mBaseChain).getChainName();
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);

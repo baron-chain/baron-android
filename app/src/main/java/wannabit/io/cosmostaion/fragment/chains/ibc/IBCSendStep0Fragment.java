@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import wannabit.io.cosmostaion.Chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.chains.ibc.IBCSendActivity;
 import wannabit.io.cosmostaion.base.BaseChain;
@@ -142,7 +143,7 @@ public class IBCSendStep0Fragment extends BaseFragment implements View.OnClickLi
         WDp.getChainImg(getSActivity(), getSActivity().mBaseChain, mFromChainImg);
         WDp.getChainTitle2(getSActivity(), getSActivity().mBaseChain, mFromChainTv);
 
-        BaseChain toChain = WDp.getChainTypeByChainId(mIbcSelectedRelayer.chain_id);
+        BaseChain toChain = ChainFactory.getChain(mIbcSelectedRelayer.chain_id).getChain();
         WDp.getChainImg(getSActivity(), toChain, mToChainImg);
         WDp.getChainTitle2(getSActivity(), toChain, mToChainTv);
 

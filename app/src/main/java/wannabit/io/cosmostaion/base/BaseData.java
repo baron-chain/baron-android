@@ -55,6 +55,7 @@ import kava.pricefeed.v1beta1.QueryOuterClass;
 import kava.swap.v1beta1.Swap;
 import osmosis.gamm.poolmodels.balancer.BalancerPool;
 import tendermint.liquidity.v1beta1.Liquidity;
+import wannabit.io.cosmostaion.Chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.crypto.EncResult;
 import wannabit.io.cosmostaion.dao.Account;
@@ -176,7 +177,7 @@ public class BaseData {
         ArrayList<Cw20Assets> result = new ArrayList<>();
         if (mCw20Assets.size() > 0) {
             for (Cw20Assets assets: mCw20Assets) {
-                if (assets.chain.equalsIgnoreCase(WDp.getChainNameByBaseChain(baseChain)) && assets.getAmount() != null && assets.getAmount().compareTo(BigDecimal.ZERO) > 0) {
+                if (assets.chain.equalsIgnoreCase(ChainFactory.getChain(baseChain).getChainName()) && assets.getAmount() != null && assets.getAmount().compareTo(BigDecimal.ZERO) > 0) {
                     result.add(assets);
                 }
             }
@@ -223,7 +224,7 @@ public class BaseData {
         if (getIbcPath(channelId).relayer_img != null) {
             url = getIbcPath(channelId).relayer_img;
         } else {
-            url = WDp.getDefaultRelayerImg(baseChain);
+            url = ChainFactory.getChain(baseChain).getDefaultRelayerImg();
         }
         return url;
     }

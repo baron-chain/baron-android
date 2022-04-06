@@ -92,6 +92,7 @@ import cosmos.staking.v1beta1.Staking;
 import kava.pricefeed.v1beta1.QueryOuterClass;
 import osmosis.gamm.poolmodels.balancer.BalancerPool;
 import tendermint.liquidity.v1beta1.Liquidity;
+import wannabit.io.cosmostaion.Chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.AppLockActivity;
 import wannabit.io.cosmostaion.activities.HtlcSendActivity;
@@ -930,7 +931,7 @@ public class BaseActivity extends AppCompatActivity implements TaskListener {
                 getBaseDao().mCw20Assets = (ArrayList<Cw20Assets>) result.resultData;
                 if (getBaseDao().mCw20Assets != null && getBaseDao().mCw20Assets.size() > 0) {
                     for (Cw20Assets assets: getBaseDao().mCw20Assets) {
-                        if (assets.chain.equalsIgnoreCase(WDp.getChainNameByBaseChain(mBaseChain))) {
+                        if (assets.chain.equalsIgnoreCase(ChainFactory.getChain(mBaseChain).getChainName())) {
                             mTaskCount = mTaskCount + 1;
                             new Cw20BalanceGrpcTask(getBaseApplication(), this, mBaseChain, mAccount, assets.contract_address).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                         }

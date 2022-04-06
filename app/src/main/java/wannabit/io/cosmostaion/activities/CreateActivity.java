@@ -15,6 +15,7 @@ import androidx.cardview.widget.CardView;
 
 import java.util.ArrayList;
 
+import wannabit.io.cosmostaion.Chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.base.BaseActivity;
 import wannabit.io.cosmostaion.base.BaseChain;
@@ -124,12 +125,13 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
         mAddress.setText(WKey.getCreateDpAddressFromEntropy(mChain, WUtil.ByteArrayToHexString(mEntropy), 0, 0));
     }
 
-
     private void onUpdateView() {
         onHideWaitDialog();
         mCardMnemonics.setCardBackgroundColor(WDp.getChainBgColor(getBaseContext(), mChain));
 
-        WDp.getLayoutColor(CreateActivity.this, mChain, mWordsLayer);
+        for(int i = 0; i < mWordsLayer.length; i++) {
+            ChainFactory.getChain(mChain).setLayoutColor(CreateActivity.this, i, mWordsLayer);
+        }
 
         mCardAddress.setVisibility(View.VISIBLE);
         mCardMnemonics.setVisibility(View.VISIBLE);

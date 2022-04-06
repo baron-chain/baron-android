@@ -1,6 +1,7 @@
 package wannabit.io.cosmostaion.task.FetchTask;
 
 import retrofit2.Response;
+import wannabit.io.cosmostaion.Chain.ChainFactory;
 import wannabit.io.cosmostaion.base.BaseApplication;
 import wannabit.io.cosmostaion.base.BaseChain;
 import wannabit.io.cosmostaion.network.ApiClient;
@@ -28,8 +29,7 @@ public class MintScanAssetsTask extends CommonTask {
     @Override
     protected TaskResult doInBackground(String... strings) {
         try {
-            WLog.w("MinScan Assets URL " +  ApiClient.getMintscan(mApp).getAssets(WDp.getChainNameByBaseChain(mChain)).request().url());
-            Response<ResAssets> response = ApiClient.getMintscan(mApp).getAssets(WDp.getChainNameByBaseChain(mChain)).execute();
+            Response<ResAssets> response = ApiClient.getMintscan(mApp).getAssets(ChainFactory.getChain(mChain).getChainName()).execute();
             if(!response.isSuccessful()) {
                 mResult.isSuccess = false;
                 mResult.errorCode = ERROR_CODE_NETWORK;

@@ -25,6 +25,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import cosmos.gov.v1beta1.Gov;
+import wannabit.io.cosmostaion.Chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.base.BaseActivity;
 import wannabit.io.cosmostaion.base.BaseChain;
@@ -80,7 +81,7 @@ public class VoteDetailsActivity extends BaseActivity implements View.OnClickLis
         mProposalId         = getIntent().getStringExtra("proposalId");
         mAccount            = getBaseDao().onSelectAccount(getBaseDao().getLastUser());
         mBaseChain          = BaseChain.getChain(mAccount.baseChain);
-        mChain              = WDp.getChainNameByBaseChain(mBaseChain);
+        mChain              = ChainFactory.getChain(mBaseChain).getChainName();
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);

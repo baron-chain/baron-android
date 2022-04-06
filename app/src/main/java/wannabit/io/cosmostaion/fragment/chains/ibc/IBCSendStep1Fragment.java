@@ -1,5 +1,8 @@
 package wannabit.io.cosmostaion.fragment.chains.ibc;
 
+import static wannabit.io.cosmostaion.base.BaseChain.IOV_MAIN;
+import static wannabit.io.cosmostaion.network.ChannelBuilder.TIME_OUT;
+
 import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -32,6 +35,7 @@ import java.util.concurrent.TimeUnit;
 import io.grpc.stub.StreamObserver;
 import starnamed.x.starname.v1beta1.QueryGrpc;
 import starnamed.x.starname.v1beta1.QueryOuterClass;
+import wannabit.io.cosmostaion.Chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.chains.ibc.IBCSendActivity;
 import wannabit.io.cosmostaion.base.BaseChain;
@@ -41,11 +45,7 @@ import wannabit.io.cosmostaion.dialog.Dialog_IBC_Receivable_Accouts;
 import wannabit.io.cosmostaion.dialog.Dialog_StarName_Confirm;
 import wannabit.io.cosmostaion.network.ChannelBuilder;
 import wannabit.io.cosmostaion.utils.WDp;
-import wannabit.io.cosmostaion.utils.WLog;
 import wannabit.io.cosmostaion.utils.WUtil;
-
-import static wannabit.io.cosmostaion.base.BaseChain.IOV_MAIN;
-import static wannabit.io.cosmostaion.network.ChannelBuilder.TIME_OUT;
 
 public class IBCSendStep1Fragment extends BaseFragment implements View.OnClickListener{
 
@@ -127,12 +127,10 @@ public class IBCSendStep1Fragment extends BaseFragment implements View.OnClickLi
     @Override
     public void onRefreshTab() {
         super.onRefreshTab();
-        mTochain = WDp.getChainTypeByChainId(getSActivity().mIbcSelectedRelayer.chain_id);
+        mTochain = ChainFactory.getChain(getSActivity().mIbcSelectedRelayer.chain_id).getChain();
         mToAccountList = getBaseDao().onSelectAccountsByChain(mTochain);
         WDp.getChainTitle(getSActivity(), mTochain, mDesitination);
         mDesitination.setTextColor(WDp.getChainColor(getSActivity(), mTochain));
-        String userInput = mAddressInput.getText().toString().trim();
-        WDp.getChainByAddress(mTochain, userInput, mAddressInput);
     }
 
     private void onUpdateView() {

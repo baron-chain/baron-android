@@ -79,6 +79,7 @@ import java.util.ArrayList;
 
 import cosmos.base.abci.v1beta1.Abci;
 import osmosis.lockup.Lock;
+import wannabit.io.cosmostaion.Chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.PasswordCheckActivity;
 import wannabit.io.cosmostaion.base.BaseBroadCastActivity;
@@ -221,7 +222,7 @@ public class StepFeeSetFragment extends BaseFragment implements View.OnClickList
     }
 
     private void onCalculateFees() {
-        mSelectedGasRate = WUtil.getGasRate(getSActivity().mBaseChain, mSelectedGasPosition);
+        mSelectedGasRate = ChainFactory.getChain(getSActivity().mBaseChain).setGasRate(mSelectedGasPosition);
         if (getSActivity().mBaseChain.equals(BaseChain.SIF_MAIN)) {
             mFee = new BigDecimal("100000000000000000");
         } else {

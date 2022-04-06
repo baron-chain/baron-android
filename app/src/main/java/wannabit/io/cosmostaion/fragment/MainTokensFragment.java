@@ -62,6 +62,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import tendermint.liquidity.v1beta1.Liquidity;
+import wannabit.io.cosmostaion.Chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.MainActivity;
 import wannabit.io.cosmostaion.activities.tokenDetail.BridgeTokenGrpcActivity;
@@ -773,7 +774,7 @@ public class MainTokensFragment extends BaseFragment {
         final Coin coin = mNativeGrpc.get(position);
         final int mainDecimal = WDp.mainDivideDecimal(mBaseChain);
         if (coin.denom.equalsIgnoreCase(WDp.mainDenom(mBaseChain))) {
-            WDp.SetCoinMainDenom(getMainActivity(), coin, holder.itemSymbol, holder.itemFullName, holder.itemImg);
+            ChainFactory.getChain(mBaseChain).setCoinMainDenom(getMainActivity(), holder.itemSymbol, holder.itemFullName, holder.itemImg);
             BigDecimal totalAmount = getBaseDao().getAllMainAsset(WDp.mainDenom(mBaseChain));
 
             holder.itemSymbol.setTextColor(WDp.getChainColor(getMainActivity(), mBaseChain));

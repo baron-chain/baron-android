@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
 
+import wannabit.io.cosmostaion.Chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.MainActivity;
 import wannabit.io.cosmostaion.activities.ValidatorListActivity;
@@ -62,7 +63,8 @@ public class WalletChainHolder extends BaseHolder {
         final String denom = WDp.mainDenom(mainActivity.mBaseChain);
         final int decimal = WDp.mainDivideDecimal(mainActivity.mBaseChain);
         mTvChainCard.setCardBackgroundColor(WDp.getChainBgColor(mainActivity, mainActivity.mBaseChain));
-        WUtil.getWalletData(mainActivity, mainActivity.mBaseChain, mTvChainIcon, mTvChainDenom);
+//        WUtil.getWalletData(mainActivity, mainActivity.mBaseChain, mTvChainIcon, mTvChainDenom);
+        ChainFactory.getChain(mainActivity.mBaseChain).setWalletData(mainActivity, mTvChainIcon, mTvChainDenom);
 
         final BigDecimal availableAmount = baseData.getAvailable(denom);
         final BigDecimal vestingAmount = baseData.getVesting(denom);
@@ -100,14 +102,15 @@ public class WalletChainHolder extends BaseHolder {
         });
 
         // dex, nft, desmos profile setting
-        WUtil.getDexTitle(mainActivity, mainActivity.mBaseChain, mBtnDex, mBtnDexTitle);
+        ChainFactory.getChain(mainActivity.mBaseChain).setDexTitle(mainActivity, mBtnDex, mBtnDexTitle);
+//        WUtil.getDexTitle(mainActivity, mainActivity.mBaseChain, mBtnDex, mBtnDexTitle);
         mBtnDex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mainActivity.mBaseChain.equals(BaseChain.DESMOS_MAIN)) {
                     mainActivity.onClickProfile();
                 } else {
-                    mainActivity.startActivity(WUtil.getDexIntent(mainActivity, mainActivity.mBaseChain));
+                    mainActivity.startActivity(ChainFactory.getChain(mainActivity.mBaseChain).setMainIntent(mainActivity, 0));
                 }
             }
         });
