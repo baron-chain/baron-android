@@ -14,13 +14,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
 
-import wannabit.io.cosmostaion.chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.MainActivity;
 import wannabit.io.cosmostaion.activities.ValidatorListActivity;
 import wannabit.io.cosmostaion.activities.VoteListActivity;
 import wannabit.io.cosmostaion.base.BaseChain;
 import wannabit.io.cosmostaion.base.BaseData;
+import wannabit.io.cosmostaion.chain.ChainFactory;
 import wannabit.io.cosmostaion.utils.WDp;
 import wannabit.io.cosmostaion.widget.BaseHolder;
 
@@ -61,7 +61,6 @@ public class WalletChainHolder extends BaseHolder {
         final String denom = WDp.mainDenom(mainActivity.mBaseChain);
         final int decimal = WDp.mainDivideDecimal(mainActivity.mBaseChain);
         mTvChainCard.setCardBackgroundColor(WDp.getChainBgColor(mainActivity, mainActivity.mBaseChain));
-//        WUtil.getWalletData(mainActivity, mainActivity.mBaseChain, mTvChainIcon, mTvChainDenom);
         ChainFactory.getChain(mainActivity.mBaseChain).setWalletData(mainActivity, mTvChainIcon, mTvChainDenom);
 
         final BigDecimal availableAmount = baseData.getAvailable(denom);
@@ -101,7 +100,6 @@ public class WalletChainHolder extends BaseHolder {
 
         // dex, nft, desmos profile setting
         ChainFactory.getChain(mainActivity.mBaseChain).setDexTitle(mainActivity, mBtnDex, mBtnDexTitle);
-//        WUtil.getDexTitle(mainActivity, mainActivity.mBaseChain, mBtnDex, mBtnDexTitle);
         mBtnDex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
