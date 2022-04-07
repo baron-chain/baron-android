@@ -39,7 +39,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import desmos.profiles.v1beta1.ModelsProfile;
-import wannabit.io.cosmostaion.Chain.ChainFactory;
+import wannabit.io.cosmostaion.chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.chains.desmos.ProfileActivity;
 import wannabit.io.cosmostaion.activities.chains.desmos.ProfileDetailActivity;

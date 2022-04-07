@@ -92,7 +92,7 @@ import cosmos.vesting.v1beta1.Vesting;
 import kava.cdp.v1beta1.Genesis;
 import kava.cdp.v1beta1.QueryOuterClass;
 import osmosis.gamm.poolmodels.balancer.BalancerPool;
-import wannabit.io.cosmostaion.Chain.ChainFactory;
+import wannabit.io.cosmostaion.chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.base.BaseChain;
 import wannabit.io.cosmostaion.base.BaseConstant;

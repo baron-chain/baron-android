@@ -92,7 +92,7 @@ import cosmos.staking.v1beta1.Staking;
 import kava.pricefeed.v1beta1.QueryOuterClass;
 import osmosis.gamm.poolmodels.balancer.BalancerPool;
 import tendermint.liquidity.v1beta1.Liquidity;
-import wannabit.io.cosmostaion.Chain.ChainFactory;
+import wannabit.io.cosmostaion.chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.AppLockActivity;
 import wannabit.io.cosmostaion.activities.HtlcSendActivity;

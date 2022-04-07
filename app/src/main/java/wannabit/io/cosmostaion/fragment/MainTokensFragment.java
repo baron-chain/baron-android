@@ -62,7 +62,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import tendermint.liquidity.v1beta1.Liquidity;
-import wannabit.io.cosmostaion.Chain.ChainFactory;
+import wannabit.io.cosmostaion.chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.MainActivity;
 import wannabit.io.cosmostaion.activities.tokenDetail.BridgeTokenGrpcActivity;

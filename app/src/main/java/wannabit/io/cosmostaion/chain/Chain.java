@@ -1,4 +1,4 @@
-package wannabit.io.cosmostaion.Chain;
+package wannabit.io.cosmostaion.chain;
 
 import android.content.Context;
 import android.content.Intent;

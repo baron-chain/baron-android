@@ -10,10 +10,9 @@ import androidx.cardview.widget.CardView;
 
 import org.jetbrains.annotations.NotNull;
 
-import wannabit.io.cosmostaion.Chain.ChainFactory;
+import wannabit.io.cosmostaion.chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.MainActivity;
-import wannabit.io.cosmostaion.utils.WUtil;
 import wannabit.io.cosmostaion.widget.BaseHolder;
 
 public class WalletGuideHolder extends BaseHolder {

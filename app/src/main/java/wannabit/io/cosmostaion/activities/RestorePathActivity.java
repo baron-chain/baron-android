@@ -28,7 +28,7 @@ import cosmos.base.v1beta1.CoinOuterClass;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import wannabit.io.cosmostaion.Chain.ChainFactory;
+import wannabit.io.cosmostaion.chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.base.BaseActivity;
 import wannabit.io.cosmostaion.base.BaseChain;

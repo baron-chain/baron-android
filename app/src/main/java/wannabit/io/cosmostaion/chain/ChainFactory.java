@@ -1,4 +1,4 @@
-package wannabit.io.cosmostaion.Chain;
+package wannabit.io.cosmostaion.chain;
 
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_ATOM;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_IRIS;

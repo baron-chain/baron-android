@@ -79,7 +79,7 @@ import java.util.ArrayList;
 
 import cosmos.base.abci.v1beta1.Abci;
 import osmosis.lockup.Lock;
-import wannabit.io.cosmostaion.Chain.ChainFactory;
+import wannabit.io.cosmostaion.chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.PasswordCheckActivity;
 import wannabit.io.cosmostaion.base.BaseBroadCastActivity;

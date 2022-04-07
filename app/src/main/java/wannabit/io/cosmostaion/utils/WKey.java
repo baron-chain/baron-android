@@ -38,7 +38,7 @@ import java.util.regex.Pattern;
 
 import cosmos.auth.v1beta1.QueryOuterClass;
 import wannabit.io.cosmostaion.BuildConfig;
-import wannabit.io.cosmostaion.Chain.ChainFactory;
+import wannabit.io.cosmostaion.chain.ChainFactory;
 import wannabit.io.cosmostaion.base.BaseChain;
 import wannabit.io.cosmostaion.crypto.Sha256;
 import wannabit.io.cosmostaion.dao.Account;

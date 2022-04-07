@@ -1,4 +1,4 @@
-package wannabit.io.cosmostaion.Chain;
+package wannabit.io.cosmostaion.chain;
 
 import static wannabit.io.cosmostaion.base.BaseChain.IRIS_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.IRIS_TEST;
