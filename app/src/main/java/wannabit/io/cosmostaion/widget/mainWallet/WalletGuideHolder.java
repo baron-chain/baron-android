@@ -10,9 +10,9 @@ import androidx.cardview.widget.CardView;
 
 import org.jetbrains.annotations.NotNull;
 
-import wannabit.io.cosmostaion.chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.MainActivity;
+import wannabit.io.cosmostaion.chain.ChainFactory;
 import wannabit.io.cosmostaion.widget.BaseHolder;
 
 public class WalletGuideHolder extends BaseHolder {
@@ -41,13 +41,13 @@ public class WalletGuideHolder extends BaseHolder {
         itemBtnGuide1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.startActivity(ChainFactory.getChain(mainActivity.mBaseChain).setGuideIntent(0));
+                ChainFactory.getChain(mainActivity.mBaseChain).setMainIntent(mainActivity, 2);
             }
         });
         itemBtnGuide2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.startActivity(ChainFactory.getChain(mainActivity.mBaseChain).setGuideIntent(1));
+                ChainFactory.getChain(mainActivity.mBaseChain).setMainIntent(mainActivity, 3);
             }
         });
     }

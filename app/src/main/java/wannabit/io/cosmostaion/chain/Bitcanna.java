@@ -7,6 +7,7 @@ import static wannabit.io.cosmostaion.base.BaseConstant.BITCANNA_GAS_RATE_TINY;
 import static wannabit.io.cosmostaion.base.BaseConstant.BITCANNA_UNKNOWN_RELAYER;
 import static wannabit.io.cosmostaion.base.BaseConstant.BITCANNA_VAL_URL;
 import static wannabit.io.cosmostaion.base.BaseConstant.BLOCK_TIME_BITCANNA;
+import static wannabit.io.cosmostaion.base.BaseConstant.COINGECKO_BITCANNA_MAIN;
 import static wannabit.io.cosmostaion.base.BaseConstant.EXPLORER_BITCANNA_MAIN;
 import static wannabit.io.cosmostaion.base.BaseConstant.KEY_PATH;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_BITCANNA;
@@ -204,16 +205,13 @@ public class Bitcanna extends Chain {
     }
 
     @Override
-    public Intent setMainIntent(MainActivity mainActivity, int type) {
-        return new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.coingecko.com/en/coins/bitcanna"));
-    }
-
-    @Override
-    public Intent setGuideIntent(int sequence) {
-        if (sequence == 0) {
-            return new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.bitcanna.io/"));
-        } else {
-            return new Intent(Intent.ACTION_VIEW , Uri.parse("https://medium.com/@BitCannaGlobal"));
+    public void setMainIntent(MainActivity mainActivity, int sequence) {
+        if (sequence == 1) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse(COINGECKO_BITCANNA_MAIN)));
+        } else if (sequence == 2) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.bitcanna.io/")));
+        } else if (sequence == 3) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://medium.com/@BitCannaGlobal/")));
         }
     }
 

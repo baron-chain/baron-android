@@ -105,11 +105,8 @@ public abstract class Chain {
     // Set Chain Dex Title
     public abstract void setDexTitle(MainActivity mainActivity, RelativeLayout mBtnDex, TextView dexTitle);
 
-    // Set Chain Main Intent ( 0 = Dex, 1 = Coingecko)
-    public abstract Intent setMainIntent(MainActivity mainActivity, int type);
-
-    // Set Chain Guide Intent
-    public abstract Intent setGuideIntent(int sequence);
+    // Set Chain Main Intent ( 0 = Dex, 1 = Coingecko, 2 = Home, 3 = Blog)
+    public abstract void setMainIntent(MainActivity mainActivity, int sequence);
 
     // Set Chain Gas Fee Amount
     public abstract BigDecimal setEstimateGasFeeAmount(Context c, BaseChain basechain, int txType,  int valCnt);

@@ -2,6 +2,7 @@ package wannabit.io.cosmostaion.chain;
 
 import static wannabit.io.cosmostaion.base.BaseChain.BNB_MAIN;
 import static wannabit.io.cosmostaion.base.BaseConstant.BLOCK_TIME_BNB;
+import static wannabit.io.cosmostaion.base.BaseConstant.COINGECKO_BNB_MAIN;
 import static wannabit.io.cosmostaion.base.BaseConstant.EXPLORER_BINANCE_MAIN;
 import static wannabit.io.cosmostaion.base.BaseConstant.FEE_BNB_SEND;
 import static wannabit.io.cosmostaion.base.BaseConstant.KEY_BNB_PATH;
@@ -195,17 +196,15 @@ public class Bnb extends Chain {
     }
 
     @Override
-    public Intent setMainIntent(MainActivity mainActivity, int type) {
-        return new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.coingecko.com/en/coins/binancecoin"));
-    }
-
-    @Override
-    public Intent setGuideIntent(int sequence) {
-        if (sequence == 0) {
-            return new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.binance.org"));
-        } else {
-            return new Intent(Intent.ACTION_VIEW , Uri.parse("https://medium.com/@binance"));
+    public void setMainIntent(MainActivity mainActivity, int sequence) {
+        if (sequence == 1) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse(COINGECKO_BNB_MAIN)));
+        } else if (sequence == 2) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.binance.org")));
+        } else if (sequence == 3) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://medium.com/@binance")));
         }
+
     }
 
     @Override

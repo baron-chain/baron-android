@@ -1,16 +1,16 @@
 package wannabit.io.cosmostaion.chain;
 
-import static wannabit.io.cosmostaion.base.BaseChain.AKASH_MAIN;
-import static wannabit.io.cosmostaion.base.BaseConstant.AKASH_UNKNOWN_RELAYER;
-import static wannabit.io.cosmostaion.base.BaseConstant.AKASH_VAL_URL;
-import static wannabit.io.cosmostaion.base.BaseConstant.BLOCK_TIME_AKASH;
-import static wannabit.io.cosmostaion.base.BaseConstant.COINGECKO_AKASH_MAIN;
-import static wannabit.io.cosmostaion.base.BaseConstant.COSMOS_GAS_RATE_AVERAGE;
-import static wannabit.io.cosmostaion.base.BaseConstant.COSMOS_GAS_RATE_LOW;
-import static wannabit.io.cosmostaion.base.BaseConstant.COSMOS_GAS_RATE_TINY;
-import static wannabit.io.cosmostaion.base.BaseConstant.EXPLORER_AKASH_MAIN;
+import static wannabit.io.cosmostaion.base.BaseChain.GRABRIDGE_MAIN;
+import static wannabit.io.cosmostaion.base.BaseConstant.BLOCK_TIME_GRAV;
+import static wannabit.io.cosmostaion.base.BaseConstant.COINGECKO_GRAV_MAIN;
+import static wannabit.io.cosmostaion.base.BaseConstant.EXPLORER_GRABRIDGE_MAIN;
+import static wannabit.io.cosmostaion.base.BaseConstant.GRABRIDGE_VAL_URL;
+import static wannabit.io.cosmostaion.base.BaseConstant.GRAB_UNKNOWN_RELAYER;
+import static wannabit.io.cosmostaion.base.BaseConstant.GRAV_GAS_RATE_AVERAGE;
+import static wannabit.io.cosmostaion.base.BaseConstant.GRAV_GAS_RATE_LOW;
+import static wannabit.io.cosmostaion.base.BaseConstant.GRAV_GAS_RATE_TINY;
 import static wannabit.io.cosmostaion.base.BaseConstant.KEY_PATH;
-import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_AKASH;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_GRABRIDGE;
 import static wannabit.io.cosmostaion.utils.WKey.bech32Decode;
 import static wannabit.io.cosmostaion.utils.WKey.bech32Encode;
 import static wannabit.io.cosmostaion.utils.WUtil.getEstimateGasAmount;
@@ -44,41 +44,41 @@ import wannabit.io.cosmostaion.base.BaseData;
 import wannabit.io.cosmostaion.model.type.Coin;
 import wannabit.io.cosmostaion.utils.WDp;
 
-public class Akash extends Chain {
+public class GravityBridge extends Chain {
 
     @Override
-    public BaseChain getChain() { return AKASH_MAIN; }
+    public BaseChain getChain() { return GRABRIDGE_MAIN; }
 
     @Override
-    public ArrayList<BaseChain> getChains() { return Lists.newArrayList(AKASH_MAIN); }
+    public ArrayList<BaseChain> getChains() { return Lists.newArrayList(GRABRIDGE_MAIN); }
 
     @Override
     public String getMainDenom() {
-        return TOKEN_AKASH;
+        return TOKEN_GRABRIDGE;
     }
 
     @Override
     public int mainDecimal() { return 6; }
 
     @Override
-    public BigDecimal getRealBlockTime() { return BLOCK_TIME_AKASH; }
+    public BigDecimal getRealBlockTime() { return BLOCK_TIME_GRAV; }
 
     @Override
-    public String getExplorer() { return EXPLORER_AKASH_MAIN; }
+    public String getExplorer() { return EXPLORER_GRABRIDGE_MAIN; }
 
     @Override
     public List<ChildNumber> setParentPath(int customPath) {
-        return ImmutableList.of(new ChildNumber(44, true), new ChildNumber(118, true), ChildNumber.ZERO_HARDENED, ChildNumber.ZERO);
+        return  ImmutableList.of(new ChildNumber(44, true), new ChildNumber(118, true), ChildNumber.ZERO_HARDENED, ChildNumber.ZERO);
     }
 
     @Override
     public String getDpAddress(byte[] converted) {
-        return bech32Encode("akash".getBytes(), converted);
+        return bech32Encode("gravity".getBytes(), converted);
     }
 
     @Override
     public String convertDpOpAddressToDpAddress(String dpOpAddress) {
-        return bech32Encode("akash".getBytes(), bech32Decode(dpOpAddress).data);
+        return bech32Encode("gravity".getBytes(), bech32Decode(dpOpAddress).data);
     }
 
     @Override
@@ -108,95 +108,95 @@ public class Akash extends Chain {
 
     @Override
     public void setDpMainDenom(Context c, TextView denomTxt) {
-        denomTxt.setTextColor(c.getResources().getColor(R.color.colorAkash));
-        denomTxt.setText(c.getString(R.string.s_akt));
+        denomTxt.setTextColor(c.getResources().getColor(R.color.colorGraBridge));
+        denomTxt.setText(c.getString(R.string.s_grabridge));
     }
 
     @Override
     public void setCoinMainDenom(Context c, TextView symbol, TextView fullName, ImageView imageView) {
-        symbol.setText(c.getString(R.string.str_akt_c));
-        fullName.setText("Akash Staking Coin");
-        imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.akash_token_img));
+        symbol.setText(c.getString(R.string.str_grabridge_c));
+        fullName.setText("G-Bridge Staking Coin");
+        imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_gravitybridge));
     }
 
     @Override
     public void setChainTitle(Context c, TextView chainName, int type) {
         if (type == 0) {
-            chainName.setText(c.getString(R.string.str_akash_chain));
+            chainName.setText(c.getString(R.string.str_grabridge_net));
         } else {
-            chainName.setText(c.getString(R.string.str_akash_main));
+            chainName.setText(c.getString(R.string.str_grabridge_main));
         }
     }
 
     @Override
     public void setInfoImg(ImageView imageView, int type) {
         if (type == 0) {
-            imageView.setImageResource(R.drawable.akash_chain_img);
+            imageView.setImageResource(R.drawable.chain_gravitybridge);
         } else if (type == 1) {
-            imageView.setImageResource(R.drawable.akash_token_img);
+            imageView.setImageResource(R.drawable.token_gravitybridge);
         }
     }
 
     @Override
     public String setMonikerImgUrl(String opAddress) {
-        return AKASH_VAL_URL + opAddress + ".png";
+        return GRABRIDGE_VAL_URL + opAddress + ".png";
     }
 
     @Override
     public String getChainName() {
-        return "akash";
+        return "gravity-bridge";
     }
 
     @Override
     public boolean isValidChainAddress(String address) {
-        if (address.startsWith("akash1")) { return true; }
+        if (address.startsWith("gravity1")) { return true; }
         else { return false; }
     }
 
     @Override
-    public String getDefaultRelayerImg() { return AKASH_UNKNOWN_RELAYER; }
+    public String getDefaultRelayerImg() { return GRAB_UNKNOWN_RELAYER; }
 
     @Override
     public void setFloatBtn(Context c, FloatingActionButton floatBtn) {
-        floatBtn.setBackgroundTintList(c.getResources().getColorStateList(R.color.colorAkash));
+        floatBtn.setBackgroundTintList(c.getResources().getColorStateList(R.color.colorGraBridge));
     }
 
     @Override
     public void setLayoutColor(Context c, int length, LinearLayout[] wordsLayer) {
-        wordsLayer[length].setBackground(c.getDrawable(R.drawable.box_round_akash));
+        wordsLayer[length].setBackground(c.getDrawable(R.drawable.box_round_grabridge));
     }
 
     @Override
     public int setChainColor(Context c, int type) {
         if (type == 0) {
-            return c.getResources().getColor(R.color.colorAkash);
+            return c.getResources().getColor(R.color.colorGraBridge);
         } else {
-            return c.getResources().getColor(R.color.colorTransBgAkash);
+            return c.getResources().getColor(R.color.colorTransBgGraBridge);
         }
     }
 
     @Override
     public ColorStateList setChainTabColor(Context c, int type) {
         if (type == 0) {
-            return c.getResources().getColorStateList(R.color.color_tab_myvalidator_akash);
+            return c.getResources().getColorStateList(R.color.color_tab_myvalidator_grabridge);
         } else {
-            return c.getResources().getColorStateList(R.color.colorAkash);
+            return c.getResources().getColorStateList(R.color.colorGraBridge);
         }
 
     }
 
     @Override
     public void setGuideInfo(MainActivity mainActivity, ImageView guideImg, TextView guideTitle, TextView guideMsg, Button guideBtn1, Button guideBtn2) {
-        guideImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.akash_img));
-        guideTitle.setText(R.string.str_front_guide_title_akash);
-        guideMsg.setText(R.string.str_front_guide_msg_akash);
+        guideImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.infoicon_gravitybridge));
+        guideTitle.setText(R.string.str_front_guide_title_grabridge);
+        guideMsg.setText(R.string.str_front_guide_msg_grabridge);
     }
 
     @Override
     public void setWalletData(MainActivity mainActivity, ImageView coinImg, TextView coinDenom) {
-        coinImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.akash_token_img));
-        coinDenom.setText(R.string.str_atom_c);
-        coinDenom.setTextAppearance(R.style.font_ss_14_akash);
+        coinImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.token_gravitybridge));
+        coinDenom.setText(R.string.str_grabridge_c);
+        coinDenom.setTextAppearance(R.style.font_ss_14_grabridge);
     }
 
     @Override
@@ -207,17 +207,17 @@ public class Akash extends Chain {
     @Override
     public void setMainIntent(MainActivity mainActivity, int sequence) {
         if (sequence == 1) {
-            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse(COINGECKO_AKASH_MAIN)));
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse(COINGECKO_GRAV_MAIN)));
         } else if (sequence == 2) {
-            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://akash.network/")));
-        } else if (sequence == 3) {
-            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://akash.network/blog")));
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.gravitybridge.net/")));
+        } else if (sequence == 3 ) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.gravitybridge.net/blog/")));
         }
     }
 
     @Override
     public BigDecimal setEstimateGasFeeAmount(Context c, BaseChain basechain, int txType, int valCnt) {
-        BigDecimal gasRate = new BigDecimal(COSMOS_GAS_RATE_AVERAGE);
+        BigDecimal gasRate = new BigDecimal(GRAV_GAS_RATE_AVERAGE);
         BigDecimal gasAmount = getEstimateGasAmount(c, basechain, txType, valCnt);
         return gasRate.multiply(gasAmount).setScale(0, RoundingMode.DOWN);
     }
@@ -225,10 +225,10 @@ public class Akash extends Chain {
     @Override
     public BigDecimal setGasRate(int position) {
         if (position == 0) {
-            return new BigDecimal(COSMOS_GAS_RATE_TINY);
+            return new BigDecimal(GRAV_GAS_RATE_TINY);
         } else if (position == 1) {
-            return new BigDecimal(COSMOS_GAS_RATE_LOW);
+            return new BigDecimal(GRAV_GAS_RATE_LOW);
         }
-        return new BigDecimal(COSMOS_GAS_RATE_AVERAGE);
+        return new BigDecimal(GRAV_GAS_RATE_AVERAGE);
     }
 }

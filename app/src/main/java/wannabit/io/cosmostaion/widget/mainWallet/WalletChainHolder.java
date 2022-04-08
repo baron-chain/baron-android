@@ -103,11 +103,7 @@ public class WalletChainHolder extends BaseHolder {
         mBtnDex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mainActivity.mBaseChain.equals(BaseChain.DESMOS_MAIN)) {
-                    mainActivity.onClickProfile();
-                } else {
-                    mainActivity.startActivity(ChainFactory.getChain(mainActivity.mBaseChain).setMainIntent(mainActivity, 0));
-                }
+                ChainFactory.getChain(mainActivity.mBaseChain).setMainIntent(mainActivity, 0);
             }
         });
 

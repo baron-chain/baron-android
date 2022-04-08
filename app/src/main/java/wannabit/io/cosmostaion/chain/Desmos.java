@@ -1,16 +1,16 @@
 package wannabit.io.cosmostaion.chain;
 
-import static wannabit.io.cosmostaion.base.BaseChain.AKASH_MAIN;
-import static wannabit.io.cosmostaion.base.BaseConstant.AKASH_UNKNOWN_RELAYER;
-import static wannabit.io.cosmostaion.base.BaseConstant.AKASH_VAL_URL;
-import static wannabit.io.cosmostaion.base.BaseConstant.BLOCK_TIME_AKASH;
-import static wannabit.io.cosmostaion.base.BaseConstant.COINGECKO_AKASH_MAIN;
-import static wannabit.io.cosmostaion.base.BaseConstant.COSMOS_GAS_RATE_AVERAGE;
-import static wannabit.io.cosmostaion.base.BaseConstant.COSMOS_GAS_RATE_LOW;
-import static wannabit.io.cosmostaion.base.BaseConstant.COSMOS_GAS_RATE_TINY;
-import static wannabit.io.cosmostaion.base.BaseConstant.EXPLORER_AKASH_MAIN;
-import static wannabit.io.cosmostaion.base.BaseConstant.KEY_PATH;
-import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_AKASH;
+import static wannabit.io.cosmostaion.base.BaseChain.DESMOS_MAIN;
+import static wannabit.io.cosmostaion.base.BaseConstant.BLOCK_TIME_DESMOS;
+import static wannabit.io.cosmostaion.base.BaseConstant.COINGECKO_DESMOS_MAIN;
+import static wannabit.io.cosmostaion.base.BaseConstant.DESMOS_GAS_RATE_AVERAGE;
+import static wannabit.io.cosmostaion.base.BaseConstant.DESMOS_GAS_RATE_LOW;
+import static wannabit.io.cosmostaion.base.BaseConstant.DESMOS_GAS_RATE_TINY;
+import static wannabit.io.cosmostaion.base.BaseConstant.DESMOS_UNKNOWN_RELAYER;
+import static wannabit.io.cosmostaion.base.BaseConstant.DESMOS_VAL_URL;
+import static wannabit.io.cosmostaion.base.BaseConstant.EXPLORER_DESMOS_MAIN;
+import static wannabit.io.cosmostaion.base.BaseConstant.KEY_DESMOS_PATH;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_DESMOS;
 import static wannabit.io.cosmostaion.utils.WKey.bech32Decode;
 import static wannabit.io.cosmostaion.utils.WKey.bech32Encode;
 import static wannabit.io.cosmostaion.utils.WUtil.getEstimateGasAmount;
@@ -44,45 +44,45 @@ import wannabit.io.cosmostaion.base.BaseData;
 import wannabit.io.cosmostaion.model.type.Coin;
 import wannabit.io.cosmostaion.utils.WDp;
 
-public class Akash extends Chain {
+public class Desmos extends Chain {
 
     @Override
-    public BaseChain getChain() { return AKASH_MAIN; }
+    public BaseChain getChain() { return DESMOS_MAIN; }
 
     @Override
-    public ArrayList<BaseChain> getChains() { return Lists.newArrayList(AKASH_MAIN); }
+    public ArrayList<BaseChain> getChains() { return Lists.newArrayList(DESMOS_MAIN); }
 
     @Override
     public String getMainDenom() {
-        return TOKEN_AKASH;
+        return TOKEN_DESMOS;
     }
 
     @Override
     public int mainDecimal() { return 6; }
 
     @Override
-    public BigDecimal getRealBlockTime() { return BLOCK_TIME_AKASH; }
+    public BigDecimal getRealBlockTime() { return BLOCK_TIME_DESMOS; }
 
     @Override
-    public String getExplorer() { return EXPLORER_AKASH_MAIN; }
+    public String getExplorer() { return EXPLORER_DESMOS_MAIN; }
 
     @Override
     public List<ChildNumber> setParentPath(int customPath) {
-        return ImmutableList.of(new ChildNumber(44, true), new ChildNumber(118, true), ChildNumber.ZERO_HARDENED, ChildNumber.ZERO);
+        return ImmutableList.of(new ChildNumber(44, true), new ChildNumber(852, true), ChildNumber.ZERO_HARDENED, ChildNumber.ZERO);
     }
 
     @Override
     public String getDpAddress(byte[] converted) {
-        return bech32Encode("akash".getBytes(), converted);
+        return bech32Encode("desmos".getBytes(), converted);
     }
 
     @Override
     public String convertDpOpAddressToDpAddress(String dpOpAddress) {
-        return bech32Encode("akash".getBytes(), bech32Decode(dpOpAddress).data);
+        return bech32Encode("desmos".getBytes(), bech32Decode(dpOpAddress).data);
     }
 
     @Override
-    public String setPath(int position, int customPath) { return KEY_PATH + String.valueOf(position); }
+    public String setPath(int position, int customPath) { return KEY_DESMOS_PATH + String.valueOf(position); }
 
     @Override
     public void setShowCoinDp(Context c, BaseData baseData, Coin coin, TextView denomTv, TextView amountTv) {
@@ -108,116 +108,120 @@ public class Akash extends Chain {
 
     @Override
     public void setDpMainDenom(Context c, TextView denomTxt) {
-        denomTxt.setTextColor(c.getResources().getColor(R.color.colorAkash));
-        denomTxt.setText(c.getString(R.string.s_akt));
+        denomTxt.setTextColor(c.getResources().getColor(R.color.colorDesmos));
+        denomTxt.setText(c.getString(R.string.s_desmos));
     }
 
     @Override
     public void setCoinMainDenom(Context c, TextView symbol, TextView fullName, ImageView imageView) {
-        symbol.setText(c.getString(R.string.str_akt_c));
-        fullName.setText("Akash Staking Coin");
-        imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.akash_token_img));
+        symbol.setText(c.getString(R.string.str_desmos_c));
+        fullName.setText("Desmos Staking Coin");
+        imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_desmos));
     }
 
     @Override
     public void setChainTitle(Context c, TextView chainName, int type) {
         if (type == 0) {
-            chainName.setText(c.getString(R.string.str_akash_chain));
+            chainName.setText(c.getString(R.string.str_desmos_net));
         } else {
-            chainName.setText(c.getString(R.string.str_akash_main));
+            chainName.setText(c.getString(R.string.str_desmos_main));
         }
     }
 
     @Override
     public void setInfoImg(ImageView imageView, int type) {
         if (type == 0) {
-            imageView.setImageResource(R.drawable.akash_chain_img);
+            imageView.setImageResource(R.drawable.chain_desmos);
         } else if (type == 1) {
-            imageView.setImageResource(R.drawable.akash_token_img);
+            imageView.setImageResource(R.drawable.token_desmos);
         }
     }
 
     @Override
     public String setMonikerImgUrl(String opAddress) {
-        return AKASH_VAL_URL + opAddress + ".png";
+        return DESMOS_VAL_URL + opAddress + ".png";
     }
 
     @Override
     public String getChainName() {
-        return "akash";
+        return "desmos";
     }
 
     @Override
     public boolean isValidChainAddress(String address) {
-        if (address.startsWith("akash1")) { return true; }
+        if (address.startsWith("desmos1")) { return true; }
         else { return false; }
     }
 
     @Override
-    public String getDefaultRelayerImg() { return AKASH_UNKNOWN_RELAYER; }
+    public String getDefaultRelayerImg() { return DESMOS_UNKNOWN_RELAYER; }
 
     @Override
     public void setFloatBtn(Context c, FloatingActionButton floatBtn) {
-        floatBtn.setBackgroundTintList(c.getResources().getColorStateList(R.color.colorAkash));
+        floatBtn.setBackgroundTintList(c.getResources().getColorStateList(R.color.colorDesmos));
     }
 
     @Override
     public void setLayoutColor(Context c, int length, LinearLayout[] wordsLayer) {
-        wordsLayer[length].setBackground(c.getDrawable(R.drawable.box_round_akash));
+        wordsLayer[length].setBackground(c.getDrawable(R.drawable.box_round_desmos));
     }
 
     @Override
     public int setChainColor(Context c, int type) {
         if (type == 0) {
-            return c.getResources().getColor(R.color.colorAkash);
+            return c.getResources().getColor(R.color.colorDesmos);
         } else {
-            return c.getResources().getColor(R.color.colorTransBgAkash);
+            return c.getResources().getColor(R.color.colorTransBgDesmos);
         }
     }
 
     @Override
     public ColorStateList setChainTabColor(Context c, int type) {
         if (type == 0) {
-            return c.getResources().getColorStateList(R.color.color_tab_myvalidator_akash);
+            return c.getResources().getColorStateList(R.color.color_tab_myvalidator_desmos);
         } else {
-            return c.getResources().getColorStateList(R.color.colorAkash);
+            return c.getResources().getColorStateList(R.color.colorDesmos);
         }
 
     }
 
     @Override
     public void setGuideInfo(MainActivity mainActivity, ImageView guideImg, TextView guideTitle, TextView guideMsg, Button guideBtn1, Button guideBtn2) {
-        guideImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.akash_img));
-        guideTitle.setText(R.string.str_front_guide_title_akash);
-        guideMsg.setText(R.string.str_front_guide_msg_akash);
+        guideImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.infoicon_desmos));
+        guideTitle.setText(R.string.str_front_guide_title_desmos);
+        guideMsg.setText(R.string.str_front_guide_msg_desmos);
     }
 
     @Override
     public void setWalletData(MainActivity mainActivity, ImageView coinImg, TextView coinDenom) {
-        coinImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.akash_token_img));
-        coinDenom.setText(R.string.str_atom_c);
-        coinDenom.setTextAppearance(R.style.font_ss_14_akash);
+        coinImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.token_desmos));
+        coinDenom.setText(R.string.str_desmos_c);
+        coinDenom.setTextAppearance(R.style.font_ss_14_desmos);
     }
 
     @Override
     public void setDexTitle(MainActivity mainActivity, RelativeLayout mBtnDex, TextView dexTitle) {
-        mBtnDex.setVisibility(View.GONE);
+        mBtnDex.setVisibility(View.VISIBLE);
+        dexTitle.setCompoundDrawablesWithIntrinsicBounds(mainActivity.getResources().getDrawable(R.drawable.icon_profile), null, null, null);
+        dexTitle.setText(R.string.str_desmos_airdrop);
     }
 
     @Override
     public void setMainIntent(MainActivity mainActivity, int sequence) {
-        if (sequence == 1) {
-            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse(COINGECKO_AKASH_MAIN)));
+        if (sequence == 0) {
+            mainActivity.onClickProfile();
+        } else if (sequence == 1) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse(COINGECKO_DESMOS_MAIN)));
         } else if (sequence == 2) {
-            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://akash.network/")));
-        } else if (sequence == 3) {
-            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://akash.network/blog")));
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.desmos.network/")));
+        } else if (sequence == 3 ) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://medium.com/desmosnetwork")));
         }
     }
 
     @Override
     public BigDecimal setEstimateGasFeeAmount(Context c, BaseChain basechain, int txType, int valCnt) {
-        BigDecimal gasRate = new BigDecimal(COSMOS_GAS_RATE_AVERAGE);
+        BigDecimal gasRate = new BigDecimal(DESMOS_GAS_RATE_AVERAGE);
         BigDecimal gasAmount = getEstimateGasAmount(c, basechain, txType, valCnt);
         return gasRate.multiply(gasAmount).setScale(0, RoundingMode.DOWN);
     }
@@ -225,10 +229,10 @@ public class Akash extends Chain {
     @Override
     public BigDecimal setGasRate(int position) {
         if (position == 0) {
-            return new BigDecimal(COSMOS_GAS_RATE_TINY);
+            return new BigDecimal(DESMOS_GAS_RATE_TINY);
         } else if (position == 1) {
-            return new BigDecimal(COSMOS_GAS_RATE_LOW);
+            return new BigDecimal(DESMOS_GAS_RATE_LOW);
         }
-        return new BigDecimal(COSMOS_GAS_RATE_AVERAGE);
+        return new BigDecimal(DESMOS_GAS_RATE_AVERAGE);
     }
 }

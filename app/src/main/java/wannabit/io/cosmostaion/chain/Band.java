@@ -7,6 +7,7 @@ import static wannabit.io.cosmostaion.base.BaseConstant.BAND_GAS_RATE_TINY;
 import static wannabit.io.cosmostaion.base.BaseConstant.BAND_UNKNOWN_RELAYER;
 import static wannabit.io.cosmostaion.base.BaseConstant.BAND_VAL_URL;
 import static wannabit.io.cosmostaion.base.BaseConstant.BLOCK_TIME_BAND;
+import static wannabit.io.cosmostaion.base.BaseConstant.COINGECKO_BAND_MAIN;
 import static wannabit.io.cosmostaion.base.BaseConstant.EXPLORER_BAND_MAIN;
 import static wannabit.io.cosmostaion.base.BaseConstant.KEY_BAND_PATH;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_BAND;
@@ -204,16 +205,13 @@ public class Band extends Chain {
     }
 
     @Override
-    public Intent setMainIntent(MainActivity mainActivity, int type) {
-        return new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.coingecko.com/en/coins/band-protocol"));
-    }
-
-    @Override
-    public Intent setGuideIntent(int sequence) {
-        if (sequence == 0) {
-            return new Intent(Intent.ACTION_VIEW , Uri.parse("https://bandprotocol.com/"));
-        } else {
-            return new Intent(Intent.ACTION_VIEW , Uri.parse("https://medium.com/bandprotocol"));
+    public void setMainIntent(MainActivity mainActivity, int sequence) {
+        if (sequence == 1) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse(COINGECKO_BAND_MAIN)));
+        } else if (sequence == 2) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://bandprotocol.com/")));
+        } else if (sequence == 3) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://medium.com/bandprotocol")));
         }
     }
 

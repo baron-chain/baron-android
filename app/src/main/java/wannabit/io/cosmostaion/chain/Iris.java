@@ -3,6 +3,7 @@ package wannabit.io.cosmostaion.chain;
 import static wannabit.io.cosmostaion.base.BaseChain.IRIS_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.IRIS_TEST;
 import static wannabit.io.cosmostaion.base.BaseConstant.BLOCK_TIME_IRIS;
+import static wannabit.io.cosmostaion.base.BaseConstant.COINGECKO_IRIS_MAIN;
 import static wannabit.io.cosmostaion.base.BaseConstant.EXPLORER_IRIS_MAIN;
 import static wannabit.io.cosmostaion.base.BaseConstant.IRIS_GAS_RATE_AVERAGE;
 import static wannabit.io.cosmostaion.base.BaseConstant.IRIS_GAS_RATE_LOW;
@@ -215,20 +216,15 @@ public class Iris extends Chain {
     }
 
     @Override
-    public Intent setMainIntent(MainActivity mainActivity, int type) {
-        if (type == 0) {
-            return new Intent(mainActivity, NFTListActivity.class);
-        } else {
-            return new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.coingecko.com/en/coins/irisnet"));
-        }
-    }
-
-    @Override
-    public Intent setGuideIntent(int sequence) {
+    public void setMainIntent(MainActivity mainActivity, int sequence) {
         if (sequence == 0) {
-            return new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.irisnet.org/"));
-        } else {
-            return new Intent(Intent.ACTION_VIEW , Uri.parse("https://medium.com/irisnet-blog"));
+            mainActivity.startActivity(new Intent(mainActivity, NFTListActivity.class));
+        } else if (sequence == 1) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse(COINGECKO_IRIS_MAIN)));
+        } else if (sequence == 2) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.irisnet.org/")));
+        } else if (sequence == 3) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://medium.com/irisnet-blog")));
         }
     }
 

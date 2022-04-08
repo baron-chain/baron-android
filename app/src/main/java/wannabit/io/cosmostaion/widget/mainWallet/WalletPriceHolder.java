@@ -18,10 +18,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
 
-import wannabit.io.cosmostaion.chain.ChainFactory;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.MainActivity;
 import wannabit.io.cosmostaion.base.BaseData;
+import wannabit.io.cosmostaion.chain.ChainFactory;
 import wannabit.io.cosmostaion.utils.WDp;
 import wannabit.io.cosmostaion.widget.BaseHolder;
 
@@ -91,7 +91,7 @@ public class WalletPriceHolder extends BaseHolder {
         itemRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.startActivity(ChainFactory.getChain(mainActivity.mBaseChain).setMainIntent(mainActivity, 1));
+                ChainFactory.getChain(mainActivity.mBaseChain).setMainIntent(mainActivity, 1);
             }
         });
 

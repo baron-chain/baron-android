@@ -3,6 +3,7 @@ package wannabit.io.cosmostaion.chain;
 import static wannabit.io.cosmostaion.base.BaseChain.COSMOS_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.COSMOS_TEST;
 import static wannabit.io.cosmostaion.base.BaseConstant.BLOCK_TIME_COSMOS;
+import static wannabit.io.cosmostaion.base.BaseConstant.COINGECKO_COSMOS_MAIN;
 import static wannabit.io.cosmostaion.base.BaseConstant.COSMOS_GAS_RATE_AVERAGE;
 import static wannabit.io.cosmostaion.base.BaseConstant.COSMOS_GAS_RATE_LOW;
 import static wannabit.io.cosmostaion.base.BaseConstant.COSMOS_GAS_RATE_TINY;
@@ -211,27 +212,22 @@ public class Cosmos extends Chain {
     }
 
     @Override
-    public Intent setMainIntent(MainActivity mainActivity, int type) {
-        if (type == 0) {
-            return new Intent(mainActivity, GravityListActivity.class);
-        } else {
-            return new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.coingecko.com/en/coins/cosmos"));
-        }
-    }
-
-    @Override
-    public Intent setGuideIntent(int sequence) {
+    public void setMainIntent(MainActivity mainActivity, int sequence) {
         if (sequence == 0) {
+            mainActivity.startActivity(new Intent(mainActivity, GravityListActivity.class));
+        } else if (sequence == 1) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse(COINGECKO_COSMOS_MAIN)));
+        } else if (sequence == 2) {
             if (Locale.getDefault().getLanguage().toLowerCase().equals("ko")) {
-                return new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.cosmostation.io/files/cosmostation_guide_app_ko.pdf"));
+                mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.cosmostation.io/files/cosmostation_guide_app_ko.pdf")));
             } else {
-                return new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.cosmostation.io/files/cosmostation_guide_app_en.pdf"));
+                mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.cosmostation.io/files/cosmostation_guide_app_en.pdf")));
             }
-        } else {
+        } else if (sequence == 3) {
             if (Locale.getDefault().getLanguage().toLowerCase().equals("ko")) {
-                return new Intent(Intent.ACTION_VIEW , Uri.parse("https://guide.cosmostation.io/app_wallet_ko.html"));
+                mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://guide.cosmostation.io/app_wallet_ko.html")));
             } else {
-                return new Intent(Intent.ACTION_VIEW , Uri.parse("https://guide.cosmostation.io/app_wallet_en.html"));
+                mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://guide.cosmostation.io/app_wallet_en.html")));
             }
         }
     }

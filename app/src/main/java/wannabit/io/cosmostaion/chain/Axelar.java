@@ -7,6 +7,7 @@ import static wannabit.io.cosmostaion.base.BaseConstant.AXELAR_GAS_RATE_TINY;
 import static wannabit.io.cosmostaion.base.BaseConstant.AXELAR_UNKNOWN_RELAYER;
 import static wannabit.io.cosmostaion.base.BaseConstant.AXELAR_VAL_URL;
 import static wannabit.io.cosmostaion.base.BaseConstant.BLOCK_TIME_AXELAR;
+import static wannabit.io.cosmostaion.base.BaseConstant.COINGECKO_AXELAR_MAIN;
 import static wannabit.io.cosmostaion.base.BaseConstant.EXPLORER_AXELAR_MAIN;
 import static wannabit.io.cosmostaion.base.BaseConstant.KEY_PATH;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_AXELAR;
@@ -205,16 +206,13 @@ public class Axelar extends Chain {
     }
 
     @Override
-    public Intent setMainIntent(MainActivity mainActivity, int type) {
-        return new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.coingecko.com/en/coins/axelar-network"));
-    }
-
-    @Override
-    public Intent setGuideIntent(int sequence) {
-        if (sequence == 0) {
-            return new Intent(Intent.ACTION_VIEW , Uri.parse("https://axelar.network/"));
-        } else {
-            return new Intent(Intent.ACTION_VIEW , Uri.parse("https://axelar.network/blog"));
+    public void setMainIntent(MainActivity mainActivity, int sequence) {
+        if (sequence == 1) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse(COINGECKO_AXELAR_MAIN)));
+        } else if (sequence == 2) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://axelar.network/")));
+        } else if (sequence == 3) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://axelar.network/blog")));
         }
     }
 
