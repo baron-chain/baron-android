@@ -148,8 +148,8 @@ public class Cerberus extends Chain {
     }
 
     @Override
-    public boolean isValidChainAddress(String address) {
-        if (address.startsWith("cerberus1")) { return true; }
+    public boolean isValidChainAddress(String address, BaseChain baseChain) {
+        if (address.startsWith("cerberus1") && baseChain.equals(getChain())) { return true; }
         else { return false; }
     }
 

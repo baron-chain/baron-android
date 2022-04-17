@@ -156,8 +156,8 @@ public class Iris extends Chain {
     }
 
     @Override
-    public boolean isValidChainAddress(String address) {
-        if (address.startsWith("iaa1")) { return true; }
+    public boolean isValidChainAddress(String address, BaseChain baseChain) {
+        if (address.startsWith("iaa1") && baseChain.equals(getChain())) { return true; }
         else { return false; }
     }
 

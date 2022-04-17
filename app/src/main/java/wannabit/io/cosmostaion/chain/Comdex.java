@@ -148,8 +148,8 @@ public class Comdex extends Chain {
     }
 
     @Override
-    public boolean isValidChainAddress(String address) {
-        if (address.startsWith("comdex1")) { return true; }
+    public boolean isValidChainAddress(String address, BaseChain baseChain) {
+        if (address.startsWith("comdex1") && baseChain.equals(getChain())) { return true; }
         else { return false; }
     }
 

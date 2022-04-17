@@ -142,8 +142,8 @@ public class Bnb extends Chain {
     }
 
     @Override
-    public boolean isValidChainAddress(String address) {
-        if (address.startsWith("bnb1")) { return true; }
+    public boolean isValidChainAddress(String address, BaseChain baseChain) {
+        if (address.startsWith("bnb1") && baseChain.equals(getChain())) { return true; }
         else { return false; }
     }
 

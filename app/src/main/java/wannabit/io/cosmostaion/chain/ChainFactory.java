@@ -12,13 +12,19 @@ import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_CHIHUAHUA;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_COMDEX;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_CRBRUS;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_CRO;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_DARC;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_DESMOS;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_EVMOS;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_FET;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_FLIX;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_GRABRIDGE;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_INJ;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_IRIS;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_JUNO;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_KAVA;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_KI;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_LUM;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_MEDI;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_NGM;
 
 import wannabit.io.cosmostaion.base.BaseChain;
@@ -89,6 +95,27 @@ public class ChainFactory {
 
             case JUNO_MAIN:
                 return new Juno();
+
+            case KAVA_MAIN:
+                return new Kava();
+
+            case KI_MAIN:
+                return new Ki();
+
+            case KONSTELL_MAIN:
+                return new Konstellation();
+
+            case LUM_MAIN:
+                return new Lum();
+
+            case MEDI_MAIN:
+                return new Medibloc();
+
+            case OKEX_MAIN:
+                return new Oec();
+
+            case OMNIFLIX_MAIN:
+                return new Omniflix();
         }
         return new Cosmos();
     }
@@ -134,6 +161,18 @@ public class ChainFactory {
             return new Injective();
         } else if (chainInfo.startsWith("juno-") || chainInfo.startsWith("juno1") || chainInfo.equalsIgnoreCase(TOKEN_JUNO)) {
             return new Juno();
+        } else if (chainInfo.startsWith("kava-") || chainInfo.startsWith("kava1") || chainInfo.equalsIgnoreCase(TOKEN_KAVA)) {
+            return new Kava();
+        } else if (chainInfo.startsWith("kichain-") || chainInfo.startsWith("ki1") || chainInfo.equalsIgnoreCase(TOKEN_KI)) {
+            return new Ki();
+        } else if (chainInfo.startsWith("darchub") || chainInfo.startsWith("darc1") || chainInfo.equalsIgnoreCase(TOKEN_DARC)) {
+            return new Konstellation();
+        } else if (chainInfo.startsWith("lum-network-") || chainInfo.startsWith("lum1") || chainInfo.equalsIgnoreCase(TOKEN_LUM)) {
+            return new Lum();
+        } else if (chainInfo.startsWith("panacea-") || chainInfo.startsWith("panacea1") || chainInfo.equalsIgnoreCase(TOKEN_MEDI)) {
+            return new Medibloc();
+        } else if (chainInfo.startsWith("omniflixhub-") || chainInfo.startsWith("omniflix1") || chainInfo.equalsIgnoreCase(TOKEN_FLIX)) {
+            return new Omniflix();
         }
         return new Cosmos();
     }

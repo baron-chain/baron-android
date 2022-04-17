@@ -149,8 +149,8 @@ public class Crypto extends Chain {
     }
 
     @Override
-    public boolean isValidChainAddress(String address) {
-        if (address.startsWith("cro1")) { return true; }
+    public boolean isValidChainAddress(String address, BaseChain baseChain) {
+        if (address.startsWith("cro1") && baseChain.equals(getChain())) { return true; }
         else { return false; }
     }
 

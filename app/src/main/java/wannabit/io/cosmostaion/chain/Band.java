@@ -148,8 +148,8 @@ public class Band extends Chain {
     }
 
     @Override
-    public boolean isValidChainAddress(String address) {
-        if (address.startsWith("band1")) { return true; }
+    public boolean isValidChainAddress(String address, BaseChain baseChain) {
+        if (address.startsWith("band1") && baseChain.equals(getChain())) { return true; }
         else { return false; }
     }
 

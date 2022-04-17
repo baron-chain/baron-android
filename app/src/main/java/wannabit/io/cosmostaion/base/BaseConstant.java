@@ -910,6 +910,13 @@ public class BaseConstant {
     public final static String COINGECKO_GRAV_MAIN          = "https://www.coingecko.com/en/coins/graviton";
     public final static String COINGECKO_INJ_MAIN           = "https://www.coingecko.com/en/coins/injective-protocol";
     public final static String COINGECKO_JUNO_MAIN          = "https://www.coingecko.com/en/coins/juno-network";
+    public final static String COINGECKO_KAVA_MAIN          = "https://www.coingecko.com/en/coins/kava";
+    public final static String COINGECKO_KI_MAIN            = "https://www.coingecko.com/en/coins/ki";
+    public final static String COINGECKO_KONSTELL_MAIN      = "https://www.coingecko.com/en/coins/konstellation";
+    public final static String COINGECKO_LUM_MAIN           = "https://www.coingecko.com/en/coins/lum-network";
+    public final static String COINGECKO_MEDI_MAIN          = "https://www.coingecko.com/en/coins/medibloc";
+    public final static String COINGECKO_OKEX_MAIN          = "https://www.coingecko.com/en/coins/oec-token";
+    public final static String COINGECKO_OMNIFLIX_MAIN      = "https://www.coingecko.com/en/coins/omniflix-network";
 
 
     public final static String AKASH_UNKNOWN_RELAYER        = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/akash/relay-akash-unknown.png";

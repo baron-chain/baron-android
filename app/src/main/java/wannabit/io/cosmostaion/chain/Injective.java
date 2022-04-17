@@ -148,8 +148,8 @@ public class Injective extends Chain {
     }
 
     @Override
-    public boolean isValidChainAddress(String address) {
-        if (address.startsWith("inj1")) { return true; }
+    public boolean isValidChainAddress(String address, BaseChain baseChain) {
+        if (address.startsWith("inj1") && baseChain.equals(getChain())) { return true; }
         else { return false; }
     }
 

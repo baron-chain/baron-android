@@ -1,18 +1,14 @@
 package wannabit.io.cosmostaion.chain;
 
-import static wannabit.io.cosmostaion.base.BaseChain.EVMOS_MAIN;
-import static wannabit.io.cosmostaion.base.BaseConstant.BLOCK_TIME_EVMOS;
-import static wannabit.io.cosmostaion.base.BaseConstant.COINGECKO_EVMOS_MAIN;
-import static wannabit.io.cosmostaion.base.BaseConstant.EVMOS_GAS_RATE_AVERAGE;
-import static wannabit.io.cosmostaion.base.BaseConstant.EVMOS_GAS_RATE_LOW;
-import static wannabit.io.cosmostaion.base.BaseConstant.EVMOS_GAS_RATE_TINY;
-import static wannabit.io.cosmostaion.base.BaseConstant.EVMOS_UNKNOWN_RELAYER;
-import static wannabit.io.cosmostaion.base.BaseConstant.EVMOS_VAL_URL;
-import static wannabit.io.cosmostaion.base.BaseConstant.EXPLORER_EVMOS_MAIN;
+import static wannabit.io.cosmostaion.base.BaseChain.OKEX_MAIN;
+import static wannabit.io.cosmostaion.base.BaseConstant.BLOCK_TIME_OKEX;
+import static wannabit.io.cosmostaion.base.BaseConstant.COINGECKO_OKEX_MAIN;
+import static wannabit.io.cosmostaion.base.BaseConstant.EXPLORER_OKEX_MAIN;
 import static wannabit.io.cosmostaion.base.BaseConstant.KEY_ETH_PATH;
-import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_EVMOS;
-import static wannabit.io.cosmostaion.utils.WKey.bech32Decode;
-import static wannabit.io.cosmostaion.utils.WKey.bech32Encode;
+import static wannabit.io.cosmostaion.base.BaseConstant.KEY_NEW_OK_PATH;
+import static wannabit.io.cosmostaion.base.BaseConstant.OKEX_VAL_URL;
+import static wannabit.io.cosmostaion.base.BaseConstant.OK_GAS_RATE_AVERAGE;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_OK;
 import static wannabit.io.cosmostaion.utils.WUtil.getEstimateGasAmount;
 
 import android.content.Context;
@@ -44,45 +40,57 @@ import wannabit.io.cosmostaion.base.BaseData;
 import wannabit.io.cosmostaion.model.type.Coin;
 import wannabit.io.cosmostaion.utils.WDp;
 
-public class Evmos extends Chain {
+public class Oec extends Chain {
 
     @Override
-    public BaseChain getChain() { return EVMOS_MAIN; }
+    public BaseChain getChain() { return OKEX_MAIN; }
 
     @Override
-    public ArrayList<BaseChain> getChains() { return Lists.newArrayList(EVMOS_MAIN); }
+    public ArrayList<BaseChain> getChains() { return Lists.newArrayList(OKEX_MAIN); }
 
     @Override
     public String getMainDenom() {
-        return TOKEN_EVMOS;
+        return TOKEN_OK;
     }
 
     @Override
-    public int mainDecimal() { return 18; }
+    public int mainDecimal() { return 0; }
 
     @Override
-    public BigDecimal getRealBlockTime() { return BLOCK_TIME_EVMOS; }
+    public BigDecimal getRealBlockTime() { return BLOCK_TIME_OKEX; }
 
     @Override
-    public String getExplorer() { return EXPLORER_EVMOS_MAIN; }
+    public String getExplorer() { return EXPLORER_OKEX_MAIN; }
 
     @Override
     public List<ChildNumber> setParentPath(int customPath) {
-        return ImmutableList.of(new ChildNumber(44, true), new ChildNumber(60, true), ChildNumber.ZERO_HARDENED, ChildNumber.ZERO);
+        if (customPath == 0 || customPath == 1) {
+            return  ImmutableList.of(new ChildNumber(44, true), new ChildNumber(996, true), ChildNumber.ZERO_HARDENED, ChildNumber.ZERO);
+        } else {
+            return  ImmutableList.of(new ChildNumber(44, true), new ChildNumber(60, true), ChildNumber.ZERO_HARDENED, ChildNumber.ZERO);
+        }
     }
 
     @Override
     public String getDpAddress(byte[] converted) {
-        return bech32Encode("evmos".getBytes(), converted);
+        return "";
     }
 
     @Override
     public String convertDpOpAddressToDpAddress(String dpOpAddress) {
-        return bech32Encode("evmos".getBytes(), bech32Decode(dpOpAddress).data);
+        return "";
     }
 
     @Override
-    public String setPath(int position, int customPath) { return KEY_ETH_PATH + String.valueOf(position); }
+    public String setPath(int position, int customPath) {
+        if (customPath == 0) {
+            return KEY_NEW_OK_PATH + String.valueOf(position) + (" (Tendermint Type) ");
+        } else if (customPath == 1) {
+            return KEY_NEW_OK_PATH + String.valueOf(position) + (" (Ethermint Type) ");
+        } else {
+            return KEY_ETH_PATH + String.valueOf(position) + (" (Ethereum Type) ");
+        }
+    }
 
     @Override
     public void setShowCoinDp(Context c, BaseData baseData, Coin coin, TextView denomTv, TextView amountTv) {
@@ -92,7 +100,7 @@ public class Evmos extends Chain {
             denomTv.setTextColor(c.getResources().getColor(R.color.colorWhite));
             denomTv.setText(coin.denom.toUpperCase());
         }
-        amountTv.setText(WDp.getDpAmount2(c, new BigDecimal(coin.amount), mainDecimal(), mainDecimal()));
+        amountTv.setText(WDp.getDpAmount2(c, new BigDecimal(coin.amount), mainDecimal(), 18));
     }
 
     @Override
@@ -103,100 +111,102 @@ public class Evmos extends Chain {
             denomTv.setTextColor(c.getResources().getColor(R.color.colorWhite));
             denomTv.setText(symbol.toUpperCase());
         }
-        amountTv.setText(WDp.getDpAmount2(c, new BigDecimal(amount), mainDecimal(), mainDecimal()));
+        amountTv.setText(WDp.getDpAmount2(c, new BigDecimal(amount), mainDecimal(), 18));
     }
 
     @Override
     public void setDpMainDenom(Context c, TextView denomTxt) {
-        denomTxt.setTextColor(c.getResources().getColor(R.color.colorEvmos));
-        denomTxt.setText(c.getString(R.string.s_evmos));
+        denomTxt.setTextColor(c.getResources().getColor(R.color.colorOK));
+        denomTxt.setText(c.getString(R.string.s_okt));
     }
 
     @Override
     public void setCoinMainDenom(Context c, TextView symbol, TextView fullName, ImageView imageView) {
-        symbol.setText(c.getString(R.string.str_evmos_c));
-        fullName.setText("Evmos Staking Coin");
-        imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_evmos));
+        symbol.setText(c.getString(R.string.str_ok_c));
+        fullName.setText("OEC Staking Coin");
+        imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_okx));
     }
 
     @Override
     public void setChainTitle(Context c, TextView chainName, int type) {
         if (type == 0) {
-            chainName.setText(c.getString(R.string.str_evmos_net));
+            chainName.setText(c.getString(R.string.str_ok_net));
         } else {
-            chainName.setText(c.getString(R.string.str_evmos_main));
+            chainName.setText(c.getString(R.string.str_okex_main));
         }
     }
 
     @Override
     public void setInfoImg(ImageView imageView, int type) {
         if (type == 0) {
-            imageView.setImageResource(R.drawable.chain_evmos);
+            imageView.setImageResource(R.drawable.chain_okx);
         } else if (type == 1) {
-            imageView.setImageResource(R.drawable.token_evmos);
+            imageView.setImageResource(R.drawable.token_okx);
         }
     }
 
     @Override
     public String setMonikerImgUrl(String opAddress) {
-        return EVMOS_VAL_URL + opAddress + ".png";
+        return OKEX_VAL_URL + opAddress + ".png";
     }
 
     @Override
     public String getChainName() {
-        return "evmos";
+        return "okex";
     }
 
     @Override
     public boolean isValidChainAddress(String address, BaseChain baseChain) {
-        if (address.startsWith("evmos1") && baseChain.equals(getChain())) { return true; }
-        else { return false; }
+        if (baseChain.equals(getChain()) && address.startsWith("0x")) {
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public String getDefaultRelayerImg() { return EVMOS_UNKNOWN_RELAYER; }
+    public String getDefaultRelayerImg() { return ""; }
 
     @Override
     public void setFloatBtn(Context c, FloatingActionButton floatBtn) {
-        floatBtn.setBackgroundTintList(c.getResources().getColorStateList(R.color.colorEvmos));
+        floatBtn.setBackgroundTintList(c.getResources().getColorStateList(R.color.colorOK));
     }
 
     @Override
     public void setLayoutColor(Context c, int length, LinearLayout[] wordsLayer) {
-        wordsLayer[length].setBackground(c.getDrawable(R.drawable.box_round_evmos));
+        wordsLayer[length].setBackground(c.getDrawable(R.drawable.box_round_okex));
     }
 
     @Override
     public int setChainColor(Context c, int type) {
         if (type == 0) {
-            return c.getResources().getColor(R.color.colorEvmos);
+            return c.getResources().getColor(R.color.colorOK);
         } else {
-            return c.getResources().getColor(R.color.colorTransBgEvmos);
+            return c.getResources().getColor(R.color.colorTransBgOkex);
         }
     }
 
     @Override
     public ColorStateList setChainTabColor(Context c, int type) {
         if (type == 0) {
-            return c.getResources().getColorStateList(R.color.color_tab_myvalidator_evmos);
+            return c.getResources().getColorStateList(R.color.color_tab_myvalidator_ok);
         } else {
-            return c.getResources().getColorStateList(R.color.colorEvmos);
+            return c.getResources().getColorStateList(R.color.colorOK);
         }
 
     }
 
     @Override
     public void setGuideInfo(MainActivity mainActivity, ImageView guideImg, TextView guideTitle, TextView guideMsg, Button guideBtn1, Button guideBtn2) {
-        guideImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.infoicon_evmos));
-        guideTitle.setText(R.string.str_front_guide_title_evmos);
-        guideMsg.setText(R.string.str_front_guide_msg_evmos);
+        guideImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.okex_validatornone));
+        guideTitle.setText(R.string.str_front_guide_title_ok);
+        guideMsg.setText(R.string.str_front_guide_msg_ok);
     }
 
     @Override
     public void setWalletData(MainActivity mainActivity, ImageView coinImg, TextView coinDenom) {
-        coinImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.token_evmos));
-        coinDenom.setText(R.string.str_evmos_c);
-        coinDenom.setTextAppearance(R.style.font_ss_14_evmos);
+        coinImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.token_okx));
+        coinDenom.setText(R.string.str_ok_c);
+        coinDenom.setTextAppearance(R.style.font_ss_14_ok);
     }
 
     @Override
@@ -207,28 +217,23 @@ public class Evmos extends Chain {
     @Override
     public void setMainIntent(MainActivity mainActivity, int sequence) {
         if (sequence == 1) {
-            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse(COINGECKO_EVMOS_MAIN)));
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse(COINGECKO_OKEX_MAIN)));
         } else if (sequence == 2) {
-            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://evmos.org/")));
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.okex.com/")));
         } else if (sequence == 3 ) {
-            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://evmos.blog/")));
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.okex.com/community/")));
         }
     }
 
     @Override
     public BigDecimal setEstimateGasFeeAmount(Context c, BaseChain basechain, int txType, int valCnt) {
-        BigDecimal gasRate = new BigDecimal(EVMOS_GAS_RATE_AVERAGE);
+        BigDecimal gasRate = new BigDecimal(OK_GAS_RATE_AVERAGE);
         BigDecimal gasAmount = getEstimateGasAmount(c, basechain, txType, valCnt);
-        return gasRate.multiply(gasAmount).setScale(0, RoundingMode.DOWN);
+        return gasRate.multiply(gasAmount).setScale(18, RoundingMode.DOWN);
     }
 
     @Override
     public BigDecimal setGasRate(int position) {
-        if (position == 0) {
-            return new BigDecimal(EVMOS_GAS_RATE_TINY);
-        } else if (position == 1) {
-            return new BigDecimal(EVMOS_GAS_RATE_LOW);
-        }
-        return new BigDecimal(EVMOS_GAS_RATE_AVERAGE);
+        return new BigDecimal(OK_GAS_RATE_AVERAGE);
     }
 }

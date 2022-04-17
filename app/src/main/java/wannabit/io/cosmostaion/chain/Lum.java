@@ -1,16 +1,17 @@
 package wannabit.io.cosmostaion.chain;
 
-import static wannabit.io.cosmostaion.base.BaseChain.CERTIK_MAIN;
-import static wannabit.io.cosmostaion.base.BaseConstant.BLOCK_TIME_CERTIK;
-import static wannabit.io.cosmostaion.base.BaseConstant.CERTIK_GAS_RATE_AVERAGE;
-import static wannabit.io.cosmostaion.base.BaseConstant.CERTIK_GAS_RATE_LOW;
-import static wannabit.io.cosmostaion.base.BaseConstant.CERTIK_GAS_RATE_TINY;
-import static wannabit.io.cosmostaion.base.BaseConstant.CERTIK_UNKNOWN_RELAYER;
-import static wannabit.io.cosmostaion.base.BaseConstant.CERTIK_VAL_URL;
-import static wannabit.io.cosmostaion.base.BaseConstant.COINGECKO_CERTIK_MAIN;
-import static wannabit.io.cosmostaion.base.BaseConstant.EXPLORER_CERTIK_MAIN;
+import static wannabit.io.cosmostaion.base.BaseChain.LUM_MAIN;
+import static wannabit.io.cosmostaion.base.BaseConstant.BLOCK_TIME_LUM;
+import static wannabit.io.cosmostaion.base.BaseConstant.COINGECKO_LUM_MAIN;
+import static wannabit.io.cosmostaion.base.BaseConstant.EXPLORER_LUM_MAIN;
+import static wannabit.io.cosmostaion.base.BaseConstant.KEY_LUM_PATH;
 import static wannabit.io.cosmostaion.base.BaseConstant.KEY_PATH;
-import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_CERTIK;
+import static wannabit.io.cosmostaion.base.BaseConstant.LUM_GAS_RATE_AVERAGE;
+import static wannabit.io.cosmostaion.base.BaseConstant.LUM_GAS_RATE_LOW;
+import static wannabit.io.cosmostaion.base.BaseConstant.LUM_GAS_RATE_TINY;
+import static wannabit.io.cosmostaion.base.BaseConstant.LUM_UNKNOWN_RELAYER;
+import static wannabit.io.cosmostaion.base.BaseConstant.LUM_VAL_URL;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_LUM;
 import static wannabit.io.cosmostaion.utils.WKey.bech32Decode;
 import static wannabit.io.cosmostaion.utils.WKey.bech32Encode;
 import static wannabit.io.cosmostaion.utils.WUtil.getEstimateGasAmount;
@@ -44,45 +45,55 @@ import wannabit.io.cosmostaion.base.BaseData;
 import wannabit.io.cosmostaion.model.type.Coin;
 import wannabit.io.cosmostaion.utils.WDp;
 
-public class Certik extends Chain {
+public class Lum extends Chain {
 
     @Override
-    public BaseChain getChain() { return CERTIK_MAIN; }
+    public BaseChain getChain() { return LUM_MAIN; }
 
     @Override
-    public ArrayList<BaseChain> getChains() { return Lists.newArrayList(CERTIK_MAIN); }
+    public ArrayList<BaseChain> getChains() { return Lists.newArrayList(LUM_MAIN); }
 
     @Override
     public String getMainDenom() {
-        return TOKEN_CERTIK;
+        return TOKEN_LUM;
     }
 
     @Override
     public int mainDecimal() { return 6; }
 
     @Override
-    public BigDecimal getRealBlockTime() { return BLOCK_TIME_CERTIK; }
+    public BigDecimal getRealBlockTime() { return BLOCK_TIME_LUM; }
 
     @Override
-    public String getExplorer() { return EXPLORER_CERTIK_MAIN; }
+    public String getExplorer() { return EXPLORER_LUM_MAIN; }
 
     @Override
     public List<ChildNumber> setParentPath(int customPath) {
-        return ImmutableList.of(new ChildNumber(44, true), new ChildNumber(118, true), ChildNumber.ZERO_HARDENED, ChildNumber.ZERO);
+        if (customPath == 0) {
+            return  ImmutableList.of(new ChildNumber(44, true), new ChildNumber(118, true), ChildNumber.ZERO_HARDENED, ChildNumber.ZERO);
+        } else {
+            return  ImmutableList.of(new ChildNumber(44, true), new ChildNumber(880, true), ChildNumber.ZERO_HARDENED, ChildNumber.ZERO);
+        }
     }
 
     @Override
     public String getDpAddress(byte[] converted) {
-        return bech32Encode("certik".getBytes(), converted);
+        return bech32Encode("lum".getBytes(), converted);
     }
 
     @Override
     public String convertDpOpAddressToDpAddress(String dpOpAddress) {
-        return bech32Encode("certik".getBytes(), bech32Decode(dpOpAddress).data);
+        return bech32Encode("lum".getBytes(), bech32Decode(dpOpAddress).data);
     }
 
     @Override
-    public String setPath(int position, int customPath) { return KEY_PATH + String.valueOf(position); }
+    public String setPath(int position, int customPath) {
+        if (customPath == 0) {
+            return KEY_PATH + String.valueOf(position);
+        } else {
+            return KEY_LUM_PATH + String.valueOf(position);
+        }
+    }
 
     @Override
     public void setShowCoinDp(Context c, BaseData baseData, Coin coin, TextView denomTv, TextView amountTv) {
@@ -108,95 +119,95 @@ public class Certik extends Chain {
 
     @Override
     public void setDpMainDenom(Context c, TextView denomTxt) {
-        denomTxt.setTextColor(c.getResources().getColor(R.color.colorCertik));
-        denomTxt.setText(c.getString(R.string.s_ctk));
+        denomTxt.setTextColor(c.getResources().getColor(R.color.colorLum));
+        denomTxt.setText(c.getString(R.string.s_lum));
     }
 
     @Override
     public void setCoinMainDenom(Context c, TextView symbol, TextView fullName, ImageView imageView) {
-        symbol.setText(c.getString(R.string.str_ctk_c));
-        fullName.setText("Certik Staking Coin");
-        imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.certik_token_img));
+        symbol.setText(c.getString(R.string.str_lum_c));
+        fullName.setText("Lum Network Staking Coin");
+        imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_lum));
     }
 
     @Override
     public void setChainTitle(Context c, TextView chainName, int type) {
         if (type == 0) {
-            chainName.setText(c.getString(R.string.str_certik_chain));
+            chainName.setText(c.getString(R.string.str_lum_net));
         } else {
-            chainName.setText(c.getString(R.string.str_certik_main));
+            chainName.setText(c.getString(R.string.str_lum_main));
         }
     }
 
     @Override
     public void setInfoImg(ImageView imageView, int type) {
         if (type == 0) {
-            imageView.setImageResource(R.drawable.certik_chain_img);
+            imageView.setImageResource(R.drawable.chain_lumnetwork);
         } else if (type == 1) {
-            imageView.setImageResource(R.drawable.certik_token_img);
+            imageView.setImageResource(R.drawable.token_lum);
         }
     }
 
     @Override
     public String setMonikerImgUrl(String opAddress) {
-        return CERTIK_VAL_URL + opAddress + ".png";
+        return LUM_VAL_URL + opAddress + ".png";
     }
 
     @Override
     public String getChainName() {
-        return "certik";
+        return "lum";
     }
 
     @Override
     public boolean isValidChainAddress(String address, BaseChain baseChain) {
-        if (address.startsWith("certik1") && baseChain.equals(getChain())) { return true; }
+        if (address.startsWith("lum1") && baseChain.equals(getChain())) { return true; }
         else { return false; }
     }
 
     @Override
-    public String getDefaultRelayerImg() { return CERTIK_UNKNOWN_RELAYER; }
+    public String getDefaultRelayerImg() { return LUM_UNKNOWN_RELAYER; }
 
     @Override
     public void setFloatBtn(Context c, FloatingActionButton floatBtn) {
-        floatBtn.setBackgroundTintList(c.getResources().getColorStateList(R.color.colorCertik));
+        floatBtn.setBackgroundTintList(c.getResources().getColorStateList(R.color.colorLum));
     }
 
     @Override
     public void setLayoutColor(Context c, int length, LinearLayout[] wordsLayer) {
-        wordsLayer[length].setBackground(c.getDrawable(R.drawable.box_round_certik));
+        wordsLayer[length].setBackground(c.getDrawable(R.drawable.box_round_lum));
     }
 
     @Override
     public int setChainColor(Context c, int type) {
         if (type == 0) {
-            return c.getResources().getColor(R.color.colorCertik);
+            return c.getResources().getColor(R.color.colorLum);
         } else {
-            return c.getResources().getColor(R.color.colorTransBgCertik);
+            return c.getResources().getColor(R.color.colorTransBgLum);
         }
     }
 
     @Override
     public ColorStateList setChainTabColor(Context c, int type) {
         if (type == 0) {
-            return c.getResources().getColorStateList(R.color.color_tab_myvalidator_certik);
+            return c.getResources().getColorStateList(R.color.color_tab_myvalidator_lum);
         } else {
-            return c.getResources().getColorStateList(R.color.colorCertik);
+            return c.getResources().getColorStateList(R.color.colorLum);
         }
 
     }
 
     @Override
     public void setGuideInfo(MainActivity mainActivity, ImageView guideImg, TextView guideTitle, TextView guideMsg, Button guideBtn1, Button guideBtn2) {
-        guideImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.certik_img));
-        guideTitle.setText(R.string.str_front_guide_title_certik);
-        guideMsg.setText(R.string.str_front_guide_msg_certik);
+        guideImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.infoicon_lumnetwork));
+        guideTitle.setText(R.string.str_front_guide_title_lum);
+        guideMsg.setText(R.string.str_front_guide_msg_lum);
     }
 
     @Override
     public void setWalletData(MainActivity mainActivity, ImageView coinImg, TextView coinDenom) {
-        coinImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.certik_token_img));
-        coinDenom.setText(R.string.str_ctk_c);
-        coinDenom.setTextAppearance(R.style.font_ss_14_certik);
+        coinImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.token_lum));
+        coinDenom.setText(R.string.str_lum_c);
+        coinDenom.setTextAppearance(R.style.font_ss_14_lum);
     }
 
     @Override
@@ -207,17 +218,17 @@ public class Certik extends Chain {
     @Override
     public void setMainIntent(MainActivity mainActivity, int sequence) {
         if (sequence == 1) {
-           mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse(COINGECKO_CERTIK_MAIN)));
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse(COINGECKO_LUM_MAIN)));
         } else if (sequence == 2) {
-            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.certik.foundation/")));
-        } else if (sequence == 3) {
-            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://www.certik.foundation/blog")));
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://lum.network/")));
+        } else if (sequence == 3 ) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://medium.com/lum-network/")));
         }
     }
 
     @Override
     public BigDecimal setEstimateGasFeeAmount(Context c, BaseChain basechain, int txType, int valCnt) {
-        BigDecimal gasRate = new BigDecimal(CERTIK_GAS_RATE_AVERAGE);
+        BigDecimal gasRate = new BigDecimal(LUM_GAS_RATE_AVERAGE);
         BigDecimal gasAmount = getEstimateGasAmount(c, basechain, txType, valCnt);
         return gasRate.multiply(gasAmount).setScale(0, RoundingMode.DOWN);
     }
@@ -225,10 +236,10 @@ public class Certik extends Chain {
     @Override
     public BigDecimal setGasRate(int position) {
         if (position == 0) {
-            return new BigDecimal(CERTIK_GAS_RATE_TINY);
+            return new BigDecimal(LUM_GAS_RATE_TINY);
         } else if (position == 1) {
-            return new BigDecimal(CERTIK_GAS_RATE_LOW);
+            return new BigDecimal(LUM_GAS_RATE_LOW);
         }
-        return new BigDecimal(CERTIK_GAS_RATE_AVERAGE);
+        return new BigDecimal(LUM_GAS_RATE_AVERAGE);
     }
 }

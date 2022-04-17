@@ -148,8 +148,8 @@ public class Akash extends Chain {
     }
 
     @Override
-    public boolean isValidChainAddress(String address) {
-        if (address.startsWith("akash1")) { return true; }
+    public boolean isValidChainAddress(String address, BaseChain baseChain) {
+        if (address.startsWith("akash1") && baseChain.equals(getChain())) { return true; }
         else { return false; }
     }
 

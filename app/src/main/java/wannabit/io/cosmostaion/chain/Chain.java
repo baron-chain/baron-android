@@ -79,7 +79,7 @@ public abstract class Chain {
     public abstract String getChainName();
 
     // Check Address
-    public abstract boolean isValidChainAddress(String address);
+    public abstract boolean isValidChainAddress(String address, BaseChain baseChain);
 
     // Default Relayer Image
     public abstract String getDefaultRelayerImg();
