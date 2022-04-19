@@ -102,26 +102,6 @@ public class Kava extends Chain {
     }
 
     @Override
-    public void setShowCoinDp(Context c, BaseData baseData, Coin coin, TextView denomTv, TextView amountTv) {
-        if (coin.denom.equals(getMainDenom())) {
-            setDpMainDenom(c, denomTv);
-        } else if (coin.denom.equals(TOKEN_HARD)) {
-            denomTv.setText(coin.denom.toUpperCase());
-            denomTv.setTextColor(c.getResources().getColor(R.color.colorHard));
-        } else if (coin.denom.equals(TOKEN_USDX)) {
-            denomTv.setText(coin.denom.toUpperCase());
-            denomTv.setTextColor(c.getResources().getColor(R.color.colorUsdx));
-        } else if (coin.denom.equals(TOKEN_SWP)) {
-            denomTv.setText(coin.denom.toUpperCase());
-            denomTv.setTextColor(c.getResources().getColor(R.color.colorSwp));
-        } else {
-            denomTv.setText(coin.denom.toUpperCase());
-            denomTv.setTextColor(c.getResources().getColor(R.color.colorWhite));
-        }
-        amountTv.setText(WDp.getDpAmount2(c, new BigDecimal(coin.amount), WUtil.getKavaCoinDecimal(coin), WUtil.getKavaCoinDecimal(coin)));
-    }
-
-    @Override
     public void setShowCoinDp(Context c, BaseData baseData, String symbol, String amount, TextView denomTv, TextView amountTv) {
         if (symbol.equals(getMainDenom())) {
             setDpMainDenom(c, denomTv);

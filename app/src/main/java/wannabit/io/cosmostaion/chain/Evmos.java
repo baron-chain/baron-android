@@ -85,17 +85,6 @@ public class Evmos extends Chain {
     public String setPath(int position, int customPath) { return KEY_ETH_PATH + String.valueOf(position); }
 
     @Override
-    public void setShowCoinDp(Context c, BaseData baseData, Coin coin, TextView denomTv, TextView amountTv) {
-        if (coin.denom.equalsIgnoreCase(getMainDenom())) {
-            setDpMainDenom(c, denomTv);
-        } else {
-            denomTv.setTextColor(c.getResources().getColor(R.color.colorWhite));
-            denomTv.setText(coin.denom.toUpperCase());
-        }
-        amountTv.setText(WDp.getDpAmount2(c, new BigDecimal(coin.amount), mainDecimal(), mainDecimal()));
-    }
-
-    @Override
     public void setShowCoinDp(Context c, BaseData baseData, String symbol, String amount, TextView denomTv, TextView amountTv) {
         if (symbol.equals(getMainDenom())) {
             setDpMainDenom(c, denomTv);
@@ -158,7 +147,8 @@ public class Evmos extends Chain {
 
     @Override
     public void setFloatBtn(Context c, FloatingActionButton floatBtn) {
-        floatBtn.setBackgroundTintList(c.getResources().getColorStateList(R.color.colorEvmos));
+        floatBtn.setBackgroundTintList(c.getResources().getColorStateList(R.color.colorBlack));
+        floatBtn.setImageTintList(c.getResources().getColorStateList(R.color.colorEvmos));
     }
 
     @Override

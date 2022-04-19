@@ -917,6 +917,17 @@ public class BaseConstant {
     public final static String COINGECKO_MEDI_MAIN          = "https://www.coingecko.com/en/coins/medibloc";
     public final static String COINGECKO_OKEX_MAIN          = "https://www.coingecko.com/en/coins/oec-token";
     public final static String COINGECKO_OMNIFLIX_MAIN      = "https://www.coingecko.com/en/coins/omniflix-network";
+    public final static String COINGECKO_OSMOSIS_MAIN       = "https://www.coingecko.com/en/coins/osmosis";
+    public final static String COINGECKO_PERSIS_MAIN        = "https://www.coingecko.com/en/coins/persistence";
+    public final static String COINGECKO_PROVENANCE_MAIN    = "https://www.coingecko.com/en/coins/";
+    public final static String COINGECKO_REGEN_MAIN         = "https://www.coingecko.com/en/coins/regen/";
+    public final static String COINGECKO_RIZON_MAIN         = "https://www.coingecko.com/en/coins/rizon/";
+    public final static String COINGECKO_SECRET_MAIN        = "https://www.coingecko.com/en/coins/secret/";
+    public final static String COINGECKO_SIF_MAIN           = "https://www.coingecko.com/en/coins/sifchain/";
+    public final static String COINGECKO_SENTINEL_MAIN      = "https://www.coingecko.com/en/coins/sentinel/";
+    public final static String COINGECKO_STARGAZE_MAIN      = "https://www.coingecko.com/en/coins/stargaze/";
+    public final static String COINGECKO_STARNAME_MAIN      = "https://www.coingecko.com/en/coins/starname/";
+    public final static String COINGECKO_UMEE_MAIN          = "https://www.coingecko.com/en/coins/umee/";
 
 
     public final static String AKASH_UNKNOWN_RELAYER        = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/akash/relay-akash-unknown.png";

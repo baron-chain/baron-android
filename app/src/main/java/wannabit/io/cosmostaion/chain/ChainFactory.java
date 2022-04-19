@@ -14,11 +14,14 @@ import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_CRBRUS;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_CRO;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_DARC;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_DESMOS;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_DVPN;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_EVMOS;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_FET;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_FLIX;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_GRABRIDGE;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_HASH;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_INJ;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_IOV;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_IRIS;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_JUNO;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_KAVA;
@@ -26,6 +29,14 @@ import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_KI;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_LUM;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_MEDI;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_NGM;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_OSMOSIS;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_REGEN;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_RIZON;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_SECRET;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_SIF;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_STARGAZE;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_UMEE;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_XPRT;
 
 import wannabit.io.cosmostaion.base.BaseChain;
 
@@ -116,6 +127,39 @@ public class ChainFactory {
 
             case OMNIFLIX_MAIN:
                 return new Omniflix();
+
+            case OSMOSIS_MAIN:
+                return new Osmosis();
+
+            case PERSIS_MAIN:
+                return new Persistence();
+
+            case PROVENANCE_MAIN:
+                return new Provenance();
+
+            case REGEN_MAIN:
+                return new Regen();
+
+            case RIZON_MAIN:
+                return new Rizon();
+
+            case SECRET_MAIN:
+                return new Secret();
+
+            case SENTINEL_MAIN:
+                return new Sentinel();
+
+            case SIF_MAIN:
+                return new Sif();
+
+            case STARGAZE_MAIN:
+                return new Stargaze();
+
+            case IOV_MAIN:
+                return new Starname();
+
+            case UMEE_MAIN:
+                return new Umee();
         }
         return new Cosmos();
     }
@@ -173,6 +217,28 @@ public class ChainFactory {
             return new Medibloc();
         } else if (chainInfo.startsWith("omniflixhub-") || chainInfo.startsWith("omniflix1") || chainInfo.equalsIgnoreCase(TOKEN_FLIX)) {
             return new Omniflix();
+        } else if (chainInfo.startsWith("osmosis-") || chainInfo.startsWith("osmo1") || chainInfo.equalsIgnoreCase(TOKEN_OSMOSIS)) {
+            return new Osmosis();
+        } else if (chainInfo.startsWith("core-") || chainInfo.startsWith("persistence1") || chainInfo.equalsIgnoreCase(TOKEN_XPRT)) {
+            return new Persistence();
+        } else if (chainInfo.startsWith("pio-mainnet-") || chainInfo.startsWith("pb1") || chainInfo.equalsIgnoreCase(TOKEN_HASH)) {
+            return new Provenance();
+        } else if (chainInfo.startsWith("regen-") || chainInfo.startsWith("regen1") || chainInfo.equalsIgnoreCase(TOKEN_REGEN)) {
+            return new Regen();
+        } else if (chainInfo.startsWith("titan-") || chainInfo.startsWith("rizon1") || chainInfo.equalsIgnoreCase(TOKEN_RIZON)) {
+            return new Rizon();
+        } else if (chainInfo.startsWith("secret-") || chainInfo.startsWith("secret1") || chainInfo.equalsIgnoreCase(TOKEN_SECRET)) {
+            return new Secret();
+        } else if (chainInfo.startsWith("sifchain-") || chainInfo.startsWith("sif1") || chainInfo.equalsIgnoreCase(TOKEN_SIF)) {
+            return new Sif();
+        } else if (chainInfo.startsWith("sentinelhub-") || chainInfo.startsWith("sent1") || chainInfo.equalsIgnoreCase(TOKEN_DVPN)) {
+            return new Sentinel();
+        } else if (chainInfo.startsWith("stargaze-") || chainInfo.startsWith("stars1") || chainInfo.equalsIgnoreCase(TOKEN_STARGAZE)) {
+            return new Stargaze();
+        } else if (chainInfo.startsWith("iov-") || chainInfo.startsWith("star1") || chainInfo.equalsIgnoreCase(TOKEN_IOV)) {
+            return new Stargaze();
+        }  else if (chainInfo.startsWith("umee-") || chainInfo.startsWith("umee1") || chainInfo.equalsIgnoreCase(TOKEN_UMEE)) {
+            return new Stargaze();
         }
         return new Cosmos();
     }

@@ -54,9 +54,6 @@ public abstract class Chain {
     // Set Path with Account Detail
     public abstract String setPath(int position, int customPath);
 
-    // Set Show CoinDp (Coin)
-    public abstract void setShowCoinDp(Context c, BaseData baseData, Coin coin, TextView denomTv, TextView amountTv);
-
     // Set Show CoinDp (String)
     public abstract void setShowCoinDp(Context c, BaseData baseData, String symbol, String amount, TextView denomTv, TextView amountTv);
 

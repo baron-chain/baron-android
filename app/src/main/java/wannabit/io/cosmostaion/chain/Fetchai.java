@@ -9,7 +9,11 @@ import static wannabit.io.cosmostaion.base.BaseConstant.FETCH_GAS_RATE_AVERAGE;
 import static wannabit.io.cosmostaion.base.BaseConstant.FETCH_GAS_RATE_LOW;
 import static wannabit.io.cosmostaion.base.BaseConstant.FETCH_GAS_RATE_TINY;
 import static wannabit.io.cosmostaion.base.BaseConstant.FETCH_VAL_URL;
-import static wannabit.io.cosmostaion.base.BaseConstant.KEY_PATH;
+import static wannabit.io.cosmostaion.base.BaseConstant.KEY_ETH_LEDGER_LEGACY_PATH;
+import static wannabit.io.cosmostaion.base.BaseConstant.KEY_ETH_LEDGER_LIVE_PATH_1;
+import static wannabit.io.cosmostaion.base.BaseConstant.KEY_ETH_LEDGER_LIVE_PATH_2;
+import static wannabit.io.cosmostaion.base.BaseConstant.KEY_ETH_NON_LEDGER_PATH;
+import static wannabit.io.cosmostaion.base.BaseConstant.KEY_FETCH_BASE_PATH;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_FET;
 import static wannabit.io.cosmostaion.utils.WKey.bech32Decode;
 import static wannabit.io.cosmostaion.utils.WKey.bech32Encode;
@@ -90,17 +94,15 @@ public class Fetchai extends Chain {
     }
 
     @Override
-    public String setPath(int position, int customPath) { return KEY_PATH + String.valueOf(position); }
-
-    @Override
-    public void setShowCoinDp(Context c, BaseData baseData, Coin coin, TextView denomTv, TextView amountTv) {
-        if (coin.denom.equalsIgnoreCase(getMainDenom())) {
-            setDpMainDenom(c, denomTv);
-        } else {
-            denomTv.setTextColor(c.getResources().getColor(R.color.colorWhite));
-            denomTv.setText(coin.denom.toUpperCase());
+    public String setPath(int position, int customPath) {
+        if (customPath == 1) {
+            return KEY_ETH_NON_LEDGER_PATH + String.valueOf(position);
+        } else if (customPath == 2) {
+            return KEY_ETH_LEDGER_LIVE_PATH_1 + String.valueOf(position) + KEY_ETH_LEDGER_LIVE_PATH_2;
+        } else if (customPath == 3) {
+            return KEY_ETH_LEDGER_LEGACY_PATH + String.valueOf(position);
         }
-        amountTv.setText(WDp.getDpAmount2(c, new BigDecimal(coin.amount), mainDecimal(), mainDecimal()));
+        return KEY_FETCH_BASE_PATH + String.valueOf(position);
     }
 
     @Override

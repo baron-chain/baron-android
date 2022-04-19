@@ -1,16 +1,16 @@
 package wannabit.io.cosmostaion.chain;
 
-import static wannabit.io.cosmostaion.base.BaseChain.CERBERUS_MAIN;
-import static wannabit.io.cosmostaion.base.BaseConstant.BLOCK_TIME_CERBERUS;
-import static wannabit.io.cosmostaion.base.BaseConstant.CERBERUS_GAS_RATE_AVERAGE;
-import static wannabit.io.cosmostaion.base.BaseConstant.CERBERUS_GAS_RATE_LOW;
-import static wannabit.io.cosmostaion.base.BaseConstant.CERBERUS_GAS_RATE_TINY;
-import static wannabit.io.cosmostaion.base.BaseConstant.CERBERUS_UNKNOWN_RELAYER;
-import static wannabit.io.cosmostaion.base.BaseConstant.CERBERUS_VAL_URL;
-import static wannabit.io.cosmostaion.base.BaseConstant.COINGECKO_CERBERUS_MAIN;
-import static wannabit.io.cosmostaion.base.BaseConstant.EXPLORER_CERBERUS_MAIN;
+import static wannabit.io.cosmostaion.base.BaseChain.UMEE_MAIN;
+import static wannabit.io.cosmostaion.base.BaseConstant.BLOCK_TIME_UMEE;
+import static wannabit.io.cosmostaion.base.BaseConstant.COINGECKO_UMEE_MAIN;
+import static wannabit.io.cosmostaion.base.BaseConstant.EXPLORER_UMEE_MAIN;
 import static wannabit.io.cosmostaion.base.BaseConstant.KEY_PATH;
-import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_CRBRUS;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_UMEE;
+import static wannabit.io.cosmostaion.base.BaseConstant.UMEE_GAS_RATE_AVERAGE;
+import static wannabit.io.cosmostaion.base.BaseConstant.UMEE_GAS_RATE_LOW;
+import static wannabit.io.cosmostaion.base.BaseConstant.UMEE_GAS_RATE_TINY;
+import static wannabit.io.cosmostaion.base.BaseConstant.UMEE_UNKNOWN_RELAYER;
+import static wannabit.io.cosmostaion.base.BaseConstant.UMEE_VAL_URL;
 import static wannabit.io.cosmostaion.utils.WKey.bech32Decode;
 import static wannabit.io.cosmostaion.utils.WKey.bech32Encode;
 import static wannabit.io.cosmostaion.utils.WUtil.getEstimateGasAmount;
@@ -41,48 +41,49 @@ import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.MainActivity;
 import wannabit.io.cosmostaion.base.BaseChain;
 import wannabit.io.cosmostaion.base.BaseData;
-import wannabit.io.cosmostaion.model.type.Coin;
 import wannabit.io.cosmostaion.utils.WDp;
 
-public class Cerberus extends Chain {
+public class Umee extends Chain {
 
     @Override
-    public BaseChain getChain() { return CERBERUS_MAIN; }
+    public BaseChain getChain() { return UMEE_MAIN; }
 
     @Override
-    public ArrayList<BaseChain> getChains() { return Lists.newArrayList(CERBERUS_MAIN); }
+    public ArrayList<BaseChain> getChains() { return Lists.newArrayList(UMEE_MAIN); }
 
     @Override
     public String getMainDenom() {
-        return TOKEN_CRBRUS;
+        return TOKEN_UMEE;
     }
 
     @Override
     public int mainDecimal() { return 6; }
 
     @Override
-    public BigDecimal getRealBlockTime() { return BLOCK_TIME_CERBERUS; }
+    public BigDecimal getRealBlockTime() { return BLOCK_TIME_UMEE; }
 
     @Override
-    public String getExplorer() { return EXPLORER_CERBERUS_MAIN; }
+    public String getExplorer() { return EXPLORER_UMEE_MAIN; }
 
     @Override
     public List<ChildNumber> setParentPath(int customPath) {
-        return ImmutableList.of(new ChildNumber(44, true), new ChildNumber(118, true), ChildNumber.ZERO_HARDENED, ChildNumber.ZERO);
+        return  ImmutableList.of(new ChildNumber(44, true), new ChildNumber(118, true), ChildNumber.ZERO_HARDENED, ChildNumber.ZERO);
     }
 
     @Override
     public String getDpAddress(byte[] converted) {
-        return bech32Encode("cerberus".getBytes(), converted);
+        return bech32Encode("umee".getBytes(), converted);
     }
 
     @Override
     public String convertDpOpAddressToDpAddress(String dpOpAddress) {
-        return bech32Encode("cerberus".getBytes(), bech32Decode(dpOpAddress).data);
+        return bech32Encode("umee".getBytes(), bech32Decode(dpOpAddress).data);
     }
 
     @Override
-    public String setPath(int position, int customPath) { return KEY_PATH + String.valueOf(position); }
+    public String setPath(int position, int customPath) {
+        return KEY_PATH + String.valueOf(position);
+    }
 
     @Override
     public void setShowCoinDp(Context c, BaseData baseData, String symbol, String amount, TextView denomTv, TextView amountTv) {
@@ -97,95 +98,95 @@ public class Cerberus extends Chain {
 
     @Override
     public void setDpMainDenom(Context c, TextView denomTxt) {
-        denomTxt.setTextColor(c.getResources().getColor(R.color.colorCerberus));
-        denomTxt.setText(c.getString(R.string.s_cerberus));
+        denomTxt.setTextColor(c.getResources().getColor(R.color.colorUmee));
+        denomTxt.setText(c.getString(R.string.s_umee));
     }
 
     @Override
     public void setCoinMainDenom(Context c, TextView symbol, TextView fullName, ImageView imageView) {
-        symbol.setText(c.getString(R.string.str_cerberus_c));
-        fullName.setText("Cerberus Staking Coin");
-        imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_cerberus));
+        symbol.setText(c.getString(R.string.str_umee_c));
+        fullName.setText("Umee Staking Coin");
+        imageView.setImageDrawable(c.getResources().getDrawable(R.drawable.token_umee));
     }
 
     @Override
     public void setChainTitle(Context c, TextView chainName, int type) {
         if (type == 0) {
-            chainName.setText(c.getString(R.string.str_cerberus_net));
+            chainName.setText(c.getString(R.string.str_umee_net));
         } else {
-            chainName.setText(c.getString(R.string.str_cerberus_main));
+            chainName.setText(c.getString(R.string.str_umee_main));
         }
     }
 
     @Override
     public void setInfoImg(ImageView imageView, int type) {
         if (type == 0) {
-            imageView.setImageResource(R.drawable.chain_cerberus);
+            imageView.setImageResource(R.drawable.chain_umee);
         } else if (type == 1) {
-            imageView.setImageResource(R.drawable.token_cerberus);
+            imageView.setImageResource(R.drawable.token_umee);
         }
     }
 
     @Override
     public String setMonikerImgUrl(String opAddress) {
-        return CERBERUS_VAL_URL + opAddress + ".png";
+        return UMEE_VAL_URL + opAddress + ".png";
     }
 
     @Override
     public String getChainName() {
-        return "cerberus";
+        return "umee";
     }
 
     @Override
     public boolean isValidChainAddress(String address, BaseChain baseChain) {
-        if (address.startsWith("cerberus1") && baseChain.equals(getChain())) { return true; }
+        if (address.startsWith("umee1") && baseChain.equals(getChain())) { return true; }
         else { return false; }
     }
 
     @Override
-    public String getDefaultRelayerImg() { return CERBERUS_UNKNOWN_RELAYER; }
+    public String getDefaultRelayerImg() { return UMEE_UNKNOWN_RELAYER; }
 
     @Override
     public void setFloatBtn(Context c, FloatingActionButton floatBtn) {
-        floatBtn.setBackgroundTintList(c.getResources().getColorStateList(R.color.colorCerberus));
+        floatBtn.setBackgroundTintList(c.getResources().getColorStateList(R.color.colorUmee));
     }
 
     @Override
     public void setLayoutColor(Context c, int length, LinearLayout[] wordsLayer) {
-        wordsLayer[length].setBackground(c.getDrawable(R.drawable.box_round_cerberus));
+        wordsLayer[length].setBackground(c.getDrawable(R.drawable.box_round_umee));
     }
 
     @Override
     public int setChainColor(Context c, int type) {
         if (type == 0) {
-            return c.getResources().getColor(R.color.colorCerberus);
+            return c.getResources().getColor(R.color.colorUmee);
         } else {
-            return c.getResources().getColor(R.color.colorTransBgCerberus);
+            return c.getResources().getColor(R.color.colorTransBgUmee);
         }
     }
 
     @Override
     public ColorStateList setChainTabColor(Context c, int type) {
         if (type == 0) {
-            return c.getResources().getColorStateList(R.color.color_tab_myvalidator_cerberus);
+            return c.getResources().getColorStateList(R.color.color_tab_myvalidator_umee);
         } else {
-            return c.getResources().getColorStateList(R.color.colorCerberus);
+            return c.getResources().getColorStateList(R.color.colorUmee);
         }
 
     }
 
     @Override
     public void setGuideInfo(MainActivity mainActivity, ImageView guideImg, TextView guideTitle, TextView guideMsg, Button guideBtn1, Button guideBtn2) {
-        guideImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.infoicon_cerberus));
-        guideTitle.setText(R.string.str_front_guide_title_cerberus);
-        guideMsg.setText(R.string.str_front_guide_msg_cerberus);
+        guideImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.infoicon_umee));
+        guideTitle.setText(R.string.str_front_guide_title_umee);
+        guideMsg.setText(R.string.str_front_guide_msg_umee);
     }
 
     @Override
     public void setWalletData(MainActivity mainActivity, ImageView coinImg, TextView coinDenom) {
-        coinImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.token_cerberus));
-        coinDenom.setText(R.string.str_cerberus_c);
-        coinDenom.setTextAppearance(R.style.font_ss_14_cerberus);
+        coinImg.setImageDrawable(mainActivity.getResources().getDrawable(R.drawable.token_umee));
+        coinDenom.setText(R.string.str_umee_c);
+        coinDenom.setTextAppearance(R.style.font_ss_14_umee);
     }
 
     @Override
@@ -196,18 +197,17 @@ public class Cerberus extends Chain {
     @Override
     public void setMainIntent(MainActivity mainActivity, int sequence) {
         if (sequence == 1) {
-            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse(COINGECKO_CERBERUS_MAIN)));
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse(COINGECKO_UMEE_MAIN)));
         } else if (sequence == 2) {
-            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://cerberus.zone/")));
-        } else if (sequence == 3) {
-            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://medium.com/@cerberus_zone")));
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://umee.cc/")));
+        } else if (sequence == 3 ) {
+            mainActivity.startActivity(new Intent(Intent.ACTION_VIEW , Uri.parse("https://medium.com/umeeblog")));
         }
-
     }
 
     @Override
     public BigDecimal setEstimateGasFeeAmount(Context c, BaseChain basechain, int txType, int valCnt) {
-        BigDecimal gasRate = new BigDecimal(CERBERUS_GAS_RATE_AVERAGE);
+        BigDecimal gasRate = new BigDecimal(UMEE_GAS_RATE_TINY);
         BigDecimal gasAmount = getEstimateGasAmount(c, basechain, txType, valCnt);
         return gasRate.multiply(gasAmount).setScale(0, RoundingMode.DOWN);
     }
@@ -215,10 +215,10 @@ public class Cerberus extends Chain {
     @Override
     public BigDecimal setGasRate(int position) {
         if (position == 0) {
-            return new BigDecimal(CERBERUS_GAS_RATE_TINY);
+            return new BigDecimal(UMEE_GAS_RATE_TINY);
         } else if (position == 1) {
-            return new BigDecimal(CERBERUS_GAS_RATE_LOW);
+            return new BigDecimal(UMEE_GAS_RATE_LOW);
         }
-        return new BigDecimal(CERBERUS_GAS_RATE_AVERAGE);
+        return new BigDecimal(UMEE_GAS_RATE_AVERAGE);
     }
 }
