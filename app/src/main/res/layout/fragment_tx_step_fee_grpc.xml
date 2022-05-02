@@ -266,24 +266,6 @@
         android:layout_marginLeft="@dimen/space_16"
         android:layout_marginRight="@dimen/space_16"
         android:layout_marginBottom="@dimen/space_24">
-        <RelativeLayout
-            android:id="@+id/btn_gas_check"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/space_45"
-            android:minHeight="@dimen/space_45"
-            android:background="@drawable/btn_trans_with_border"
-            android:clickable="true">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:drawableLeft="@drawable/icon_gas"
-                android:drawableTint="@color/colorPhoton"
-                android:drawablePadding="@dimen/space_4"
-                android:gravity="center"
-                style="@style/font_ss_14_photon"
-                android:text="@string/str_check_estimate_gas_amount" />
-        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
