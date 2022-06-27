@@ -50,7 +50,6 @@ import static wannabit.io.cosmostaion.base.BaseChain.UMEE_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.isGRPC;
 import static wannabit.io.cosmostaion.base.BaseConstant.ASSET_IMG_URL;
 import static wannabit.io.cosmostaion.base.BaseConstant.BINANCE_TOKEN_IMG_URL;
-import static wannabit.io.cosmostaion.base.BaseConstant.COSMOS_COIN_IMG_URL;
 import static wannabit.io.cosmostaion.base.BaseConstant.EMONEY_COIN_IMG_URL;
 import static wannabit.io.cosmostaion.base.BaseConstant.KAVA_COIN_IMG_URL;
 import static wannabit.io.cosmostaion.base.BaseConstant.OKEX_COIN_IMG_URL;
@@ -144,7 +143,6 @@ import com.squareup.picasso.Picasso;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import tendermint.liquidity.v1beta1.Liquidity;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.MainActivity;
 import wannabit.io.cosmostaion.activities.tokenDetail.BridgeTokenGrpcActivity;
@@ -175,7 +173,6 @@ public class MainTokensFragment extends BaseFragment {
     public final static int SECTION_OSMOSIS_POOL_GRPC = 2;
     public final static int SECTION_ETHER_GRPC = 3;
     public final static int SECTION_IBC_UNKNOWN_GRPC = 4;
-    public final static int SECTION_GRAVICTY_DEX_GRPC = 5;
     public final static int SECTION_INJECTIVE_POOL_GRPC = 6;
     public final static int SECTION_KAVA_BEP2_GRPC = 7;
     public final static int SECTION_ETC_GRPC = 8;
@@ -206,7 +203,6 @@ public class MainTokensFragment extends BaseFragment {
     private ArrayList<Coin> mPoolGrpc = new ArrayList<>();
     private ArrayList<Coin> mEtherGrpc = new ArrayList<>();
     private ArrayList<Coin> mIbcUnknownGrpc = new ArrayList<>();
-    private ArrayList<Coin> mGravityDexGrpc = new ArrayList<>();
     private ArrayList<Coin> mInjectivePoolGrpc = new ArrayList<>();
     private ArrayList<Coin> mKavaBep2Grpc = new ArrayList<>();
     private ArrayList<Coin> mEtcGrpc = new ArrayList<>();
@@ -307,11 +303,6 @@ public class MainTokensFragment extends BaseFragment {
                             || position == mNativeGrpc.size() + mIbcAuthedGrpc.size() + mPoolGrpc.size()
                             || position == mNativeGrpc.size() + mIbcAuthedGrpc.size() + mPoolGrpc.size() + mIbcUnknownGrpc.size();
 
-                } else if (baseChain.equals(COSMOS_MAIN)) {
-                    return position == 0 || position == mNativeGrpc.size() || position == mNativeGrpc.size() + mIbcAuthedGrpc.size()
-                            || position == mNativeGrpc.size() + mIbcAuthedGrpc.size() + mGravityDexGrpc.size()
-                            || position == mNativeGrpc.size() + mIbcAuthedGrpc.size() + mGravityDexGrpc.size() + mIbcUnknownGrpc.size();
-
                 } else if (baseChain.equals(SIF_MAIN) || baseChain.equals(GRABRIDGE_MAIN)) {
                     return position == 0 || position == mNativeGrpc.size() || position == mNativeGrpc.size() + mIbcAuthedGrpc.size()
                             || position == mNativeGrpc.size() + mIbcAuthedGrpc.size() + mEtherGrpc.size()
@@ -358,8 +349,6 @@ public class MainTokensFragment extends BaseFragment {
                     return getMainActivity().getString(R.string.str_pool_coin_title);
                 } else if (section == SECTION_ETHER_GRPC) {
                     return getMainActivity().getString(R.string.str_sif_ether_token_title);
-                } else if (section == SECTION_GRAVICTY_DEX_GRPC) {
-                    return getMainActivity().getString(R.string.str_gravity_dex_token_title);
                 } else if (section == SECTION_KAVA_BEP2_GRPC) {
                     return getMainActivity().getString(R.string.str_kava_bep2_token_title);
                 } else if (section == SECTION_ETC_GRPC) {
@@ -450,7 +439,6 @@ public class MainTokensFragment extends BaseFragment {
         mPoolGrpc.clear();
         mEtherGrpc.clear();
         mIbcUnknownGrpc.clear();
-        mGravityDexGrpc.clear();
         mInjectivePoolGrpc.clear();
         mKavaBep2Grpc.clear();
         mEtcGrpc.clear();
@@ -476,8 +464,6 @@ public class MainTokensFragment extends BaseFragment {
                     getMainActivity().mBaseChain.equals(GRABRIDGE_MAIN) && coin.denom.startsWith("gravity") ||
                     getMainActivity().mBaseChain.equals(INJ_MAIN) && coin.denom.startsWith("peggy")) {
                 mEtherGrpc.add(coin);
-            } else if (getMainActivity().mBaseChain.equals(COSMOS_MAIN) && coin.denom.startsWith("pool")) {
-                mGravityDexGrpc.add(coin);
             } else if (getMainActivity().mBaseChain.equals(INJ_MAIN) && coin.denom.startsWith("share")) {
                 mInjectivePoolGrpc.add(coin);
             } else if (getMainActivity().mBaseChain.equals(KAVA_MAIN)) {
@@ -510,7 +496,6 @@ public class MainTokensFragment extends BaseFragment {
 
         if (isGRPC(getMainActivity().mBaseChain)) {
             WUtil.onSortingCoins(mNativeGrpc, getMainActivity().mBaseChain);
-            WUtil.onSortingGravityPool(mGravityDexGrpc, getBaseDao());
             WUtil.onSortingOsmosisPool(getMainActivity().mBaseChain, mPoolGrpc);
             WUtil.onSortingInjectivePool(mInjectivePoolGrpc);
 
@@ -580,19 +565,6 @@ public class MainTokensFragment extends BaseFragment {
                     onBindIbcUnknownToken(viewHolder, position - mNativeGrpc.size() - mIbcAuthedGrpc.size() - mEtherGrpc.size());
                 } else if (getItemViewType(position) == SECTION_UNKNOWN_GRPC) {
                     onBindUnKnownToken(viewHolder, position - mNativeGrpc.size() - mIbcAuthedGrpc.size() - mEtherGrpc.size() - mIbcUnknownGrpc.size());
-                }
-
-            } else if (getMainActivity().mBaseChain.equals(COSMOS_MAIN)) {
-                if (getItemViewType(position) == SECTION_NATIVE_GRPC) {
-                    onNativeGrpcItem(viewHolder, position);
-                } else if (getItemViewType(position) == SECTION_IBC_AUTHED_GRPC) {
-                    onBindIbcAuthToken(viewHolder, position - mNativeGrpc.size());
-                } else if (getItemViewType(position) == SECTION_GRAVICTY_DEX_GRPC) {
-                    onBindGravityDexToken(viewHolder, position - mNativeGrpc.size() - mIbcAuthedGrpc.size());
-                } else if (getItemViewType(position) == SECTION_IBC_UNKNOWN_GRPC) {
-                    onBindIbcUnknownToken(viewHolder, position - mNativeGrpc.size() - mIbcAuthedGrpc.size() - mGravityDexGrpc.size());
-                } else if (getItemViewType(position) == SECTION_UNKNOWN_GRPC) {
-                    onBindUnKnownToken(viewHolder, position - mNativeGrpc.size() - mIbcAuthedGrpc.size() - mGravityDexGrpc.size() - mIbcUnknownGrpc.size());
                 }
 
             } else if (getMainActivity().mBaseChain.equals(INJ_MAIN)) {
@@ -710,19 +682,6 @@ public class MainTokensFragment extends BaseFragment {
                 } else if (position < mNativeGrpc.size() + mIbcAuthedGrpc.size() + mEtherGrpc.size() + mIbcUnknownGrpc.size()) {
                     return SECTION_IBC_UNKNOWN_GRPC;
                 } else if (position < mNativeGrpc.size() + mIbcAuthedGrpc.size() + mEtherGrpc.size() + mIbcUnknownGrpc.size() + mUnknownGrpc.size()) {
-                    return SECTION_UNKNOWN_GRPC;
-                }
-
-            } else if (getMainActivity().mBaseChain.equals(COSMOS_MAIN)) {
-                if (position < mNativeGrpc.size()) {
-                    return SECTION_NATIVE_GRPC;
-                } else if (position < mNativeGrpc.size() + mIbcAuthedGrpc.size()) {
-                    return SECTION_IBC_AUTHED_GRPC;
-                } else if (position < mNativeGrpc.size() + mIbcAuthedGrpc.size() + mGravityDexGrpc.size()) {
-                    return SECTION_GRAVICTY_DEX_GRPC;
-                } else if (position < mNativeGrpc.size() + mIbcAuthedGrpc.size() + mGravityDexGrpc.size() + mIbcUnknownGrpc.size()) {
-                    return SECTION_IBC_UNKNOWN_GRPC;
-                } else if (position < mNativeGrpc.size() + mIbcAuthedGrpc.size() + mGravityDexGrpc.size() + mIbcUnknownGrpc.size() + mUnknownGrpc.size()) {
                     return SECTION_UNKNOWN_GRPC;
                 }
 
@@ -1576,30 +1535,6 @@ public class MainTokensFragment extends BaseFragment {
         });
     }
 
-    //with Cosmos Gravity Dex gRPC
-    private void onBindGravityDexToken(TokensAdapter.AssetHolder holder, int position) {
-        final Coin coin = mGravityDexGrpc.get(position);
-        Picasso.get().load(COSMOS_COIN_IMG_URL + "gravitydex.png").fit().placeholder(R.drawable.token_ic).error(R.drawable.token_ic).into(holder.itemImg);
-        holder.itemBalance.setText(WDp.getDpAmount2(getContext(), new BigDecimal(coin.amount), 6, 6));
-        holder.itemValue.setText(WDp.dpUserCurrencyValue(getBaseDao(), coin.denom, new BigDecimal(coin.amount), 6));
-        holder.itemInnerSymbol.setText("");
-        Liquidity.Pool poolInfo = getBaseDao().getGravityPoolByDenom(coin.denom);
-        if (poolInfo != null) {
-            holder.itemSymbol.setText("GDEX-" + poolInfo.getId());
-            holder.itemSymbol.setTextColor(ContextCompat.getColor(getMainActivity(), R.color.colorWhite));
-            holder.itemFullName.setText("pool/" + poolInfo.getId());
-        }
-
-        holder.itemRoot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getMainActivity(), POOLTokenDetailActivity.class);
-                intent.putExtra("denom", coin.denom);
-                startActivity(intent);
-            }
-        });
-    }
-
     //with Injective Pool gRPC
     private void onBindInjectivePoolToken(TokensAdapter.AssetHolder holder, int position) {
         final Coin coin = mInjectivePoolGrpc.get(position);
@@ -1713,15 +1648,18 @@ public class MainTokensFragment extends BaseFragment {
     //with Unknown Token gRPC
     private void onBindUnKnownToken(TokensAdapter.AssetHolder holder, int position) {
         final Coin coin = mUnknownGrpc.get(position);
-        holder.itemSymbol.setText("UNKNOWN");
-        holder.itemSymbol.setTextColor(ContextCompat.getColor(getMainActivity(), R.color.colorWhite));
-        holder.itemInnerSymbol.setText("");
+        if (coin.denom.startsWith("pool")) {
+            holder.itemSymbol.setText("POOL");
+        } else {
+            holder.itemSymbol.setText("UNKNOWN");
+        }
         holder.itemFullName.setText("");
+        holder.itemInnerSymbol.setText("");
         holder.itemImg.setImageDrawable(ContextCompat.getDrawable(getMainActivity(), R.drawable.token_ic));
         holder.itemBalance.setText(WDp.getDpAmount2(getContext(), new BigDecimal(coin.amount), 6, 6));
-        holder.itemValue.setText(WDp.dpUserCurrencyValue(getBaseDao(), coin.denom, BigDecimal.ZERO, 6));
+        holder.itemValue.setText("");
+        holder.itemSymbol.setTextColor(ContextCompat.getColor(getMainActivity(), R.color.colorWhite));
     }
-
 
     //with native tokens
     private void onBindNativeItem(TokensAdapter.AssetHolder holder, int position) {
@@ -1913,12 +1851,6 @@ public class MainTokensFragment extends BaseFragment {
                     else if (mSection == SECTION_ETHER_GRPC) {
                         title = sectionCallback.getSectionGrpcHeader(getMainActivity().mBaseChain, mEtherGrpc, mSection);
                         mItemCnt.setText("" + mEtherGrpc.size());
-                    }
-
-                    // cosmos gravity dex token
-                    else if (mSection == SECTION_GRAVICTY_DEX_GRPC) {
-                        title = sectionCallback.getSectionGrpcHeader(getMainActivity().mBaseChain, mGravityDexGrpc, mSection);
-                        mItemCnt.setText("" + mGravityDexGrpc.size());
                     }
 
                     // kava token
