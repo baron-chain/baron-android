@@ -838,6 +838,21 @@ public class ApiClient {
         return api_nyx;
     }
 
+    //Services for Nyx mainnet api
+    private static HistoryApi api_tgrade = null;
+    public static HistoryApi getTgradeApi(Context c) {
+        if (api_tgrade == null) {
+            synchronized (ApiClient.class) {
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(c.getString(R.string.url_api_tgrade))
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                api_tgrade = retrofit.create(HistoryApi.class);
+            }
+        }
+        return api_tgrade;
+    }
+
     //Services for Rizon swap_status api
     private static HdacChain api_rizon_swap_status = null;
 

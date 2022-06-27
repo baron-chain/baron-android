@@ -147,7 +147,11 @@
 
     <string name="url_api_station" translatable="false">https://api-office.cosmostation.io/station-testnet/</string>
 
+
     <string name="url_api_nyx" translatable="false">https://api-nym.cosmostation.io/</string>
+
+
+    <string name="url_api_tgrade" translatable="false">https://api-tgrade.cosmostation.io/</string>
 
 
     <string name="url_hdac_mainnet" translatable="false">https://insight-api.rizon.world/insight-api/</string>

@@ -386,7 +386,17 @@ public class ApiAccountTxsHistoryTask extends CommonTask {
                 } else {
                     WLog.w("HistoryTask : NOk");
                 }
-            } else if (mChain.equals(COSMOS_TEST)) {
+            } else if (mChain.equals(BaseChain.TGRADE_MAIN)) {
+                Response<ArrayList<ResApiNewTxListCustom>> response = ApiClient.getTgradeApi(mApp).getNewAccountTxCustom(mAddress, "50").execute();
+                if (response.isSuccessful() && response.body() != null) {
+                    mResult.resultData = response.body();
+                    mResult.isSuccess = true;
+                } else {
+                    WLog.w("HistoryTask : NOk");
+                }
+            }
+
+            else if (mChain.equals(COSMOS_TEST)) {
                 Response<ArrayList<ResApiNewTxListCustom>> response = ApiClient.getCosmosTestApi(mApp).getNewAccountTxCustom(mAddress, "50").execute();
                 if (response.isSuccessful() && response.body() != null) {
                     mResult.resultData = response.body();

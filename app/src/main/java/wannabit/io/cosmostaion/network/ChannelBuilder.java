@@ -45,6 +45,7 @@ import static wannabit.io.cosmostaion.base.BaseChain.SENTINEL_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.SIF_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.STARGAZE_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.STATION_TEST;
+import static wannabit.io.cosmostaion.base.BaseChain.TGRADE_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.UMEE_MAIN;
 
 import io.grpc.ManagedChannel;
@@ -178,6 +179,10 @@ public class ChannelBuilder {
     private final static String GRPC_NYX_MAIN = "lcd-nym-app.cosmostation.io";
     private final static int PORT_NYX_MAIN = 9090;
 
+    private final static String GRPC_TGRADE_MAIN = "lcd-tgrade-app.cosmostation.io";
+    private final static int PORT_TGRADE_MAIN = 9090;
+
+    // testnet
     private final static String GRPC_COSMOS_TEST = "lcd-office.cosmostation.io";
     private final static int PORT_COSMOS_TEST = 10300;
 
@@ -278,7 +283,11 @@ public class ChannelBuilder {
             return getStationTest();
         } else if (chain.equals(NYX_MAIN)) {
             return getNyxMain();
-        } else if (chain.equals(COSMOS_TEST)) {
+        } else if (chain.equals(TGRADE_MAIN)) {
+            return getTgradeMain();
+        }
+
+        else if (chain.equals(COSMOS_TEST)) {
             return getCosmosTest();
         } else if (chain.equals(IRIS_TEST)) {
             return getIrisTest();
@@ -877,6 +886,19 @@ public class ChannelBuilder {
             }
         }
         return channel_nyx_main;
+    }
+
+    //Channel for nyx main
+    private static ManagedChannel channel_tgrade_main = null;
+    public static ManagedChannel getTgradeMain() {
+        if (channel_tgrade_main == null) {
+            synchronized (ChannelBuilder.class) {
+                channel_tgrade_main = ManagedChannelBuilder.forAddress(GRPC_TGRADE_MAIN, PORT_TGRADE_MAIN)
+                        .usePlaintext()
+                        .build();
+            }
+        }
+        return channel_tgrade_main;
     }
 
     //Channel for stargate testnet
