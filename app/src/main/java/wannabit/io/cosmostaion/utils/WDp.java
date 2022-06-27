@@ -48,6 +48,7 @@ import static wannabit.io.cosmostaion.base.BaseChain.SENTINEL_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.SIF_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.STARGAZE_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.STATION_TEST;
+import static wannabit.io.cosmostaion.base.BaseChain.TGRADE_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.UMEE_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.getChain;
 import static wannabit.io.cosmostaion.base.BaseChain.isGRPC;
@@ -593,12 +594,23 @@ public class WDp {
             }
             amountTv.setText(getDpAmount2(c, new BigDecimal(amount), 6, 6));
 
+        } else if (chain.equals(TGRADE_MAIN)) {
+            if (symbol.equals(TOKEN_TGD)) {
+                DpMainDenom(c, chain.getChain(), denomTv);
+            } else {
+                denomTv.setText(symbol.toUpperCase());
+                denomTv.setTextColor(ContextCompat.getColor(c, R.color.colorWhite));
+            }
+            amountTv.setText(getDpAmount2(c, new BigDecimal(amount), 6, 6));
+
         } else if (chain.equals(STATION_TEST)) {
             if (symbol.equals(TOKEN_STATION)) {
                 DpMainDenom(c, chain.getChain(), denomTv);
             }
 
-        } else if (chain.equals(COSMOS_TEST)) {
+        }
+
+        else if (chain.equals(COSMOS_TEST)) {
             if (symbol.equals(TOKEN_COSMOS_TEST)) {
                 DpMainDenom(c, chain.getChain(), denomTv);
             } else {
@@ -752,7 +764,11 @@ public class WDp {
                 chainImg.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.chain_assetmantle));
             } else if (baseChain.equals(NYX_MAIN)) {
                 chainImg.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.chain_nym));
-            } else if (baseChain.equals(COSMOS_TEST)) {
+            } else if (baseChain.equals(TGRADE_MAIN)) {
+                chainImg.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.chain_tgrade));
+            }
+
+            else if (baseChain.equals(COSMOS_TEST)) {
                 chainImg.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.chain_test_cosmos));
             } else if (baseChain.equals(IRIS_TEST)) {
                 chainImg.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.chain_test_iris));
@@ -854,7 +870,11 @@ public class WDp {
                 chainName.setText(c.getString(R.string.str_mantle_net));
             } else if (baseChain.equals(NYX_MAIN)) {
                 chainName.setText(c.getString(R.string.str_nyx_net));
-            } else if (baseChain.equals(COSMOS_TEST)) {
+            } else if (baseChain.equals(TGRADE_MAIN)) {
+                chainName.setText(c.getString(R.string.str_tgrade_net));
+            }
+
+            else if (baseChain.equals(COSMOS_TEST)) {
                 chainName.setText(c.getString(R.string.str_cosmos_testnet));
             } else if (baseChain.equals(IRIS_TEST)) {
                 chainName.setText(c.getString(R.string.str_iris_testnet));
@@ -957,7 +977,11 @@ public class WDp {
                 chainName.setText(c.getString(R.string.str_mantle_main));
             } else if (baseChain.equals(NYX_MAIN)) {
                 chainName.setText(c.getString(R.string.str_nyx_main));
-            } else if (baseChain.equals(COSMOS_TEST)) {
+            } else if (baseChain.equals(TGRADE_MAIN)) {
+                chainName.setText(c.getString(R.string.str_tgrade_main));
+            }
+
+            else if (baseChain.equals(COSMOS_TEST)) {
                 chainName.setText(c.getString(R.string.str_cosmos_test));
             } else if (baseChain.equals(IRIS_TEST)) {
                 chainName.setText(c.getString(R.string.str_iris_test));
@@ -1069,7 +1093,11 @@ public class WDp {
             floatBtn.setBackgroundTintList(ContextCompat.getColorStateList(c, R.color.colorMantle));
         } else if (baseChain.equals(NYX_MAIN)) {
             floatBtn.setBackgroundTintList(ContextCompat.getColorStateList(c, R.color.colorNyx));
-        } else if (baseChain.equals(COSMOS_TEST)) {
+        } else if (baseChain.equals(TGRADE_MAIN)) {
+            floatBtn.setBackgroundTintList(ContextCompat.getColorStateList(c, R.color.colorTgd));
+        }
+
+        else if (baseChain.equals(COSMOS_TEST)) {
             floatBtn.setBackgroundTintList(ContextCompat.getColorStateList(c, R.color.colorAtom));
         } else if (baseChain.equals(IRIS_TEST)) {
             floatBtn.setBackgroundTintList(ContextCompat.getColorStateList(c, R.color.colorIris));
@@ -1168,7 +1196,11 @@ public class WDp {
                 wordsLayer[i].setBackground(ContextCompat.getDrawable(c, R.drawable.box_round_station));
             } else if (baseChain.equals(NYX_MAIN)) {
                 wordsLayer[i].setBackground(ContextCompat.getDrawable(c, R.drawable.box_round_nym));
-            } else if (baseChain.equals(COSMOS_TEST) || baseChain.equals(IRIS_TEST) || baseChain.equals(ALTHEA_TEST)) {
+            } else if (baseChain.equals(TGRADE_MAIN)) {
+                wordsLayer[i].setBackground(ContextCompat.getDrawable(c, R.drawable.box_round_tgrade));
+            }
+
+            else if (baseChain.equals(COSMOS_TEST) || baseChain.equals(IRIS_TEST) || baseChain.equals(ALTHEA_TEST)) {
                 wordsLayer[i].setBackground(ContextCompat.getDrawable(c, R.drawable.box_round_darkgray));
             }
         }
@@ -1263,6 +1295,8 @@ public class WDp {
                 wordsLayer[i].setBackground(ContextCompat.getDrawable(c, R.drawable.box_round_mantle));
             } else if (baseChain.equals(NYX_MAIN)) {
                 wordsLayer[i].setBackground(ContextCompat.getDrawable(c, R.drawable.box_round_nym));
+            } else if (baseChain.equals(TGRADE_MAIN)) {
+                wordsLayer[i].setBackground(ContextCompat.getDrawable(c, R.drawable.box_round_tgrade));
             }
 
             if (i >= words.size()) wordsLayer[i].setVisibility(View.INVISIBLE);
@@ -1352,6 +1386,8 @@ public class WDp {
                 return ASSETMANTLE_MAIN;
             } else if (chainId.contains("nyx")) {
                 return NYX_MAIN;
+            } else if (chainId.contains("tgrade-mainnet")) {
+                return TGRADE_MAIN;
             } else if (chainId.contains("mooncat-")) {
                 return CRESCENT_TEST;
             } else if (chainId.contains("station")) {
@@ -1527,6 +1563,10 @@ public class WDp {
                 if (!address.startsWith("station1")) {
                     textView.setText("");
                 }
+            } else if (baseChain.equals(TGRADE_MAIN)) {
+                if (!address.startsWith("tgrade1")) {
+                    textView.setText("");
+                }
             }
         }
     }
@@ -1619,6 +1659,8 @@ public class WDp {
                 return "asset-mantle";
             } else if (baseChain.equals(NYX_MAIN)) {
                 return "nyx";
+            } else if (baseChain.equals(TGRADE_MAIN)) {
+                return "tgrade";
             } else if (baseChain.equals(COSMOS_TEST)) {
                 return "cosmos-testnet";
             } else if (baseChain.equals(STATION_TEST)) {
@@ -1729,6 +1771,8 @@ public class WDp {
                 return true;
             } else if (address.startsWith("n1") && baseChain.equals(NYX_MAIN)) {
                 return true;
+            } else if (address.startsWith("tgrade1") && baseChain.equals(TGRADE_MAIN)) {
+                return true;
             }
         }
         return false;
@@ -1833,6 +1877,8 @@ public class WDp {
                 return Lists.newArrayList(STATION_TEST);
             } else if (address.startsWith("n1")) {
                 return Lists.newArrayList(NYX_MAIN);
+            } else if (address.startsWith("tgrade1")) {
+                return Lists.newArrayList(TGRADE_MAIN);
             }
         }
         return null;
@@ -1920,6 +1966,8 @@ public class WDp {
                 return MANTLE_UNKNOWN_RELAYER;
             } else if (chain.equals(NYX_MAIN)) {
                 return NYX_UNKNOWN_RELAYER;
+            } else if (chain.equals(TGRADE_MAIN)) {
+                return TGRADE_UNKNOWN_RELAYER;
             }
         }
         return null;
@@ -3005,6 +3053,8 @@ public class WDp {
                 return ContextCompat.getColor(c, R.color.colorMantle);
             } else if (chain.equals(NYX_MAIN)) {
                 return ContextCompat.getColor(c, R.color.colorNyx);
+            } else if (chain.equals(TGRADE_MAIN)) {
+                return ContextCompat.getColor(c, R.color.colorTgd);
             } else if (chain.equals(STATION_TEST)) {
                 return ContextCompat.getColor(c, R.color.colorStation);
             }
@@ -3100,6 +3150,8 @@ public class WDp {
                 return ContextCompat.getColor(c, R.color.colorTransBgMantle);
             } else if (chain.equals(NYX_MAIN)) {
                 return ContextCompat.getColor(c, R.color.colorTransBgNyx);
+            } else if (chain.equals(TGRADE_MAIN)) {
+                return ContextCompat.getColor(c, R.color.colorTransBgTgd);
             } else if (chain.equals(STATION_TEST)) {
                 return ContextCompat.getColor(c, R.color.colorTransBgStation);
             }
@@ -3193,7 +3245,9 @@ public class WDp {
                 return ContextCompat.getColorStateList(c, R.color.color_tab_myvalidator_mantle);
             } else if (chain.equals(NYX_MAIN)) {
                 return ContextCompat.getColorStateList(c, R.color.color_tab_myvalidator_nym);
-            } else if (chain.equals(STATION_TEST)) {
+            } else if (chain.equals(TGRADE_MAIN)) {
+                return ContextCompat.getColorStateList(c, R.color.color_tab_myvalidator_tgrade);
+            }  else if (chain.equals(STATION_TEST)) {
                 return ContextCompat.getColorStateList(c, R.color.color_tab_myvalidator_station);
             }
         }
@@ -3286,6 +3340,8 @@ public class WDp {
                 return ContextCompat.getColorStateList(c, R.color.colorMantle);
             } else if (chain.equals(NYX_MAIN)) {
                 return ContextCompat.getColorStateList(c, R.color.colorNyx);
+            } else if (chain.equals(TGRADE_MAIN)) {
+                return ContextCompat.getColorStateList(c, R.color.colorTgd);
             } else if (chain.equals(STATION_TEST)) {
                 return ContextCompat.getColorStateList(c, R.color.colorStation);
             }
@@ -3470,6 +3526,10 @@ public class WDp {
             textview.setTextColor(ContextCompat.getColor(c, R.color.colorNyx));
             textview.setText(c.getString(R.string.s_nyx));
 
+        } else if (getChain(chain).equals(TGRADE_MAIN)) {
+            textview.setTextColor(ContextCompat.getColor(c, R.color.colorTgd));
+            textview.setText(c.getString(R.string.s_tgd));
+
         } else if (getChain(chain).equals(COSMOS_TEST)) {
             textview.setTextColor(ContextCompat.getColor(c, R.color.colorAtom));
             textview.setText(c.getString(R.string.s_muon));
@@ -3576,6 +3636,8 @@ public class WDp {
             return TOKEN_MANTLE;
         } else if (chain.equals(NYX_MAIN)) {
             return TOKEN_NYX;
+        } else if (chain.equals(TGRADE_MAIN)) {
+            return TOKEN_TGD;
         } else if (chain.equals(CRESCENT_TEST)) {
             return TOKEN_CRESCENT_TEST;
         } else if (chain.equals(STATION_TEST)) {
@@ -3695,6 +3757,8 @@ public class WDp {
                 imageView.setImageResource(R.drawable.token_assetmantle);
             } else if (baseChain.equals(NYX_MAIN)) {
                 imageView.setImageResource(R.drawable.token_nyx);
+            } else if (baseChain.equals(TGRADE_MAIN)) {
+                imageView.setImageResource(R.drawable.tgrade_token);
             } else if (baseChain.equals(STATION_TEST)) {
                 imageView.setImageResource(R.drawable.token_iss);
             }
@@ -4146,6 +4210,8 @@ public class WDp {
             return NYX_VAL_URL + opAddress + ".png";
         } else if (basechain.equals(OKEX_MAIN)) {
             return OKEX_VAL_URL + opAddress + ".png";
+        } else if (basechain.equals(TGRADE_MAIN)) {
+            return TGRADE_VAL_URL + opAddress + ".png";
         }
         return "";
     }

@@ -470,6 +470,7 @@ public class BaseConstant {
     public final static String TOKEN_STATION        = "uiss";
     public final static String TOKEN_NYX            = "unyx";
     public final static String TOKEN_NYM            = "unym";
+    public final static String TOKEN_TGD            = "utgd";
 
     public final static String TOKEN_EMONEY_EUR     = "eeur";
     public final static String TOKEN_EMONEY_CHF     = "echf";
@@ -781,6 +782,10 @@ public class BaseConstant {
     public final static String NYM_GAS_RATE_LOW                         = "0.025";
     public final static String NYM_GAS_RATE_AVERAGE                     = "0.025";
 
+    public final static String TGD_GAS_RATE_TINY                        = "0.05";
+    public final static String TGD_GAS_RATE_LOW                         = "0.05";
+    public final static String TGD_GAS_RATE_AVERAGE                     = "0.05";
+
     public final static String V1_GAS_AMOUNT_LOW                        = "100000";
     public final static String V1_GAS_AMOUNT_MID                        = "200000";
     public final static String V1_GAS_AMOUNT_HIGH                       = "300000";
@@ -846,6 +851,7 @@ public class BaseConstant {
     public final static String CRESCENT_VAL_URL         = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/crescent/";
     public final static String ASSETMANTLE_VAL_URL      = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/asset-mantle/";
     public final static String NYX_VAL_URL              = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/nyx/";
+    public final static String TGRADE_VAL_URL           = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/tgrade/";
 
     public final static String COSMOS_COIN_IMG_URL      = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/coin_image/cosmos/";
     public final static String KAVA_COIN_IMG_URL        = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/coin_image/kava/";
@@ -901,6 +907,7 @@ public class BaseConstant {
     public final static String EXPLORER_MANTLE_MAIN     = "https://www.mintscan.io/asset-mantle/";
     public final static String EXPLORER_STATION_TEST    = "https://testnet.mintscan.io/station/";
     public final static String EXPLORER_NYX_MAIN        = "https://www.mintscan.io/nyx/";
+    public final static String EXPLORER_TGRADE_MAIN     = "https://www.mintscan.io/tgrade/";
     public final static String EXPLORER_HDAC_MAIN       = "https://explorer.as.hdactech.com/hdac-explorer/";
 
     public final static String EXPLORER_NOTICE_MINTSCAN = "https://notice.mintscan.io/";
@@ -957,6 +964,7 @@ public class BaseConstant {
     public final static String CRESCENT_UNKNOWN_RELAYER     = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/crescent/relay-crescent-unknown.png";
     public final static String MANTLE_UNKNOWN_RELAYER       = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/asset-mantle/relay-assetmantle-unknown.png";
     public final static String NYX_UNKNOWN_RELAYER          = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/nyx/relay-nyx-unknown.png";
+    public final static String TGRADE_UNKNOWN_RELAYER       = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/tgrade/relay-tgrade-unknown.png";
 
     //NFT Denom Default config
     public final static String STATION_NFT_DENOM            = "station";

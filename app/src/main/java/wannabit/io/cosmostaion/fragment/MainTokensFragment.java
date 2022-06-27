@@ -109,6 +109,7 @@ import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_SIF;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_STARGAZE;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_STATION;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_SWP;
+import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_TGD;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_UMEE;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_USDX;
 import static wannabit.io.cosmostaion.base.BaseConstant.TOKEN_XPRT;
@@ -1390,7 +1391,20 @@ public class MainTokensFragment extends BaseFragment {
             holder.itemBalance.setText(WDp.getDpAmount2(getContext(), totalAmount, 6, 6));
             holder.itemValue.setText(WDp.dpUserCurrencyValue(getBaseDao(), coin.denom, totalAmount, 6));
 
-        } else if (coin.denom.equals(TOKEN_COSMOS_TEST)) {
+        } else if (coin.denom.equals(TOKEN_TGD)) {
+            holder.itemSymbol.setText(getString(R.string.str_tgd_c));
+            holder.itemSymbol.setTextColor(ContextCompat.getColor(getMainActivity(), R.color.colorTgd));
+            holder.itemInnerSymbol.setText("");
+            holder.itemFullName.setText("Tgrade Staking Coin");
+            holder.itemImg.setImageDrawable(ContextCompat.getDrawable(getMainActivity(), R.drawable.tgrade_token));
+
+            BigDecimal totalAmount = getBaseDao().getAvailable(TOKEN_TGD);
+            holder.itemBalance.setText(WDp.getDpAmount2(getContext(), totalAmount, 6, 6));
+            holder.itemValue.setText(WDp.dpUserCurrencyValue(getBaseDao(), coin.denom, totalAmount, 6));
+
+        }
+
+        else if (coin.denom.equals(TOKEN_COSMOS_TEST)) {
             holder.itemSymbol.setText(getString(R.string.str_muon_c));
             holder.itemSymbol.setTextColor(WDp.getChainColor(getContext(), COSMOS_TEST));
             holder.itemInnerSymbol.setText("");

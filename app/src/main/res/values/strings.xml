@@ -227,6 +227,7 @@
     <string name="str_station_c" translatable="false">ISS</string>
     <string name="str_nym_c" translatable="false">NYM</string>
     <string name="str_nyx_c" translatable="false">NYX</string>
+    <string name="str_tgd_c" translatable="false">TGD</string>
 
     <string name="str_create_swap_memo_c" translatable="false">Create Atomic Swap via Cosmostation Wallet</string>
     <string name="str_claim_swap_memo_c" translatable="false">Claim Atomic Swap via Cosmostation Wallet</string>
@@ -539,6 +540,7 @@
     <string name="str_mantle_net" translatable="false">(AssetMantle)</string>
     <string name="str_station_net" translatable="false">(Station Testnet)</string>
     <string name="str_nyx_net" translatable="false">(Nyx)</string>
+    <string name="str_tgrade_net" translatable="false">(Tgrade)</string>
     <string name="str_althea_chain_test" translatable="false">(Althea Testnet)</string>
     <string name="str_althea_chain_test_2" translatable="false">Althea Testnet</string>
     <string name="str_crescent_chain_test" translatable="false">(Crescent Testnet)</string>
@@ -596,6 +598,7 @@
     <string name="str_mantle_main" translatable="false">ASSETMANTLE</string>
     <string name="str_station_test" translatable="false">STATION TEST</string>
     <string name="str_nyx_main" translatable="false">NYX</string>
+    <string name="str_tgrade_main" translatable="false">TGRADE</string>
     <string name="str_althea_test" translatable="false">ALTHEA TEST</string>
     <string name="str_crescent_test" translatable="false">CRESCENT TEST</string>
     <string name="str_mintscan">Check Explorer</string>
@@ -708,6 +711,7 @@
     <string name="str_front_guide_title_mantle"><![CDATA[ASSETMANTLE]]></string>
     <string name="str_front_guide_title_station"><![CDATA[STATION]]></string>
     <string name="str_front_guide_title_nyx"><![CDATA[NYX]]></string>
+    <string name="str_front_guide_title_tgrade"><![CDATA[TGRADE]]></string>
     <string name="str_front_guide_msg">Decentralized network of blockchains powered by Tendermint BFT and ABCI.</string>
     <string name="str_front_guide_msg_iris">Interchain service infrastructure for a distributed business ecosystem.</string>
     <string name="str_front_guide_msg_bnb">Fast and secure decentralized digital asset exchange based on Tendermint built by Binance.</string>
@@ -752,6 +756,7 @@
     <string name="str_front_guide_msg_mantle"><![CDATA[AssetMantle is a community focused one-for-all NFT platform for creators and collectors, powered by $MNTL token.]]></string>
     <string name="str_front_guide_msg_station"><![CDATA[Station Test]]></string>
     <string name="str_front_guide_msg_nyx"><![CDATA[Nyx is a decentralized and incentivized infrastructure providing next generation privacy infrastructure.]]></string>
+    <string name="str_front_guide_msg_tgrade"><![CDATA[Tgrade offers institutions a regulated DeFi platform with various self-sovereign governance frameworks.]]></string>
     <string name="str_current_reward_address">Current Reward Address</string>
     <string name="str_new_reward_address">New Reward Address</string>
     <string name="str_inflation">Inflation</string>
@@ -1994,6 +1999,7 @@
     <string name="s_mantle" translatable="false">MNTL</string>
     <string name="s_station" translatable="false">ISS</string>
     <string name="s_nyx" translatable="false">NYX</string>
+    <string name="s_tgd" translatable="false">TGD</string>
 
     <string name="tx_send">Send</string>
     <string name="tx_receive">Received</string>

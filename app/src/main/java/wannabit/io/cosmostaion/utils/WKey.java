@@ -47,6 +47,7 @@ import static wannabit.io.cosmostaion.base.BaseChain.SENTINEL_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.SIF_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.STARGAZE_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.STATION_TEST;
+import static wannabit.io.cosmostaion.base.BaseChain.TGRADE_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.UMEE_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.getChain;
 
@@ -516,6 +517,8 @@ public class WKey {
                 result = bech32Encode("station".getBytes(), converted);
             } else if (chain.equals(NYX_MAIN)) {
                 result = bech32Encode("n".getBytes(), converted);
+            } else if (chain.equals(TGRADE_MAIN)) {
+                result = bech32Encode("tgrade".getBytes(), converted);
             }
 
         } catch (Exception e) {
@@ -613,6 +616,8 @@ public class WKey {
             return bech32Encode("station".getBytes(), bech32Decode(dpOpAddress).data);
         } else if (chain.equals(NYX_MAIN)) {
             return bech32Encode("n".getBytes(), bech32Decode(dpOpAddress).data);
+        } else if (chain.equals(TGRADE_MAIN)) {
+            return bech32Encode("tgrade".getBytes(), bech32Decode(dpOpAddress).data);
         } else {
             return "";
         }
