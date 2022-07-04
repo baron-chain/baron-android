@@ -143,7 +143,7 @@ public class MnemonicDetailActivity extends BaseActivity implements View.OnClick
                     getString(R.string.str_safe_copy), view -> onSafeCopy());
 
         } else if (v.equals(mDerive)) {
-            Intent intent = new Intent(MnemonicDetailActivity.this, WalletDeriveActivity.class);
+            Intent intent = new Intent(MnemonicDetailActivity.this, WalletAddActivity.class);
             intent.putExtra("id", mWords.id);
             intent.putExtra("isDetailMode", true);
             startActivity(intent);

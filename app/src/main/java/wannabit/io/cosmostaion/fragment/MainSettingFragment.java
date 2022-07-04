@@ -33,9 +33,9 @@ import wannabit.io.cosmostaion.activities.AccountListActivity;
 import wannabit.io.cosmostaion.activities.AppLockSetActivity;
 import wannabit.io.cosmostaion.activities.MainActivity;
 import wannabit.io.cosmostaion.activities.setting.MnemonicListActivity;
-import wannabit.io.cosmostaion.activities.setting.RestoreKeyActivity;
-import wannabit.io.cosmostaion.activities.setting.WatchingAccountAddActivity;
-import wannabit.io.cosmostaion.activities.chains.starname.StarNameWalletConnectActivity;
+import wannabit.io.cosmostaion.activities.setting.PrivateKeyRestoreActivity;
+import wannabit.io.cosmostaion.activities.setting.WatchingWalletAddActivity;
+import wannabit.io.cosmostaion.activities.txs.starname.StarNameWalletConnectActivity;
 import wannabit.io.cosmostaion.base.BaseFragment;
 import wannabit.io.cosmostaion.dialog.AlertDialogUtils;
 import wannabit.io.cosmostaion.dialog.Dialog_Currency_Set;
@@ -171,10 +171,10 @@ public class MainSettingFragment extends BaseFragment implements View.OnClickLis
             startActivity(new Intent(getBaseActivity(), MnemonicListActivity.class));
 
         } else if (v.equals(mBtnImportKey)) {
-            startActivity(new Intent(getBaseActivity(), RestoreKeyActivity.class));
+            startActivity(new Intent(getBaseActivity(), PrivateKeyRestoreActivity.class));
 
         } else if (v.equals(mBtnWatchAddress)) {
-            startActivity(new Intent(getBaseActivity(), WatchingAccountAddActivity.class));
+            startActivity(new Intent(getBaseActivity(), WatchingWalletAddActivity.class));
 
         } else if (v.equals(mBtnAlaram)) {
             Toast.makeText(getBaseActivity(), R.string.str_preparing, Toast.LENGTH_SHORT).show();

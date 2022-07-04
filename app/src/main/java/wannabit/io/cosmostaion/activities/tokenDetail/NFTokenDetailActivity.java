@@ -33,7 +33,7 @@ import java.util.List;
 import irismod.nft.Nft;
 import irismod.nft.QueryOuterClass;
 import wannabit.io.cosmostaion.R;
-import wannabit.io.cosmostaion.activities.chains.nft.NFTSendActivity;
+import wannabit.io.cosmostaion.activities.txs.nft.NFTSendActivity;
 import wannabit.io.cosmostaion.base.BaseActivity;
 import wannabit.io.cosmostaion.base.BaseChain;
 import wannabit.io.cosmostaion.dialog.AlertDialogUtils;

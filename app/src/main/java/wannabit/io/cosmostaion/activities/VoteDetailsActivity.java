@@ -37,6 +37,7 @@ import java.util.List;
 
 import cosmos.gov.v1beta1.Gov;
 import wannabit.io.cosmostaion.R;
+import wannabit.io.cosmostaion.activities.txs.common.VoteActivity;
 import wannabit.io.cosmostaion.base.BaseActivity;
 import wannabit.io.cosmostaion.base.BaseChain;
 import wannabit.io.cosmostaion.dialog.AlertDialogUtils;

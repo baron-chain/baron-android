@@ -76,7 +76,7 @@ public class MnemonicCreateActivity extends BaseActivity {
         if (resultCode == Activity.RESULT_OK) {
             long id = getBaseDao().onInsertMnemonics(onGenMWords());
             if (id > 0) {
-                Intent checkintent = new Intent(MnemonicCreateActivity.this, WalletDeriveActivity.class);
+                Intent checkintent = new Intent(MnemonicCreateActivity.this, WalletAddActivity.class);
                 checkintent.putExtra("id", id);
                 startActivity(checkintent);
                 finish();

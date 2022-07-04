@@ -314,7 +314,7 @@ public class MnemonicRestoreActivity extends BaseActivity implements View.OnClic
             if (resultCode == Activity.RESULT_OK) {
                 long id = getBaseDao().onInsertMnemonics(onGenMWords());
                 if (id > 0) {
-                    Intent checkintent = new Intent(MnemonicRestoreActivity.this, WalletDeriveActivity.class);
+                    Intent checkintent = new Intent(MnemonicRestoreActivity.this, WalletAddActivity.class);
                     checkintent.putExtra("id", id);
                     startActivity(checkintent);
                     finish();
