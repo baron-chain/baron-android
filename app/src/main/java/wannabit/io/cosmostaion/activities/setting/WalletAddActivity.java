@@ -244,11 +244,12 @@ public class WalletAddActivity extends BaseActivity implements View.OnClickListe
 
             if (derive.status == 2) {
                 holder.accountState.setText("Imported");
+                holder.accountCard.setBackground(ContextCompat.getDrawable(WalletAddActivity.this, R.drawable.box_account_unselected));
                 holder.accountDimLayer.setVisibility(View.VISIBLE);
-                holder.accountDimLayer.setAlpha(1f);
+                holder.accountDimLayer.setAlpha(0.5f);
             } else {
                 holder.accountDimLayer.setVisibility(View.GONE);
-                holder.accountCard.setBackground(ContextCompat.getDrawable(WalletAddActivity.this, R.drawable.box_account_unselected));
+                holder.accountCard.setBackground(ContextCompat.getDrawable(WalletAddActivity.this, R.drawable.box_accout_unselected));
                 holder.accountState.setText("");
             }
 
@@ -260,9 +261,9 @@ public class WalletAddActivity extends BaseActivity implements View.OnClickListe
                     }
                     derive.selected = !derive.selected;
                     if (derive.selected) {
-                        holder.accountCard.setBackground(ContextCompat.getDrawable(WalletAddActivity.this, R.drawable.box_round_seleted_white_daynight));
+                        holder.accountCard.setBackground(ContextCompat.getDrawable(WalletAddActivity.this, R.drawable.box_accout_selected));
                     } else {
-                        holder.accountCard.setBackground(ContextCompat.getDrawable(WalletAddActivity.this, R.drawable.box_account_unselected));
+                        holder.accountCard.setBackground(ContextCompat.getDrawable(WalletAddActivity.this, R.drawable.box_accout_unselected));
                     }
                     onUpdateCnt();
                 }
