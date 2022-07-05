@@ -1355,7 +1355,7 @@ public class WUtil {
 
     public static String dpCosmosTokenName(Context c, BaseData baseData, TextView textView, String denom) {
         if (denom.equals(TOKEN_ATOM)) {
-            textView.setTextColor(ContextCompat.getColor(c, R.color.color_atom));
+            textView.setTextColor(ContextCompat.getColor(c, R.color.color_cosmos));
             textView.setText("ATOM");
 
         } else if (denom.startsWith("pool")) {
@@ -1658,7 +1658,7 @@ public class WUtil {
     public static void DpCosmosTokenImg(BaseData baseData, ImageView imageView, String denom) {
         if (denom.equalsIgnoreCase(TOKEN_ATOM)) {
             Picasso.get().cancelRequest(imageView);
-            imageView.setImageResource(R.drawable.atom_ic);
+            imageView.setImageResource(R.drawable.token_cosmos);
         } else if (denom.startsWith("pool")) {
             Liquidity.Pool poolInfo = baseData.getGravityPoolByDenom(denom);
             if (poolInfo != null) {
@@ -2998,12 +2998,12 @@ public class WUtil {
         guideBtn1.setText(R.string.str_home);
         guideBtn2.setText(R.string.str_blog);
         if (mainActivity.mBaseChain.equals(COSMOS_MAIN) || mainActivity.mBaseChain.equals(COSMOS_TEST)) {
-            guideImg.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.cosmos_infoicon));
-            guideTitle.setText(R.string.str_front_guide_title);
-            guideMsg.setText(R.string.str_front_guide_msg);
+            guideImg.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.infoicon_cosmos));
+            guideTitle.setText(R.string.str_front_guide_title_cosmos);
+            guideMsg.setText(R.string.str_front_guide_msg_cosmos);
 
         } else if (mainActivity.mBaseChain.equals(IRIS_MAIN) || mainActivity.mBaseChain.equals(IRIS_TEST)) {
-            guideImg.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.irisnet_img));
+            guideImg.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.infoicon_iris));
             guideTitle.setText(R.string.str_front_guide_title_iris);
             guideMsg.setText(R.string.str_front_guide_msg_iris);
 
@@ -3223,12 +3223,12 @@ public class WUtil {
 
     public static void getWalletData(MainActivity mainActivity, BaseChain chain, ImageView coinImg, TextView coinDenom) {
         if (chain.equals(COSMOS_MAIN)) {
-            coinImg.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.atom_ic));
+            coinImg.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.token_cosmos));
             coinDenom.setText(R.string.str_atom_c);
             coinDenom.setTextAppearance(R.style.font_ss_14_atom);
 
         } else if (chain.equals(IRIS_MAIN)) {
-            coinImg.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.iris_toket_img));
+            coinImg.setImageDrawable(ContextCompat.getDrawable(mainActivity, R.drawable.token_iris));
             coinDenom.setText(R.string.str_iris_c);
             coinDenom.setTextAppearance(R.style.font_ss_14_iris);
 

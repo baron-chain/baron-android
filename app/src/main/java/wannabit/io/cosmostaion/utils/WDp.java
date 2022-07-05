@@ -645,24 +645,6 @@ public class WDp {
         } else {
             cardAlarm.setVisibility(View.GONE);
         }
-
-        if (baseChain.equals(COSMOS_TEST)) {
-            cardName.setCardBackgroundColor(ContextCompat.getColor(c, R.color.colorTransBg));
-            cardAlarm.setCardBackgroundColor(ContextCompat.getColor(c, R.color.colorTransBg));
-            cardAlarm.setVisibility(View.GONE);
-            cardBody.setCardBackgroundColor(ContextCompat.getColor(c, R.color.colorTransBg));
-            cardRewardAddress.setCardBackgroundColor(ContextCompat.getColor(c, R.color.colorTransBg));
-            cardRewardAddress.setVisibility(View.VISIBLE);
-
-        } else if (baseChain.equals(IRIS_TEST)) {
-            cardName.setCardBackgroundColor(ContextCompat.getColor(c, R.color.colorTransBg));
-            cardAlarm.setCardBackgroundColor(ContextCompat.getColor(c, R.color.colorTransBg));
-            cardAlarm.setVisibility(View.GONE);
-            cardBody.setCardBackgroundColor(ContextCompat.getColor(c, R.color.colorTransBg));
-            cardRewardAddress.setCardBackgroundColor(ContextCompat.getColor(c, R.color.colorTransBg));
-            cardRewardAddress.setVisibility(View.VISIBLE);
-
-        }
     }
 
     public static void getChainImg(Context c, BaseChain baseChain, ImageView chainImg) {
@@ -763,7 +745,7 @@ public class WDp {
                 chainImg.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.testnet_station));
             }
         } else {
-            chainImg.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.default_chain_img));
+            chainImg.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.chain_default));
         }
     }
 
@@ -975,7 +957,7 @@ public class WDp {
     public static void getFloatBtn(Context c, BaseChain baseChain, FloatingActionButton
             floatBtn) {
         if (baseChain.equals(COSMOS_MAIN)) {
-            floatBtn.setBackgroundTintList(ContextCompat.getColorStateList(c, R.color.color_atom));
+            floatBtn.setBackgroundTintList(ContextCompat.getColorStateList(c, R.color.color_cosmos));
             floatBtn.setImageTintList(ContextCompat.getColorStateList(c, R.color.colorWhite));
         } else if (baseChain.equals(IRIS_MAIN)) {
             floatBtn.setBackgroundTintList(ContextCompat.getColorStateList(c, R.color.color_iris));
@@ -1103,7 +1085,7 @@ public class WDp {
             floatBtn.setBackgroundTintList(ContextCompat.getColorStateList(c, R.color.color_nyx));
             floatBtn.setImageTintList(ContextCompat.getColorStateList(c, R.color.colorWhite));
         } else if (baseChain.equals(COSMOS_TEST)) {
-            floatBtn.setBackgroundTintList(ContextCompat.getColorStateList(c, R.color.color_atom));
+            floatBtn.setBackgroundTintList(ContextCompat.getColorStateList(c, R.color.color_cosmos));
         } else if (baseChain.equals(IRIS_TEST)) {
             floatBtn.setBackgroundTintList(ContextCompat.getColorStateList(c, R.color.color_iris));
         } else if (baseChain.equals(STATION_TEST)) {
@@ -3033,7 +3015,7 @@ public class WDp {
     public static int getChainColor(Context c, BaseChain chain) {
         if (chain != null) {
             if (chain.equals(COSMOS_MAIN) || chain.equals(COSMOS_TEST)) {
-                return ContextCompat.getColor(c, R.color.color_atom);
+                return ContextCompat.getColor(c, R.color.color_cosmos);
             } else if (chain.equals(IRIS_MAIN) || chain.equals(IRIS_TEST)) {
                 return ContextCompat.getColor(c, R.color.color_iris);
             } else if (chain.equals(BNB_MAIN)) {
@@ -3223,7 +3205,7 @@ public class WDp {
     public static ColorStateList getTabColor(Context c, BaseChain chain) {
         if (chain != null) {
             if (chain.equals(COSMOS_MAIN) || chain.equals(COSMOS_TEST)) {
-                return ContextCompat.getColorStateList(c, R.color.color_tab_myvalidator);
+                return ContextCompat.getColorStateList(c, R.color.color_tab_myvalidator_cosmos);
             } else if (chain.equals(IRIS_MAIN) || chain.equals(IRIS_TEST)) {
                 return ContextCompat.getColorStateList(c, R.color.color_tab_myvalidator_iris);
             } else if (chain.equals(KAVA_MAIN)) {
@@ -3310,13 +3292,13 @@ public class WDp {
                 return ContextCompat.getColorStateList(c, R.color.color_tab_myvalidator_station);
             }
         }
-        return ContextCompat.getColorStateList(c, R.color.color_tab_myvalidator);
+        return ContextCompat.getColorStateList(c, R.color.color_tab_myvalidator_cosmos);
     }
 
     public static ColorStateList getChainTintColor(Context c, BaseChain chain) {
         if (chain != null) {
             if (chain.equals(COSMOS_MAIN) || chain.equals(COSMOS_TEST)) {
-                return ContextCompat.getColorStateList(c, R.color.color_atom);
+                return ContextCompat.getColorStateList(c, R.color.color_cosmos);
             } else if (chain.equals(IRIS_MAIN) || chain.equals(IRIS_TEST)) {
                 return ContextCompat.getColorStateList(c, R.color.color_iris);
             } else if (chain.equals(KAVA_MAIN)) {
@@ -3412,7 +3394,7 @@ public class WDp {
 
     public static void DpMainDenom(Context c, String chain, TextView textview) {
         if (getChain(chain).equals(COSMOS_MAIN)) {
-            textview.setTextColor(ContextCompat.getColor(c, R.color.color_atom));
+            textview.setTextColor(ContextCompat.getColor(c, R.color.color_cosmos));
             textview.setText(c.getString(R.string.s_atom));
 
         } else if (getChain(chain).equals(IRIS_MAIN)) {
@@ -3584,7 +3566,7 @@ public class WDp {
             textview.setText(c.getString(R.string.s_nyx));
 
         } else if (getChain(chain).equals(COSMOS_TEST)) {
-            textview.setTextColor(ContextCompat.getColor(c, R.color.color_atom));
+            textview.setTextColor(ContextCompat.getColor(c, R.color.color_cosmos));
             textview.setText(c.getString(R.string.s_muon));
 
         } else if (getChain(chain).equals(IRIS_TEST)) {
@@ -3723,9 +3705,9 @@ public class WDp {
         Picasso.get().cancelRequest(imageView);
         if (baseChain != null) {
             if (baseChain.equals(COSMOS_MAIN) || baseChain.equals(COSMOS_TEST)) {
-                imageView.setImageResource(R.drawable.atom_ic);
+                imageView.setImageResource(R.drawable.token_cosmos);
             } else if (baseChain.equals(IRIS_MAIN) || baseChain.equals(IRIS_TEST)) {
-                imageView.setImageResource(R.drawable.iris_toket_img);
+                imageView.setImageResource(R.drawable.token_iris);
             } else if (baseChain.equals(BNB_MAIN)) {
                 imageView.setImageResource(R.drawable.bnb_token_img);
             } else if (baseChain.equals(OKEX_MAIN)) {
