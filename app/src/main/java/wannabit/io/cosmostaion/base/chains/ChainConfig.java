@@ -13,7 +13,7 @@ public class ChainConfig {
     public int chainTabColor() { return 0; }
     public String chainName() { return "unknown"; }
     public String chainTitle() { return "(" + chainName().substring(0, 1).toUpperCase() + chainName().substring(1) + ")"; }
-    public String chainTitle2() { return chainName().toUpperCase(); }
+    public String chainTitleToUp() { return chainName().toUpperCase(); }
 
     public int mainDenomImg() { return 0; }
     public String mainDenom() { return ""; }

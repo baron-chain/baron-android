@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import java.math.BigDecimal;
 
@@ -23,12 +24,13 @@ import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.txs.desmos.LinkAccountActivity;
 import wannabit.io.cosmostaion.base.BaseChain;
 import wannabit.io.cosmostaion.base.BaseFragment;
+import wannabit.io.cosmostaion.base.chains.ChainConfig;
+import wannabit.io.cosmostaion.base.chains.ChainFactory;
 import wannabit.io.cosmostaion.dao.Account;
 import wannabit.io.cosmostaion.dialog.Dialog_Link_Accounts;
 import wannabit.io.cosmostaion.dialog.Dialog_Link_Chain;
 import wannabit.io.cosmostaion.network.ApiClient;
 import wannabit.io.cosmostaion.network.res.ResAirdropClaimCheck;
-import wannabit.io.cosmostaion.utils.WDp;
 import wannabit.io.cosmostaion.utils.WLog;
 import wannabit.io.cosmostaion.utils.WUtil;
 
@@ -47,6 +49,7 @@ public class LinkAccountStep0Fragment extends BaseFragment implements View.OnCli
 
     private BaseChain       mSelectedChain;
     private Account         mSelectedAccount;
+    private ChainConfig     mChainConfig;
 
     private ResAirdropClaimCheck mCheckClaim;
 
@@ -83,12 +86,15 @@ public class LinkAccountStep0Fragment extends BaseFragment implements View.OnCli
         mBtnLinkAccount.setOnClickListener(this);
 
         mSelectedChain = WUtil.getDesmosAirDropChains().get(0);
+        if (mSelectedChain != null) {
+            mChainConfig = ChainFactory.getChain(mSelectedChain);
+        }
         return rootView;
     }
 
     public void onUpdateView() {
-        WDp.getChainImg(getSActivity(), mSelectedChain, mLinkChain);
-        WDp.getChainTitle2(getSActivity(), mSelectedChain, mLinkChainTxt);
+        mLinkChain.setImageDrawable(ContextCompat.getDrawable(getSActivity(), mChainConfig.chainImg()));
+        mLinkChainTxt.setText(mChainConfig.chainTitleToUp());
 
         if ((mSelectedAccount != null)) {
             mLinkAccountName.setText(WUtil.getWalletName(getContext(), mSelectedAccount));

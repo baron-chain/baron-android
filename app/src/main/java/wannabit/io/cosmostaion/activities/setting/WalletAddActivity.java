@@ -34,6 +34,8 @@ import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.base.BaseActivity;
 import wannabit.io.cosmostaion.base.BaseChain;
 import wannabit.io.cosmostaion.base.BaseConstant;
+import wannabit.io.cosmostaion.base.chains.ChainConfig;
+import wannabit.io.cosmostaion.base.chains.ChainFactory;
 import wannabit.io.cosmostaion.crypto.CryptoHelper;
 import wannabit.io.cosmostaion.dao.Account;
 import wannabit.io.cosmostaion.dao.Derive;
@@ -235,48 +237,51 @@ public class WalletAddActivity extends BaseActivity implements View.OnClickListe
         public void onBindViewHolder(@NonNull AccountHolder holder, int position) {
             final Derive derive = mDerives.get(position);
             final BaseChain baseChain = derive.baseChain;
-            WDp.getChainImg(WalletAddActivity.this, baseChain, holder.accountChainImg);
-            holder.accountAddress.setText(derive.dpAddress);
+            if (baseChain != null) {
+                final ChainConfig chainConfig = ChainFactory.getChain(baseChain);
+                holder.accountChainImg.setImageDrawable(ContextCompat.getDrawable(WalletAddActivity.this, chainConfig.chainImg()));
+                holder.accountAddress.setText(derive.dpAddress);
 
-            if (mPrivateKeyMode) {
-                holder.accountKeyPath.setVisibility(View.GONE);
-            } else {
-                holder.accountKeyPath.setVisibility(View.VISIBLE);
-                holder.accountKeyPath.setText(derive.fullPath);
-            }
-
-            if (derive.status == 2) {
-                holder.accountState.setText("Imported");
-                holder.accountCard.setBackground(ContextCompat.getDrawable(WalletAddActivity.this, R.drawable.box_account_unselected));
-                holder.accountDimLayer.setVisibility(View.VISIBLE);
-                holder.accountDimLayer.setAlpha(0.5f);
-            } else {
-                if (derive.selected) {
-                    holder.accountCard.setBackground(ContextCompat.getDrawable(WalletAddActivity.this, R.drawable.box_accout_selected));
+                if (mPrivateKeyMode) {
+                    holder.accountKeyPath.setVisibility(View.GONE);
                 } else {
-                    holder.accountCard.setBackground(ContextCompat.getDrawable(WalletAddActivity.this, R.drawable.box_accout_unselected));
+                    holder.accountKeyPath.setVisibility(View.VISIBLE);
+                    holder.accountKeyPath.setText(derive.fullPath);
                 }
-                holder.accountDimLayer.setVisibility(View.GONE);
-                holder.accountState.setText("");
-            }
 
-            holder.accountCard.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (derive.status == 2) {
-                        return;
-                    }
-                    derive.selected = !derive.selected;
+                if (derive.status == 2) {
+                    holder.accountState.setText("Imported");
+                    holder.accountCard.setBackground(ContextCompat.getDrawable(WalletAddActivity.this, R.drawable.box_account_unselected));
+                    holder.accountDimLayer.setVisibility(View.VISIBLE);
+                    holder.accountDimLayer.setAlpha(0.5f);
+                } else {
                     if (derive.selected) {
                         holder.accountCard.setBackground(ContextCompat.getDrawable(WalletAddActivity.this, R.drawable.box_accout_selected));
                     } else {
                         holder.accountCard.setBackground(ContextCompat.getDrawable(WalletAddActivity.this, R.drawable.box_accout_unselected));
                     }
-                    onUpdateCnt();
+                    holder.accountDimLayer.setVisibility(View.GONE);
+                    holder.accountState.setText("");
                 }
-            });
 
-            loadBalance(holder, derive);
+                holder.accountCard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (derive.status == 2) {
+                            return;
+                        }
+                        derive.selected = !derive.selected;
+                        if (derive.selected) {
+                            holder.accountCard.setBackground(ContextCompat.getDrawable(WalletAddActivity.this, R.drawable.box_accout_selected));
+                        } else {
+                            holder.accountCard.setBackground(ContextCompat.getDrawable(WalletAddActivity.this, R.drawable.box_accout_unselected));
+                        }
+                        onUpdateCnt();
+                    }
+                });
+
+                loadBalance(holder, derive);
+            }
         }
 
 

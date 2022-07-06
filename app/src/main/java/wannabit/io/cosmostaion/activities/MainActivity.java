@@ -50,6 +50,7 @@ import wannabit.io.cosmostaion.activities.txs.sif.SifIncentiveActivity;
 import wannabit.io.cosmostaion.base.BaseActivity;
 import wannabit.io.cosmostaion.base.BaseChain;
 import wannabit.io.cosmostaion.base.BaseFragment;
+import wannabit.io.cosmostaion.base.chains.ChainFactory;
 import wannabit.io.cosmostaion.dao.Account;
 import wannabit.io.cosmostaion.dao.ChainAccounts;
 import wannabit.io.cosmostaion.dialog.AlertDialogUtils;
@@ -195,15 +196,16 @@ public class MainActivity extends BaseActivity implements FetchCallBack {
 
         mAccount = getBaseDao().onSelectAccount(getBaseDao().getLastUser());
         mBaseChain = BaseChain.getChain(mAccount.baseChain);
+        mChainConfig = ChainFactory.getChain(mBaseChain);
 
         if (needFetch) {
             onShowWaitDialog();
             onFetchAllData();
 
+            mToolbarChainImg.setImageDrawable(ContextCompat.getDrawable(this, mChainConfig.chainImg()));
+            mToolbarChainName.setText(mChainConfig.chainTitle());
+            mToolbarChainName.setTextColor(ContextCompat.getColor(this, mChainConfig.chainColor()));
             mFloatBtn.setImageTintList(ContextCompat.getColorStateList(MainActivity.this, R.color.colorBlackDayNight));
-            WDp.getChainImg(MainActivity.this, mBaseChain, mToolbarChainImg);
-            WDp.getChainTitle(MainActivity.this, mBaseChain, mToolbarChainName);
-            mToolbarChainName.setTextColor(WDp.getChainColor(MainActivity.this, mBaseChain));
             WDp.getFloatBtn(MainActivity.this, mBaseChain, mFloatBtn);
 
             mSelectedChain = mBaseChain;
@@ -253,23 +255,6 @@ public class MainActivity extends BaseActivity implements FetchCallBack {
         }
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
-    }
-
-    public void onChainSelected(BaseChain baseChain) {
-        if (getBaseDao().onSelectAccountsByChain(baseChain).size() >= 5) {
-            Toast.makeText(this, R.string.error_max_account_number, Toast.LENGTH_SHORT).show();
-            return;
-        }
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Bundle bundle = new Bundle();
-                bundle.putString("chain", baseChain.getChain());
-                Dialog_AddAccount add = Dialog_AddAccount.newInstance(bundle);
-                add.setCancelable(true);
-                getSupportFragmentManager().beginTransaction().add(add, "dialog").commitNowAllowingStateLoss();
-            }
-        }, 300);
     }
 
     public void onFetchAllData() {
@@ -349,36 +334,19 @@ public class MainActivity extends BaseActivity implements FetchCallBack {
                     getString(R.string.str_close), null);
             return;
         }
-
-        if (mBaseChain.equals(KAVA_MAIN)) {
-            BigDecimal available = getBaseDao().getAvailable(WDp.mainDenom(mBaseChain));
-            BigDecimal txFee = WUtil.getEstimateGasFeeAmount(this, mBaseChain, CONST_PW_TX_CLAIM_INCENTIVE, 0);
-            if (available.compareTo(txFee) <= 0) {
-                Toast.makeText(this, R.string.error_not_enough_fee, Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if (getBaseDao().mIncentiveRewards.getRewardSum(TOKEN_KAVA) == BigDecimal.ZERO && getBaseDao().mIncentiveRewards.getRewardSum(TOKEN_HARD) == BigDecimal.ZERO &&
-                    getBaseDao().mIncentiveRewards.getRewardSum(TOKEN_SWP) == BigDecimal.ZERO) {
-                Toast.makeText(this, R.string.error_no_incentive_to_claim, Toast.LENGTH_SHORT).show();
-                return;
-            }
-            Intent intent = new Intent(MainActivity.this, ClaimIncentiveActivity.class);
-            startActivity(intent);
-
-        } else if (mBaseChain.equals(SIF_MAIN)) {
-            BigDecimal available = getBaseDao().getAvailable(WDp.mainDenom(mBaseChain));
-            BigDecimal txFee = WUtil.getEstimateGasFeeAmount(this, mBaseChain, CONST_PW_TX_SIF_CLAIM_INCENTIVE, 0);
-            if (available.compareTo(txFee) <= 0) {
-                Toast.makeText(this, R.string.error_not_enough_fee, Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if (getBaseDao().mSifLmIncentive == null || getBaseDao().mSifLmIncentive.totalClaimableCommissionsAndClaimableRewards == 0) {
-                Toast.makeText(this, R.string.error_no_incentive_to_claim, Toast.LENGTH_SHORT).show();
-                return;
-            }
-            Intent intent = new Intent(MainActivity.this, SifIncentiveActivity.class);
-            startActivity(intent);
+        BigDecimal available = getBaseDao().getAvailable(WDp.mainDenom(mBaseChain));
+        BigDecimal txFee = WUtil.getEstimateGasFeeAmount(this, mBaseChain, CONST_PW_TX_CLAIM_INCENTIVE, 0);
+        if (available.compareTo(txFee) <= 0) {
+            Toast.makeText(this, R.string.error_not_enough_fee, Toast.LENGTH_SHORT).show();
+            return;
         }
+        if (getBaseDao().mIncentiveRewards.getRewardSum(TOKEN_KAVA) == BigDecimal.ZERO && getBaseDao().mIncentiveRewards.getRewardSum(TOKEN_HARD) == BigDecimal.ZERO &&
+                getBaseDao().mIncentiveRewards.getRewardSum(TOKEN_SWP) == BigDecimal.ZERO) {
+            Toast.makeText(this, R.string.error_no_incentive_to_claim, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent(MainActivity.this, ClaimIncentiveActivity.class);
+        startActivity(intent);
     }
 
     private class MainViewPageAdapter extends FragmentPagerAdapter {

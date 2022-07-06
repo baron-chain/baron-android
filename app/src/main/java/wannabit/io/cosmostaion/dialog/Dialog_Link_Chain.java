@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +24,8 @@ import java.util.ArrayList;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.base.BaseActivity;
 import wannabit.io.cosmostaion.base.BaseChain;
-import wannabit.io.cosmostaion.utils.WDp;
+import wannabit.io.cosmostaion.base.chains.ChainConfig;
+import wannabit.io.cosmostaion.base.chains.ChainFactory;
 import wannabit.io.cosmostaion.utils.WUtil;
 
 public class Dialog_Link_Chain extends DialogFragment {
@@ -73,18 +75,21 @@ public class Dialog_Link_Chain extends DialogFragment {
         @Override
         public void onBindViewHolder(@NonNull LinkChainAdapter.RelayerListHolder holder, int position) {
             final BaseChain baseChain = mLinkChainList.get(position);
-            WDp.getChainImg(getSActivity(), baseChain, holder.chainImg);
-            WDp.getChainTitle2(getSActivity(), baseChain, holder.chainName);
+            if (baseChain != null) {
+                final ChainConfig chainConfig = ChainFactory.getChain(baseChain);
+                holder.chainImg.setImageDrawable(ContextCompat.getDrawable(getSActivity(), chainConfig.chainImg()));
+                holder.chainName.setText(chainConfig.chainTitleToUp());
 
-            holder.rootLayer.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent resultIntent = new Intent();
-                    resultIntent.putExtra("position", position);
-                    getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, resultIntent);
-                    getDialog().dismiss();
-                }
-            });
+                holder.rootLayer.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("position", position);
+                        getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, resultIntent);
+                        getDialog().dismiss();
+                    }
+                });
+            }
         }
 
         @Override

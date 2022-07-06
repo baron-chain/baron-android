@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +24,8 @@ import java.util.ArrayList;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.base.BaseActivity;
 import wannabit.io.cosmostaion.base.BaseChain;
+import wannabit.io.cosmostaion.base.chains.ChainConfig;
+import wannabit.io.cosmostaion.base.chains.ChainFactory;
 import wannabit.io.cosmostaion.dao.IbcPath;
 import wannabit.io.cosmostaion.utils.WDp;
 
@@ -74,18 +77,21 @@ public class Dialog_IBC_Receive_Chain extends DialogFragment {
         public void onBindViewHolder(@NonNull RelayerListHolder holder, int position) {
             final IbcPath ibcPath = mIbcSendableRelayers.get(position);
             final BaseChain toChain = WDp.getChainTypeByChainId(ibcPath.chain_id);
-            WDp.getChainImg(getSActivity(), toChain, holder.chainImg);
-            WDp.getChainTitle2(getSActivity(), toChain, holder.chainName);
+            if (toChain != null) {
+                final ChainConfig chainConfig = ChainFactory.getChain(toChain);
+                holder.chainImg.setImageDrawable(ContextCompat.getDrawable(getSActivity(), chainConfig.chainImg()));
+                holder.chainName.setText(chainConfig.chainTitleToUp());
 
-            holder.rootLayer.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent resultIntent = new Intent();
-                    resultIntent.putExtra("position", position);
-                    getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, resultIntent);
-                    getDialog().dismiss();
-                }
-            });
+                holder.rootLayer.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("position", position);
+                        getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, resultIntent);
+                        getDialog().dismiss();
+                    }
+                });
+            }
         }
 
         @Override

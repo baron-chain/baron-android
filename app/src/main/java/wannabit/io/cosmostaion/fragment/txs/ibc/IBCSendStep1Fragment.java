@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -36,6 +37,8 @@ import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.txs.ibc.IBCSendActivity;
 import wannabit.io.cosmostaion.base.BaseChain;
 import wannabit.io.cosmostaion.base.BaseFragment;
+import wannabit.io.cosmostaion.base.chains.ChainConfig;
+import wannabit.io.cosmostaion.base.chains.ChainFactory;
 import wannabit.io.cosmostaion.dao.Account;
 import wannabit.io.cosmostaion.dialog.Dialog_IBC_Receivable_Accouts;
 import wannabit.io.cosmostaion.dialog.Dialog_StarName_Confirm;
@@ -127,11 +130,14 @@ public class IBCSendStep1Fragment extends BaseFragment implements View.OnClickLi
     public void onRefreshTab() {
         super.onRefreshTab();
         mTochain = WDp.getChainTypeByChainId(getSActivity().mIbcSelectedRelayer.chain_id);
-        mToAccountList = getBaseDao().onSelectAccountsByChain(mTochain);
-        WDp.getChainTitle(getSActivity(), mTochain, mDesitination);
-        mDesitination.setTextColor(WDp.getChainColor(getSActivity(), mTochain));
-        String userInput = mAddressInput.getText().toString().trim();
-        WDp.getChainByAddress(mTochain, userInput, mAddressInput);
+        if (mTochain != null) {
+            ChainConfig chainConfig = ChainFactory.getChain(mTochain);
+            mToAccountList = getBaseDao().onSelectAccountsByChain(mTochain);
+            mDesitination.setText(chainConfig.chainTitle());
+            mDesitination.setTextColor(ContextCompat.getColor(getSActivity(), chainConfig.chainColor()));
+            String userInput = mAddressInput.getText().toString().trim();
+            WDp.getChainByAddress(mTochain, userInput, mAddressInput);
+        }
     }
 
     private void onUpdateView() {

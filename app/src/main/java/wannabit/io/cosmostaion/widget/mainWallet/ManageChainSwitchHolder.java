@@ -18,6 +18,8 @@ import org.jetbrains.annotations.NotNull;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.WalletSwitchActivity;
 import wannabit.io.cosmostaion.base.BaseChain;
+import wannabit.io.cosmostaion.base.chains.ChainConfig;
+import wannabit.io.cosmostaion.base.chains.ChainFactory;
 import wannabit.io.cosmostaion.dao.Account;
 import wannabit.io.cosmostaion.dao.ChainAccounts;
 import wannabit.io.cosmostaion.utils.WDp;
@@ -122,8 +124,9 @@ public class ManageChainSwitchHolder extends BaseHolder {
 
     public void onBindChainSwitch(@NotNull WalletSwitchActivity switchActivity, ChainAccounts data, Account currentAccount) {
         accountCard.setCardBackgroundColor(WDp.getChainBgColor(switchActivity, data.baseChain));
-        WDp.getChainImg(switchActivity, data.baseChain, accountChainImg);
-        WDp.getChainTitle2(switchActivity, data.baseChain, accountChainName);
+        ChainConfig chainConfig = ChainFactory.getChain(data.baseChain);
+        accountChainImg.setImageDrawable(ContextCompat.getDrawable(switchActivity, chainConfig.chainImg()));
+        accountChainName.setText(chainConfig.chainTitleToUp());
         accountWalletCnt.setText(data.accounts.size() + " / 5");
 
         accountSelect.setOnClickListener(new View.OnClickListener() {

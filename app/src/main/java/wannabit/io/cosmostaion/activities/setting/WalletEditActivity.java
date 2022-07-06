@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +23,8 @@ import java.util.ArrayList;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.base.BaseActivity;
 import wannabit.io.cosmostaion.base.BaseChain;
-import wannabit.io.cosmostaion.utils.WDp;
+import wannabit.io.cosmostaion.base.chains.ChainConfig;
+import wannabit.io.cosmostaion.base.chains.ChainFactory;
 
 public class WalletEditActivity extends BaseActivity implements View.OnClickListener{
 
@@ -119,8 +121,9 @@ public class WalletEditActivity extends BaseActivity implements View.OnClickList
         @Override
         public void onBindViewHolder(@NonNull DisplayListAdapter.DisplayHolder holder, final int position) {
             final BaseChain chain = mDisplayChains.get(position);
-            WDp.getChainImg(WalletEditActivity.this, chain, holder.chainTokenImg);
-            WDp.getChainTitle2(WalletEditActivity.this, chain, holder.chainName);
+            final ChainConfig chainConfig = ChainFactory.getChain(chain);
+            holder.chainTokenImg.setImageDrawable(ContextCompat.getDrawable(WalletEditActivity.this, chainConfig.chainImg()));
+            holder.chainName.setText(chainConfig.chainTitleToUp());
 
             holder.chainRemoveImg.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -211,26 +214,29 @@ public class WalletEditActivity extends BaseActivity implements View.OnClickList
         @Override
         public void onBindViewHolder(@NonNull HideListAdapter.HideHolder holder, int position) {
             final BaseChain chain = mHideChains.get(position);
-            WDp.getChainImg(WalletEditActivity.this, chain, holder.chainTokenImg);
-            WDp.getChainTitle2(WalletEditActivity.this, chain, holder.chainName);
+            if (chain != null) {
+                final ChainConfig chainConfig = ChainFactory.getChain(chain);
+                holder.chainTokenImg.setImageDrawable(ContextCompat.getDrawable(WalletEditActivity.this, chainConfig.chainImg()));
+                holder.chainName.setText(chainConfig.chainTitleToUp());
 
-            holder.chainAddImg.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int hideChainIndex = mHideChains.indexOf(chain);
-                    if (hideChainIndex >= 0) {
-                        mHideChains.remove(hideChainIndex);
-                        mDisplayChains.add(chain);
+                holder.chainAddImg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int hideChainIndex = mHideChains.indexOf(chain);
+                        if (hideChainIndex >= 0) {
+                            mHideChains.remove(hideChainIndex);
+                            mDisplayChains.add(chain);
 
-                        if (mHideChains.size() <= 0) {
-                            mEmptyChains.setVisibility(View.VISIBLE);
-                            mHideRecyclerView.setVisibility(View.GONE);
+                            if (mHideChains.size() <= 0) {
+                                mEmptyChains.setVisibility(View.VISIBLE);
+                                mHideRecyclerView.setVisibility(View.GONE);
+                            }
+                            mHideListAdapter.notifyDataSetChanged();
+                            mDisplayListAdapter.notifyDataSetChanged();
                         }
-                        mHideListAdapter.notifyDataSetChanged();
-                        mDisplayListAdapter.notifyDataSetChanged();
                     }
-                }
-            });
+                });
+            }
         }
 
         @Override

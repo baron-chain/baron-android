@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import java.math.BigDecimal;
 
@@ -15,6 +16,8 @@ import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.txs.ibc.IBCSendActivity;
 import wannabit.io.cosmostaion.base.BaseChain;
 import wannabit.io.cosmostaion.base.BaseFragment;
+import wannabit.io.cosmostaion.base.chains.ChainConfig;
+import wannabit.io.cosmostaion.base.chains.ChainFactory;
 import wannabit.io.cosmostaion.utils.WDp;
 
 public class IBCSendStep4Fragment extends BaseFragment implements View.OnClickListener{
@@ -69,8 +72,11 @@ public class IBCSendStep4Fragment extends BaseFragment implements View.OnClickLi
         WDp.showCoinDp(getSActivity(), getBaseDao(), getSActivity().mToIbcDenom, toSendAmount.toPlainString(), mSendAmountSymbol, mSendAmount, getSActivity().mBaseChain);
 
         BaseChain toChain = WDp.getChainTypeByChainId(getSActivity().mIbcSelectedRelayer.chain_id);
-        WDp.getChainTitle(getSActivity(), toChain, mRecipientChain);
-        mRecipientChain.setTextColor(WDp.getChainColor(getSActivity(), toChain));
+        if (toChain != null) {
+            ChainConfig chainConfig = ChainFactory.getChain(toChain);
+            mRecipientChain.setText(chainConfig.chainTitle());
+            mRecipientChain.setTextColor(ContextCompat.getColor(getSActivity(), chainConfig.chainColor()));
+        }
         mRecipientAddress.setText(getSActivity().mToAddress);
     }
 
