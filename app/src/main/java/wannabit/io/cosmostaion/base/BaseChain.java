@@ -79,12 +79,7 @@ public enum BaseChain {
     ASSETMANTLE_MAIN("assetmantle-mainnet"),
     STATION_TEST("station-testnet"),
     NYX_MAIN("nyx-mainnet"),
-    COSMOS_TEST_LEGACY1("stargate-final"),
-    COSMOS_TEST("cosmos-testnet"),
-    IRIS_TEST_LEGACY1("bifrost-2"),
-    IRIS_TEST("iris-testnet"),
-    OK_TEST("okexchain-testnet"),
-    ALTHEA_TEST("althea-testnet"),
+    TGRADE_MAIN("tgrade-mainnet"),
     CRESCENT_TEST("crescent-testnet");
 
     private final String chainName;
@@ -251,7 +246,9 @@ public enum BaseChain {
         if (chainName.equals(NYX_MAIN.chainName)) {
             return NYX_MAIN;
         }
-
+        if (chainName.equals(TGRADE_MAIN.chainName)) {
+            return TGRADE_MAIN;
+        }
         return null;
     }
 
@@ -297,6 +294,7 @@ public enum BaseChain {
         result.add(SENTINEL_MAIN);
         result.add(SIF_MAIN);
         result.add(STARGAZE_MAIN);
+        result.add(TGRADE_MAIN);
         result.add(IOV_MAIN);
         result.add(UMEE_MAIN);
         result.add(STATION_TEST);
@@ -309,9 +307,9 @@ public enum BaseChain {
     }
 
     public static boolean IS_TESTNET(BaseChain chain) {
-        if (chain.equals(ALTHEA_TEST)) {
-            return true;
-        }
+//        if (chain.equals(ALTHEA_TEST)) {
+//            return true;
+//        }
         return false;
     }
 

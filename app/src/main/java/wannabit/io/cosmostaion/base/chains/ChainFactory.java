@@ -150,6 +150,9 @@ public class ChainFactory {
                 case STARGAZE_MAIN:
                     return new Stargaze();
 
+                case TGRADE_MAIN:
+                    return new Tgrade();
+
                 case IOV_LEGACY1:
                 case IOV_MAIN:
                     return new Starname();

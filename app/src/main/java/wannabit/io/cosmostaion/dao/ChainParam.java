@@ -174,11 +174,14 @@ public class ChainParam {
         }
 
         public BigDecimal getBondedAmount(BaseChain baseChain) {
-            if (isGRPC(baseChain)) {
-                return new BigDecimal(mStakingpools.pool.bonded_tokens);
-            } else {
-                return new BigDecimal(mStakingpools.bonded_tokens);
+            if (mStakingpools != null) {
+                if (isGRPC(baseChain)) {
+                    return new BigDecimal(mStakingpools.pool.bonded_tokens);
+                } else {
+                    return new BigDecimal(mStakingpools.bonded_tokens);
+                }
             }
+            return BigDecimal.ZERO;
         }
 
         public BigDecimal getTax(BaseChain baseChain) {
