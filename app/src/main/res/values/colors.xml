@@ -70,6 +70,7 @@
     <color name="colorTransBgCanto">#E6F9F1</color>
     <color name="colorTransBgCoreum">#E5F7F0</color>
     <color name="colorTransBgQuasar">#EBEEFE</color>
+    <color name="colorTransBgTerra">#E7EDFF</color>
 
 
     <color name="colorTransBgGray">#E63D3D3D</color>
@@ -230,6 +231,8 @@
     <color name="color_coreum">#16B87B</color>
 
     <color name="color_quasar">#3D62FC</color>
+
+    <color name="color_terra">#1E75EE</color>
 
     <color name="colorRed">#f31963</color>
     <color name="colorRipple1">#AA000000</color>

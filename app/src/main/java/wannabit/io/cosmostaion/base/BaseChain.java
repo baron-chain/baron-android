@@ -93,7 +93,8 @@ public enum BaseChain {
     CANTO_MAIN("canto-mainnet"),
     KYVE_MAIN("kyve-mainnet"),
     COREUM_MAIN("coreum-mainnet"),
-    QUASAR_MAIN("quasar-mainnet");
+    QUASAR_MAIN("quasar-mainnet"),
+    TERRA_MAIN("terra-mainnet");
 
 
     private final String chainName;
@@ -305,6 +306,9 @@ public enum BaseChain {
         if (chainName.equals(QUASAR_MAIN.chainName)) {
             return QUASAR_MAIN;
         }
+        if (chainName.equals(TERRA_MAIN.chainName)) {
+            return TERRA_MAIN;
+        }
         return null;
     }
 
@@ -362,6 +366,7 @@ public enum BaseChain {
         result.add(SOMMELIER_MAIN);
         result.add(STARGAZE_MAIN);
         result.add(STRIDE_MAIN);
+        result.add(TERRA_MAIN);
         result.add(TERITORI_MAIN);
         result.add(IOV_MAIN);
         result.add(UMEE_MAIN);
