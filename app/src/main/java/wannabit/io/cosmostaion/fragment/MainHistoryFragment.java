@@ -27,7 +27,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.common.util.CollectionUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
+import java.util.stream.Collectors;
 
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.MainActivity;
@@ -113,7 +117,7 @@ public class MainHistoryFragment extends BaseFragment implements TaskListener {
         mRecyclerView.setHasFixedSize(true);
         mHistoryAdapter = new HistoryAdapter();
         mRecyclerView.setAdapter(mHistoryAdapter);
-        RecyclerViewHeader recyclerViewHeader = new RecyclerViewHeader(getMainActivity());
+        RecyclerViewHeader recyclerViewHeader = new RecyclerViewHeader(getMainActivity(), true, getSectionCall());
         mRecyclerView.addItemDecoration(recyclerViewHeader);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -286,12 +290,16 @@ public class MainHistoryFragment extends BaseFragment implements TaskListener {
 
     public static class RecyclerViewHeader extends RecyclerView.ItemDecoration {
         private final int topPadding;
+        private final boolean sticky;
+        private final SectionCallback sectionCallback;
 
         private View headerView;
         private TextView mTitle, mItemCnt;
 
-        public RecyclerViewHeader(Context context) {
-            topPadding = dpToPx(context, 26);
+        public RecyclerViewHeader(Context context, boolean sticky, @NonNull SectionCallback sectionCallback) {
+            this.sticky = sticky;
+            this.sectionCallback = sectionCallback;
+            topPadding = dpToPx(context, 32);
         }
 
         private int dpToPx(Context context, int dp) {
@@ -306,16 +314,24 @@ public class MainHistoryFragment extends BaseFragment implements TaskListener {
                 headerView = inflateHeaderView(parent);
                 mTitle = (TextView) headerView.findViewById(R.id.header_title);
                 mItemCnt = (TextView) headerView.findViewById(R.id.recycler_cnt);
-
-                mTitle.setText(R.string.str_history_title);
-                mItemCnt.setText(String.valueOf(state.getItemCount()));
                 fixLayoutSize(headerView, parent);
             }
-            mItemCnt.setText(String.valueOf(state.getItemCount()));
 
+            CharSequence previousHeader = "";
             for (int i = 0; i < parent.getChildCount(); i++) {
                 View child = parent.getChildAt(i);
-                drawHeader(c, child, headerView);
+                final int position = parent.getChildAdapterPosition(child);
+                if (position == RecyclerView.NO_POSITION) {
+                    return;
+                }
+
+                CharSequence title = sectionCallback.SectionHeader(position);
+                mTitle.setText(title);
+                mItemCnt.setVisibility(View.GONE);
+                if (!previousHeader.equals(title) || sectionCallback.isSection(position)) {
+                    drawHeader(c, child, headerView);
+                    previousHeader = title;
+                }
             }
         }
 
@@ -324,7 +340,7 @@ public class MainHistoryFragment extends BaseFragment implements TaskListener {
             super.getItemOffsets(outRect, view, parent, state);
 
             int position = parent.getChildAdapterPosition(view);
-            if (position == 0) {
+            if (sectionCallback.isSection(position)) {
                 outRect.top = topPadding;
             }
         }
@@ -335,6 +351,11 @@ public class MainHistoryFragment extends BaseFragment implements TaskListener {
 
         private void drawHeader(Canvas c, View child, View headerView) {
             c.save();
+            if (sticky) {
+                c.translate(0, Math.max(0, child.getTop() - headerView.getHeight()));
+            } else {
+                c.translate(0, child.getTop() - headerView.getHeight());
+            }
             headerView.draw(c);
             c.restore();
         }
@@ -355,6 +376,40 @@ public class MainHistoryFragment extends BaseFragment implements TaskListener {
             view.measure(childWidth, childHeight);
             view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
         }
+    }
+
+    public interface SectionCallback {
+        boolean isSection(int position);
+
+        CharSequence SectionHeader(int position);
+    }
+
+    private SectionCallback getSectionCall() {
+        return new SectionCallback() {
+            @Override
+            public boolean isSection(int position) {
+                return position == 0 || !WDp.getTimeHistoryFormat(requireContext(), mApiNewTxCustomHistory.get(position).data.timestamp).equals(WDp.getTimeHistoryFormat(requireContext(), mApiNewTxCustomHistory.get(position - 1).data.timestamp));
+            }
+
+            @Override
+            public CharSequence SectionHeader(int position) {
+                Date date = new Date(System.currentTimeMillis());
+                SimpleDateFormat nowDateFormat = new SimpleDateFormat(getString(R.string.str_dp_time_format4));
+                String getNowTime = nowDateFormat.format(date);
+
+                if (getNowTime.equalsIgnoreCase(WDp.getTimeHistoryFormat(requireContext(), mApiNewTxCustomHistory.get(position).data.timestamp))) {
+                    return "Today";
+                } else {
+                    try {
+                        SimpleDateFormat txTimeFormat = new SimpleDateFormat(getString(R.string.str_tx_time_format));
+                        SimpleDateFormat myFormat = new SimpleDateFormat(getString(R.string.str_dp_time_format5));
+                        txTimeFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+                        return myFormat.format(txTimeFormat.parse(mApiNewTxCustomHistory.get(position).data.timestamp));
+                    } catch (Exception e) { }
+                }
+                return "";
+            }
+        };
     }
 }
 

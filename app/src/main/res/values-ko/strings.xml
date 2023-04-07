@@ -1332,6 +1332,7 @@
     <string name="str_dp_time_format2">yyyy-MM-dd HH:mm</string>
     <string name="str_dp_time_format3">HH:mm:ss</string>
     <string name="str_dp_time_format4">yyyy-MM-dd</string>
+    <string name="str_dp_time_format5">MMMM dd, yyyy</string>
     <string name="str_dp_date_format">yyyy-MM-dd</string>
 
 </resources>
