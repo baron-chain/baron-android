@@ -49,6 +49,7 @@ import wannabit.io.cosmostaion.task.FetchTask.OkHistoryTask;
 import wannabit.io.cosmostaion.task.TaskListener;
 import wannabit.io.cosmostaion.task.TaskResult;
 import wannabit.io.cosmostaion.utils.WDp;
+import wannabit.io.cosmostaion.widget.HistoryHolder;
 import wannabit.io.cosmostaion.widget.HistoryNewHolder;
 import wannabit.io.cosmostaion.widget.HistoryOldHolder;
 
@@ -245,14 +246,14 @@ public class MainHistoryFragment extends BaseFragment implements TaskListener {
             if (viewType == TYPE_OLD_HISTORY) {
                 return new HistoryOldHolder(getLayoutInflater().inflate(R.layout.item_history, viewGroup, false));
             } else {
-                return new HistoryNewHolder(getLayoutInflater().inflate(R.layout.item_new_history, viewGroup, false));
+                return new HistoryHolder(getLayoutInflater().inflate(R.layout.item_history_view, viewGroup, false));
             }
         }
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
             if (isGRPC(mBaseChain)) {
-                HistoryNewHolder holder = (HistoryNewHolder) viewHolder;
+                HistoryHolder holder = (HistoryHolder) viewHolder;
                 final ResApiNewTxListCustom history = mApiNewTxCustomHistory.get(position);
                 holder.onBindNewHistory(getMainActivity(), getBaseDao(), mChainConfig, history);
             } else {

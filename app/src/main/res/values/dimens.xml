@@ -11,11 +11,13 @@
     <dimen name="space_1">1dp</dimen>
     <dimen name="space_1.8">1.8dp</dimen>
     <dimen name="space_2">2dp</dimen>
+    <dimen name="space_3">3dp</dimen>
     <dimen name="space_4">4dp</dimen>
     <dimen name="space_5">5dp</dimen>
     <dimen name="space_6">6dp</dimen>
     <dimen name="space_8">8dp</dimen>
     <dimen name="space_10">10dp</dimen>
+    <dimen name="space_11">11dp</dimen>
     <dimen name="space_12">12dp</dimen>
     <dimen name="space_14">14dp</dimen>
     <dimen name="space_15">15dp</dimen>
@@ -48,7 +50,10 @@
     <dimen name="space_110">110dp</dimen>
     <dimen name="space_120">120dp</dimen>
     <dimen name="space_140">140dp</dimen>
+    <dimen name="space_150">150dp</dimen>
+    <dimen name="space_160">160dp</dimen>
     <dimen name="space_180">180dp</dimen>
+    <dimen name="space_200">200dp</dimen>
     <dimen name="space_240">240dp</dimen>
     <dimen name="space_280">280dp</dimen>
     <dimen name="space_300">300dp</dimen>

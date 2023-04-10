@@ -963,13 +963,13 @@ public class ResApiNewTxListCustom {
             }
             if (msgType.contains("MsgVote")) {
                 if ("VOTE_OPTION_YES".equals(option) || "Yes".equals(option)) {
-                    result = "YES";
+                    result = "Yes";
                 } else if ("VOTE_OPTION_NO".equals(option) || "No".equals(option)) {
-                    result = "NO";
+                    result = "No";
                 } else if ("VOTE_OPTION_ABSTAIN".equals(option) || "Abstain".equals(option)) {
-                    result = "ABSTAIN";
+                    result = "Abstain";
                 } else if ("VOTE_OPTION_NO_WITH_VETO".equals(option) || "NoWithVeto".equals(option)) {
-                    result = "VETO";
+                    result = "Veto";
                 }
             }
             return result;

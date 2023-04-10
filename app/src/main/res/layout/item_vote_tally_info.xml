@@ -152,8 +152,7 @@
                         android:id="@+id/vote_yes_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorVoteYes"
-                        android:textSize="@dimen/text_size_14"
+                        style="@style/font_rm_14_vote_yes"
                         android:text="@string/str_vote_yes" />
 
                     <TextView
@@ -190,8 +189,7 @@
                         android:id="@+id/vote_no_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorVoteNo"
-                        android:textSize="@dimen/text_size_14"
+                        style="@style/font_rm_14_vote_no"
                         android:text="@string/str_vote_no" />
 
                     <TextView
@@ -236,8 +234,7 @@
                         android:id="@+id/vote_veto_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorVoteVeto"
-                        android:textSize="@dimen/text_size_14"
+                        style="@style/font_rm_14_vote_veto"
                         android:text="@string/str_vote_veto" />
 
                     <TextView
@@ -273,8 +270,7 @@
                         android:id="@+id/vote_abstain_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorVoteAbstain"
-                        android:textSize="@dimen/text_size_14"
+                        style="@style/font_rm_14_vote_abstain"
                         android:text="@string/str_vote_abstain" />
 
                     <TextView
