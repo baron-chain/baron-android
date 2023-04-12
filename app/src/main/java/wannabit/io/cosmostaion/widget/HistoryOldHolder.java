@@ -13,7 +13,6 @@ import org.jetbrains.annotations.NotNull;
 import wannabit.io.cosmostaion.R;
 import wannabit.io.cosmostaion.activities.MainActivity;
 import wannabit.io.cosmostaion.base.chains.ChainConfig;
-import wannabit.io.cosmostaion.model.type.BnbHistory;
 import wannabit.io.cosmostaion.network.res.ResOkHistory;
 import wannabit.io.cosmostaion.utils.WDp;
 
@@ -31,18 +30,18 @@ public class HistoryOldHolder extends BaseHolder {
         history_time_gap = itemView.findViewById(R.id.history_time_gap);
     }
 
-    public void onBindOldBnbHistory(@NotNull MainActivity mainActivity, ChainConfig chainConfig, BnbHistory history) {
-        historyType.setText(WDp.DpBNBTxType(mainActivity, history, mainActivity.mAccount.address));
-        history_time.setText(WDp.getTimeformat(mainActivity, history.timeStamp));
-        history_time_gap.setText(WDp.getTimeGap(mainActivity, history.timeStamp));
-        history_block.setText(history.blockHeight + " block");
-
-        historyRoot.setOnClickListener(v -> {
-            String url = chainConfig.explorerHistoryLink(history.txHash);
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            mainActivity.startActivity(intent);
-        });
-    }
+//    public void onBindOldBnbHistory(@NotNull MainActivity mainActivity, ChainConfig chainConfig, BnbHistory history) {
+//        historyType.setText(WDp.DpBNBTxType(mainActivity, history, mainActivity.mAccount.address));
+//        history_time.setText(WDp.getTimeformat(mainActivity, history.timeStamp));
+//        history_time_gap.setText(WDp.getTimeGap(mainActivity, history.timeStamp));
+//        history_block.setText(history.blockHeight + " block");
+//
+//        historyRoot.setOnClickListener(v -> {
+//            String url = chainConfig.explorerHistoryLink(history.txHash);
+//            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+//            mainActivity.startActivity(intent);
+//        });
+//    }
 
     public void onBindOldOkHistory(@NotNull MainActivity mainActivity, ChainConfig chainConfig, ResOkHistory.Data.transactionData history) {
         historyType.setText(history.txId);

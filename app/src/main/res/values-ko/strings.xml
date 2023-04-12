@@ -1129,14 +1129,14 @@
     <string name="tx_kava_drawdebt_cdp">CDP\n대출</string>
     <string name="tx_kava_repaydebt_cdp">CDP\n상환</string>
     <string name="tx_kava_liquidate_cdp">CDP\n청산</string>
-    <string name="tx_send_htlc">BEP3\n보내기</string>
-    <string name="tx_receive_htlc">BEP3\n받기</string>
-    <string name="tx_create_htlc">BEP3\n생성</string>
-    <string name="tx_claim_htlc">BEP3\n청구하기</string>
-    <string name="tx_refund_htlc">BEP3\n환불하기</string>
-    <string name="tx_kava_bep3_create">BEP3\n보내기</string>
-    <string name="tx_kava_bep3_claim">BEP3\n청구하기</string>
-    <string name="tx_kava_bep3_refund">BEP3\n환불하기</string>
+    <string name="tx_send_htlc">BEP3 보내기</string>
+    <string name="tx_receive_htlc">BEP3 받기</string>
+    <string name="tx_create_htlc">BEP3 생성</string>
+    <string name="tx_claim_htlc">BEP3 청구하기</string>
+    <string name="tx_refund_htlc">BEP3 환불하기</string>
+    <string name="tx_kava_bep3_create">BEP3 보내기</string>
+    <string name="tx_kava_bep3_claim">BEP3 청구하기</string>
+    <string name="tx_kava_bep3_refund">BEP3 환불하기</string>
     <string name="tx_kava_hard_deposit">하드 풀\n예치</string>
     <string name="tx_kava_hard_withdraw">하드 풀\n출금</string>
     <string name="tx_kava_hard_borrow">하드 풀\n대출</string>
@@ -1333,7 +1333,7 @@
     <string name="str_dp_time_format1">yyyy-MM-dd HH:mm:ss</string>
     <string name="str_dp_time_format2">yyyy-MM-dd HH:mm</string>
     <string name="str_dp_time_format3">HH:mm:ss</string>
-    <string name="str_dp_time_format4">yyyy-MM-dd</string>
+    <string name="str_dp_time_format4">MMM d, yyyy</string>
     <string name="str_dp_time_format5">MMMM dd, yyyy</string>
     <string name="str_dp_date_format">yyyy-MM-dd</string>
 

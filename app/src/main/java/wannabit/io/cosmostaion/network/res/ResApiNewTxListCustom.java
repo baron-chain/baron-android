@@ -936,6 +936,13 @@ public class ResApiNewTxListCustom {
             } catch (JSONException e) {
             }
             return new Coin(denom, amount);
+
+        } else if (msgType.contains("kava") && msgType.contains("MsgCreateAtomicSwap")) {
+            try {
+                denom = getMsgs().getJSONObject(0).getJSONArray("amount").getJSONObject(0).getString("denom");
+                amount = getMsgs().getJSONObject(0).getJSONArray("amount").getJSONObject(0).getString("amount");
+            } catch (JSONException e) { }
+            return new Coin(denom, amount);
         }
         return null;
     }

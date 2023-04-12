@@ -827,32 +827,32 @@ public class WDp {
 
     public static String DpBNBTxType(Context c, BnbHistory history, String address) {
         String result = c.getString(R.string.tx_known);
-        if (history.txType.equals("NEW_ORDER")) {
+        if (history.getTxType().equals("NEW_ORDER")) {
             result = c.getString(R.string.tx_new_order);
 
-        } else if (history.txType.equals("CANCEL_ORDER")) {
+        } else if (history.getTxType().equals("CANCEL_ORDER")) {
             result = c.getString(R.string.tx_Cancel_order);
 
-        } else if (history.txType.equals("TRANSFER")) {
-            if (!TextUtils.isEmpty(history.fromAddr) && address.equals(history.fromAddr)) {
+        } else if (history.getTxType().equals("TRANSFER")) {
+            if (!TextUtils.isEmpty(history.getFromAddr()) && address.equals(history.getFromAddr())) {
                 result = c.getString(R.string.tx_send);
             } else {
                 result = c.getString(R.string.tx_receive);
             }
 
-        } else if (history.txType.equals("HTL_TRANSFER")) {
-            if (history.fromAddr.equals(address)) {
+        } else if (history.getTxType().equals("HTL_TRANSFER")) {
+            if (history.getFromAddr().equals(address)) {
                 result = c.getString(R.string.tx_send_htlc);
-            } else if (history.toAddr.equals(address)) {
+            } else if (history.getToAddr().equals(address)) {
                 result = c.getString(R.string.tx_receive_htlc);
             } else {
                 result = c.getString(R.string.tx_create_htlc);
             }
 
-        } else if (history.txType.equals("CLAIM_HTL")) {
+        } else if (history.getTxType().equals("CLAIM_HTL")) {
             result = c.getString(R.string.tx_claim_htlc);
 
-        } else if (history.txType.equals("REFUND_HTL")) {
+        } else if (history.getTxType().equals("REFUND_HTL")) {
             result = c.getString(R.string.tx_refund_htlc);
 
         }
@@ -1060,17 +1060,6 @@ public class WDp {
         } catch (Exception e) {
         }
 
-        return result;
-    }
-
-    public static String getTimeHistoryFormat(Context c, String rawValue) {
-        String result = "??";
-        try {
-            SimpleDateFormat blockDateFormat = new SimpleDateFormat(c.getString(R.string.str_tx_time_format));
-            SimpleDateFormat myFormat = new SimpleDateFormat(c.getString(R.string.str_dp_time_format4));
-            blockDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-            result = myFormat.format(blockDateFormat.parse(rawValue));
-        } catch (Exception e) { }
         return result;
     }
 
