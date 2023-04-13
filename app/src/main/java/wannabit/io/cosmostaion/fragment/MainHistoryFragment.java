@@ -29,6 +29,7 @@ import com.google.android.gms.common.util.CollectionUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -42,6 +43,7 @@ import wannabit.io.cosmostaion.dao.Account;
 import wannabit.io.cosmostaion.model.type.BnbHistory;
 import wannabit.io.cosmostaion.network.res.ResApiNewTxListCustom;
 import wannabit.io.cosmostaion.network.res.ResOkHistory;
+import wannabit.io.cosmostaion.network.res.ResOkHistory.Data.transactionData;
 import wannabit.io.cosmostaion.task.FetchTask.ApiAccountTxsHistoryTask;
 import wannabit.io.cosmostaion.task.FetchTask.BnbHistoryTask;
 import wannabit.io.cosmostaion.task.FetchTask.OkHistoryTask;
@@ -63,7 +65,7 @@ public class MainHistoryFragment extends BaseFragment implements TaskListener {
     private HistoryAdapter mHistoryAdapter;
 
     private ArrayList<BnbHistory> mBnbHistory = new ArrayList<>();
-    private ArrayList<ResOkHistory.Data.transactionData> mOkHistory = new ArrayList<>();
+    private ArrayList<transactionData> mOkHistory = new ArrayList<>();
     private ArrayList<ResApiNewTxListCustom> mApiNewTxCustomHistory = new ArrayList<>();
 
     private Account mAccount;
@@ -198,7 +200,7 @@ public class MainHistoryFragment extends BaseFragment implements TaskListener {
             }
 
         } else if (result.taskType == BaseConstant.TASK_FETCH_OK_HISTORY) {
-            mOkHistory = (ArrayList<ResOkHistory.Data.transactionData>) result.resultData;
+            mOkHistory = (ArrayList<transactionData>) result.resultData;
             if (!CollectionUtils.isEmpty(mOkHistory)) {
                 mEmptyHistory.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);
@@ -246,9 +248,12 @@ public class MainHistoryFragment extends BaseFragment implements TaskListener {
             if (isGRPC(mBaseChain)) {
                 final ResApiNewTxListCustom history = mApiNewTxCustomHistory.get(position);
                 holder.onBindNewHistory(getMainActivity(), getBaseDao(), mChainConfig, history);
-            } else {
+            } else if (mBaseChain.equals(BNB_MAIN)) {
                 final BnbHistory history = mBnbHistory.get(position);
                 holder.onBindBnbHistory(getMainActivity(), mChainConfig, history);
+            } else {
+                final transactionData history = mOkHistory.get(position);
+                holder.onBindOkHistory(getMainActivity(), mChainConfig, history);
             }
         }
 
@@ -367,9 +372,12 @@ public class MainHistoryFragment extends BaseFragment implements TaskListener {
                 if (isGRPC(mBaseChain)) {
                     return position == 0 || !getGrpcTxTimeFormat(mApiNewTxCustomHistory.get(position).data.timestamp)
                             .equals(getGrpcTxTimeFormat(mApiNewTxCustomHistory.get(position - 1).data.timestamp));
-                } else {
+                } else if (mBaseChain.equals(BNB_MAIN)) {
                     return position == 0 || !getBnbTxTimeFormat(mBnbHistory.get(position).getTimeStamp())
                             .equals(getBnbTxTimeFormat(mBnbHistory.get(position - 1).getTimeStamp()));
+                } else {
+                    return position == 0 || !getOkcTxTimeFormat(mOkHistory.get(position).transactionTime).
+                            equals(getOkcTxTimeFormat(mOkHistory.get(position - 1).transactionTime));
                 }
             }
 
@@ -385,12 +393,22 @@ public class MainHistoryFragment extends BaseFragment implements TaskListener {
                     } else {
                         return getGrpcTxTimeFormat(mApiNewTxCustomHistory.get(position).data.timestamp);
                     }
-                } else {
+                } else if (mBaseChain.equals(BNB_MAIN)) {
                     if (mBnbHistory != null && mBnbHistory.size() > 0) {
                         if (getNowTime.equalsIgnoreCase(getBnbTxTimeFormat(mBnbHistory.get(position).getTimeStamp()))) {
                             return "Today";
                         } else {
                             return getBnbTxTimeFormat(mBnbHistory.get(position).getTimeStamp());
+                        }
+                    } else {
+                        return "";
+                    }
+                } else {
+                    if (mOkHistory != null && mOkHistory.size() > 0) {
+                        if (getNowTime.equalsIgnoreCase(getOkcTxTimeFormat(mOkHistory.get(position).transactionTime))) {
+                            return "Today";
+                        } else {
+                            return getOkcTxTimeFormat(mOkHistory.get(position).transactionTime);
                         }
                     } else {
                         return "";
@@ -418,6 +436,17 @@ public class MainHistoryFragment extends BaseFragment implements TaskListener {
             SimpleDateFormat myFormat = new SimpleDateFormat(getString(R.string.str_dp_time_format4));
             blockDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
             result = myFormat.format(blockDateFormat.parse(rawValue));
+        } catch (Exception e) { }
+        return result;
+    }
+
+    private String getOkcTxTimeFormat(String timeStamp) {
+        String result = "??";
+        try {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(Long.parseLong(timeStamp));
+            SimpleDateFormat simpleFormat = new SimpleDateFormat(getString(R.string.str_dp_time_format4));
+            result = simpleFormat.format(calendar.getTimeInMillis());
         } catch (Exception e) { }
         return result;
     }

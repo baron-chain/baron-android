@@ -1205,8 +1205,8 @@
     <string name="tx_authz_grant">Authz Grant</string>
     <string name="tx_authz_revoke">Authz Revoke</string>
     <string name="tx_authz_exe">Authz Execute</string>
-    <string name="tx_authz_grant_allow">Fee Grant\nAllowance</string>
-    <string name="tx_authz_grant_revoke">Fee Grant\nRevoke</string>
+    <string name="tx_authz_grant_allow">Fee Grant Allowance</string>
+    <string name="tx_authz_grant_revoke">Fee Grant Revoke</string>
     <string name="tx_create_validator">Create Val</string>
     <string name="tx_edit_validator">Edit Val</string>
     <string name="tx_unjail">Unjail</string>
@@ -1221,12 +1221,12 @@
     <string name="tx_known">Unknown</string>
     <string name="tx_rizon_create_Token_swap">Receive Swap Token</string>
 
-    <string name="tx_kava_create_cdp">CDP\nOpen</string>
-    <string name="tx_kava_deposit_cdp">CDP\nDeposit</string>
-    <string name="tx_kava_withdraw_cdp">CDP\nWithdraw</string>
-    <string name="tx_kava_drawdebt_cdp">CDP\nBorrow</string>
-    <string name="tx_kava_repaydebt_cdp">CDP\nRepay</string>
-    <string name="tx_kava_liquidate_cdp">CDP\nLiquidate</string>
+    <string name="tx_kava_create_cdp">CDP Open</string>
+    <string name="tx_kava_deposit_cdp">CDP Deposit</string>
+    <string name="tx_kava_withdraw_cdp">CDP Withdraw</string>
+    <string name="tx_kava_drawdebt_cdp">CDP Borrow</string>
+    <string name="tx_kava_repaydebt_cdp">CDP Repay</string>
+    <string name="tx_kava_liquidate_cdp">CDP Liquidate</string>
     <string name="tx_send_htlc">BEP3 Send</string>
     <string name="tx_receive_htlc">BEP3 Receive</string>
     <string name="tx_create_htlc">BEP3 Create</string>
@@ -1235,23 +1235,23 @@
     <string name="tx_kava_bep3_create">BEP3 Send</string>
     <string name="tx_kava_bep3_claim">BEP3 Claim</string>
     <string name="tx_kava_bep3_refund">BEP3 Refund</string>
-    <string name="tx_kava_hard_deposit">Hard Lend\nDeposit</string>
-    <string name="tx_kava_hard_withdraw">Hard Lend\nWithdraw</string>
-    <string name="tx_kava_hard_borrow">Hard Lend\nBorrow</string>
-    <string name="tx_kava_hard_repay">Hard Lend\nRepay</string>
-    <string name="tx_kava_hard_liquidate">Hard Lend\nLiquidate</string>
+    <string name="tx_kava_hard_deposit">Hard Lend Deposit</string>
+    <string name="tx_kava_hard_withdraw">Hard Lend Withdraw</string>
+    <string name="tx_kava_hard_borrow">Hard Lend Borrow</string>
+    <string name="tx_kava_hard_repay">Hard Lend Repay</string>
+    <string name="tx_kava_hard_liquidate">Hard Lend Liquidate</string>
     <string name="tx_kava_swap_token">Swap Coin</string>
-    <string name="tx_kava_swap_deposit">Swap Pool\nDeposit</string>
-    <string name="tx_kava_swap_withdraw">Swap Pool\nWithdraw</string>
-    <string name="tx_kava_swap_incentive">Swap Pool\nIncentive</string>
-    <string name="tx_kava_delegator_incentive">Delegator\nIncentive</string>
+    <string name="tx_kava_swap_deposit">Swap Pool Deposit</string>
+    <string name="tx_kava_swap_withdraw">Swap Pool Withdraw</string>
+    <string name="tx_kava_swap_incentive">Swap Pool Incentive</string>
+    <string name="tx_kava_delegator_incentive">Delegator Incentive</string>
     <string name="tx_kava_auction_bid">Auction Bid</string>
-    <string name="tx_kava_save_deposit">Saving\nDeposit</string>
-    <string name="tx_kava_save_withdraw">Saving\nWithdraw</string>
-    <string name="tx_kava_hard_mint_incentive">USDX Minting\nIncentive</string>
-    <string name="tx_kava_hard_hard_incentive">Hard Lend\nIncentive</string>
-    <string name="tx_kava_hard_save_incentive">Incentive\nSaving</string>
-    <string name="tx_kava_hard_earn_incentive">Earn\nIncentive</string>
+    <string name="tx_kava_save_deposit">Saving Deposit</string>
+    <string name="tx_kava_save_withdraw">Saving Withdraw</string>
+    <string name="tx_kava_hard_mint_incentive">USDX Minting Incentive</string>
+    <string name="tx_kava_hard_hard_incentive">Hard Lend Incentive</string>
+    <string name="tx_kava_hard_save_incentive">Incentive Saving</string>
+    <string name="tx_kava_hard_earn_incentive">Earn Incentive</string>
 
     <string name="tx_kava_create_cdp2">CDP Open</string>
     <string name="tx_kava_deposit_cdp2">CDP Deposit</string>
@@ -1356,19 +1356,19 @@
     <string name="tx_block_user">Block User</string>
     <string name="tx_unblock_user">Unblock User</string>
 
-    <string name="tx_cosmwasm_store_code">Store\nContract Code</string>
-    <string name="tx_cosmwasm_instantiate">Instantiate\nContract</string>
-    <string name="tx_cosmwasm_execontract">Execute\nContract</string>
+    <string name="tx_cosmwasm_store_code">Store Contract Code</string>
+    <string name="tx_cosmwasm_instantiate">Instantiate Contract</string>
+    <string name="tx_cosmwasm_execontract">Execute Contract</string>
     <string name="tx_cosmwasm_store_code_title">Store Contract Code</string>
     <string name="tx_cosmwasm_instantiate_title">Instantiate Contract</string>
     <string name="tx_cosmwasm_execontract_title">Execute Contract</string>
 
     <string name="tx_crescent_liquid_stake">Liquid Stake</string>
     <string name="tx_crescent_liquid_unstake">Liquid Unstake</string>
-    <string name="tx_crescent_liquidity_deposit">Liquidity\nDeposit</string>
-    <string name="tx_crescent_liquidity_withdraw">Liquidity\nWithdraw</string>
-    <string name="tx_crescent_liquidity_create_pair">Liquidity\nCreate Pair</string>
-    <string name="tx_crescent_liquidity_create_pool">Liquidity\nCreate Pool</string>
+    <string name="tx_crescent_liquidity_deposit">Liquidity Deposit</string>
+    <string name="tx_crescent_liquidity_withdraw">Liquidity Withdraw</string>
+    <string name="tx_crescent_liquidity_create_pair">Liquidity Create Pair</string>
+    <string name="tx_crescent_liquidity_create_pool">Liquidity Create Pool</string>
     <string name="tx_crescent_liquidity_limit_order">Limit Order</string>
     <string name="tx_crescent_liquidity_market_order">Market Order</string>
     <string name="tx_crescent_liquidity_cancel_order">Cancel Order</string>
@@ -1376,16 +1376,16 @@
     <string name="tx_crescent_farming_stake">Farming Stake</string>
     <string name="tx_crescent_farming_unstake">Farming Unstake</string>
     <string name="tx_crescent_farming_harvest">Farming Harvest</string>
-    <string name="tx_crescent_farming_create_fixed_amount_plan">Farming\nCreate Plain(Amount)</string>
-    <string name="tx_crescent_farming_create_ratio_plan">Farming\nCreate Plain(Ratio)</string>
-    <string name="tx_crescent_farming_remove_plan">Farming\nRemove Plain</string>
-    <string name="tx_crescent_farming_advance_epoch">Farming\nEpoch</string>
+    <string name="tx_crescent_farming_create_fixed_amount_plan">Farming Create Plain(Amount)</string>
+    <string name="tx_crescent_farming_create_ratio_plan">Farming Create Plain(Ratio)</string>
+    <string name="tx_crescent_farming_remove_plan">Farming Remove Plain</string>
+    <string name="tx_crescent_farming_advance_epoch">Farming Epoch</string>
     <string name="tx_crescent_farming_claim">Airdrop</string>
 
-    <string name="tx_osmosis_super_fluid_delegate">SuperFluid\nStaking</string>
-    <string name="tx_osmosis_super_fluid_undelegate">SuperFluid\nUnstaking</string>
-    <string name="tx_osmosis_super_fluid_unbondinglock">SuperFluid\nUnbonding Lock</string>
-    <string name="tx_osmosis_super_fluid_lockanddelegate">SuperFluid\nLock <![CDATA[ & ]]> Staking</string>
+    <string name="tx_osmosis_super_fluid_delegate">SuperFluid Staking</string>
+    <string name="tx_osmosis_super_fluid_undelegate">SuperFluid Unstaking</string>
+    <string name="tx_osmosis_super_fluid_unbondinglock">SuperFluid Unbonding Lock</string>
+    <string name="tx_osmosis_super_fluid_lockanddelegate">SuperFluid Lock <![CDATA[ & ]]> Staking</string>
 
     <string name="tx_axelar_refund_msg_request">Refund Msg Request</string>
     <string name="tx_axelar_link_request">Link Request</string>
@@ -1400,11 +1400,11 @@
     <string name="tx_injective_cancel_limit_order">Cancel Derivative Order</string>
     <string name="tx_injective_cancel_spot_order">Cancel Spot Order</string>
 
-    <string name="str_tx_kava_earn_delegateDeposit">Earn Liquidate\nDelegate Deposit</string>
+    <string name="str_tx_kava_earn_delegateDeposit">Earn Liquidate Delegate Deposit</string>
     <string name="tx_kava_earn_delegateDeposit">Earn Liquidate Delegate Deposit</string>
-    <string name="str_tx_kava_earn_withdraw">Earn Liquidate\nWithdraw</string>
+    <string name="str_tx_kava_earn_withdraw">Earn Liquidate Withdraw</string>
     <string name="tx_kava_earn_withdraw">Earn Liquidate Withdraw</string>
-    <string name="tx_kava_earn_deposit">Earn Liquidate\nDeposit</string>
+    <string name="tx_kava_earn_deposit">Earn Liquidate Deposit</string>
 
     <string name="tx_stride_liquid_stake">Liquid Stake</string>
     <string name="tx_stride_redeem_stake">Redeem Stake</string>

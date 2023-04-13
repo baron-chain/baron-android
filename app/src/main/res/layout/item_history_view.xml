@@ -27,13 +27,31 @@
             android:paddingHorizontal="@dimen/space_15"
             android:paddingVertical="@dimen/space_11">
 
+            <ImageView
+                android:id="@+id/history_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_4"
+                android:layout_marginRight="@dimen/space_4"
+                app:srcCompat="@drawable/icon_success" />
+
             <TextView
                 android:id="@+id/history_type"
                 style="@style/font_rr_14_black_daynight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/history_status"
                 android:maxWidth="@dimen/space_150"
-                android:lines="2" />
+                android:lines="1"
+                android:ellipsize="middle" />
+
+            <TextView
+                android:id="@+id/history_height"
+                style="@style/font_rr_12_gray1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/history_type"
+                android:layout_marginTop="@dimen/space_9" />
 
             <TextView
                 android:id="@+id/history_event_symbol"
@@ -65,30 +83,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/history_event_symbol"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/space_4"
+                android:layout_marginTop="@dimen/space_9"
                 android:layout_marginLeft="@dimen/space_4"
                 android:maxWidth="@dimen/space_120"
                 android:gravity="right"
                 android:lines="1"
                 android:ellipsize="middle" />
-
-            <ImageView
-                android:id="@+id/history_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_success"
-                android:layout_toLeftOf="@+id/history_hash"
-                android:layout_below="@+id/history_event_symbol"
-                android:layout_marginTop="@dimen/space_6"/>
-
-            <TextView
-                android:id="@+id/history_height"
-                style="@style/font_rr_12_gray1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/history_hash"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/space_4" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

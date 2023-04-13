@@ -3,6 +3,7 @@ package wannabit.io.cosmostaion.widget
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.text.TextUtils
 import android.view.View
 import androidx.core.content.ContextCompat
 import wannabit.io.cosmostaion.R
@@ -12,8 +13,8 @@ import wannabit.io.cosmostaion.base.chains.ChainConfig
 import wannabit.io.cosmostaion.databinding.ItemHistoryViewBinding
 import wannabit.io.cosmostaion.model.type.BnbHistory
 import wannabit.io.cosmostaion.network.res.ResApiNewTxListCustom
+import wannabit.io.cosmostaion.network.res.ResOkHistory.Data.transactionData
 import wannabit.io.cosmostaion.utils.WDp
-import wannabit.io.cosmostaion.utils.visibleOrGone
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,7 +31,7 @@ class HistoryHolder(itemView: View) : BaseHolder(itemView) {
                 if (history.isSuccess) historyStatus.setImageResource(R.drawable.icon_success)
                 else historyStatus.setImageResource(R.drawable.icon_fail)
                 historyHash.text = history.data.txhash
-                historyHeight.text = history.data.height + " (" + getGrpcTime(mainActivity, history.data.timestamp) + ")"
+                historyHeight.text = getGrpcTime(mainActivity, history.data.timestamp) + " (" + history.data.height + ")"
 
                 val txCoin = history.getDpCoin(mainActivity.mBaseChain)
                 if (type == mainActivity.getString(R.string.tx_vote)) {
@@ -58,9 +59,11 @@ class HistoryHolder(itemView: View) : BaseHolder(itemView) {
         binding = ItemHistoryViewBinding.bind(itemView)
         binding.apply {
             historyType.text = WDp.DpBNBTxType(mainActivity, history, mainActivity.mAccount.address)
-            historyStatus.visibleOrGone(history.code == 0)
             historyHash.text = history.txHash
-            historyHeight.text = history.blockHeight.toString() + " (" + getBnbTime(mainActivity, history.timeStamp) + ")"
+            historyHeight.text = getBnbTime(mainActivity, history.timeStamp) + " (" + history.blockHeight.toString() + ")"
+
+            if (history.code > 0) historyStatus.setImageResource(R.drawable.icon_fail)
+            else historyStatus.setImageResource(R.drawable.icon_success)
 
             history.txAsset?.let {
                 WDp.setDpCoin(mainActivity, mainActivity.baseDao, chainConfig, it, history.value, historyEventSymbol, historyEventAmount)
@@ -78,8 +81,20 @@ class HistoryHolder(itemView: View) : BaseHolder(itemView) {
         }
     }
 
-    fun onBindOkcHistory() {
+    fun onBindOkHistory(mainActivity: MainActivity, chainConfig: ChainConfig, history: transactionData) {
+        binding = ItemHistoryViewBinding.bind(itemView)
+        binding.apply {
+            historyType.ellipsize = TextUtils.TruncateAt.MIDDLE
+            historyType.text = history.txId
 
+            historyEventAmount.text = ""
+            historyEventSymbol.text = "-"
+            historyHash.text = history.blockHash
+            historyHeight.text = getOkcTime(mainActivity, history.transactionTime) + " (" + history.height + ")"
+
+            if (history.state == "success") historyStatus.setImageResource(R.drawable.icon_success)
+            else historyStatus.setImageResource(R.drawable.icon_fail)
+        }
     }
 
     private fun getGrpcTime(c: Context, timeStamp: String): String {
@@ -94,5 +109,12 @@ class HistoryHolder(itemView: View) : BaseHolder(itemView) {
         val myFormat = SimpleDateFormat(c.getString(R.string.str_dp_time_format6))
         txTimeFormat.timeZone = TimeZone.getTimeZone("UTC")
         return myFormat.format(txTimeFormat.parse(timeStamp))
+    }
+
+    private fun getOkcTime(c: Context, timeStamp: String): String {
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = timeStamp.toLong()
+        val simpleFormat = SimpleDateFormat(c.getString(R.string.str_dp_time_format6))
+        return simpleFormat.format(calendar.timeInMillis)
     }
 }
