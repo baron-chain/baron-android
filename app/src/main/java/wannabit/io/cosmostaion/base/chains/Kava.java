@@ -32,15 +32,19 @@ public class Kava extends ChainConfig {
     public int mainDenomImg() { return R.drawable.token_kava; }
     public String mainDenom() { return "ukava"; }
     public String addressPrefix() { return "kava"; }
+    public boolean ethAccountType() { return true; }
 
+    public boolean evmSupport() { return true; }
     public boolean bridgeCoinSupport() { return true; }
     public boolean dexSupport() { return true; }
     public boolean wcSupport() { return true; }
     public boolean authzSupport() { return true; }
     public boolean moonPaySupport() { return true; }
+    public boolean erc20CoinSupport() { return true; }
 
     public String grpcUrl() { return "grpc-kava.cosmostation.io"; }
     public String lcdUrl() { return "https://lcd-kava.cosmostation.io/"; }
+    public String rpcUrl() { return "https://rpc-kava-app.cosmostation.io"; }
 
     public String explorerUrl() { return EXPLORER_BASE_URL + "kava/"; }
     public String homeInfoLink() { return  "https://www.kava.io"; }
@@ -52,13 +56,15 @@ public class Kava extends ChainConfig {
     public List<ChildNumber> setParentPath(int customPath) {
         if (customPath == 0) {
             return ImmutableList.of(new ChildNumber(44, true), new ChildNumber(118, true), ChildNumber.ZERO_HARDENED, ChildNumber.ZERO);
-        } else {
+        } else if (customPath == 1) {
             return ImmutableList.of(new ChildNumber(44, true), new ChildNumber(459, true), ChildNumber.ZERO_HARDENED, ChildNumber.ZERO);
+        } else {
+            return ImmutableList.of(new ChildNumber(44, true), new ChildNumber(60, true), ChildNumber.ZERO_HARDENED, ChildNumber.ZERO);
         }
     }
 
     public ArrayList<String> supportHdPaths() {
-        return Lists.newArrayList("m/44'/118'/0'/0/X", defaultPath());
+        return Lists.newArrayList("m/44'/118'/0'/0/X", defaultPath(), "m/44'/60'/0'/0/X");
     }
 
 

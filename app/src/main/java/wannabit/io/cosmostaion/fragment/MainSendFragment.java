@@ -153,7 +153,7 @@ public class MainSendFragment extends BaseFragment {
 
         getMainActivity().setAccountKeyStatus(getActivity(), mAccount, mChainConfig, itemKeyStatus);
         mWalletAddress.setText(mAccount.address);
-        getMainActivity().setEthAddress(mChainConfig, mEthAddress);
+        getMainActivity().setEthAddress(mChainConfig, mAccount, mEthAddress);
         mTotalValue.setText(WDp.dpAllAssetValue(mBaseChain, getBaseDao(), mChainConfig));
         mMainWalletAdapter.notifyDataSetChanged();
     }

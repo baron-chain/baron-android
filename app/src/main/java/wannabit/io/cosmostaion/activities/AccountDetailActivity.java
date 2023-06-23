@@ -173,7 +173,7 @@ public class AccountDetailActivity extends BaseActivity implements View.OnClickL
             mAccountName.setText(mAccount.nickName);
         }
         mAccountAddress.setText(mAccount.address);
-        setEthAddress(mChainConfig, mAccountEthAddress);
+        setEthAddress(mChainConfig, mAccount, mAccountEthAddress);
         mAccountGenTime.setText(WDp.getDpTime(getBaseContext(), mAccount.importTime));
 
         if (mAccount.hasPrivateKey && mAccount.fromMnemonic) {

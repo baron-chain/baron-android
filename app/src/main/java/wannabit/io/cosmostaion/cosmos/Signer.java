@@ -1260,7 +1260,8 @@ public class Signer {
 
     public static byte[] getGrpcByteSingleSignature(ECKey key, byte[] toSignByte, int pubKeyType, BaseChain baseChain) {
         byte[] sigData = new byte[64];
-        if (baseChain.equals(BaseChain.INJ_MAIN) || baseChain.equals(BaseChain.EVMOS_MAIN) || (baseChain.equals(BaseChain.XPLA_MAIN) && pubKeyType == 1) || baseChain.equals(BaseChain.CANTO_MAIN)) {
+        if ((baseChain.equals(BaseChain.KAVA_MAIN) && pubKeyType == 2) || baseChain.equals(BaseChain.INJ_MAIN) || baseChain.equals(BaseChain.EVMOS_MAIN) ||
+                (baseChain.equals(BaseChain.XPLA_MAIN) && pubKeyType == 1) || baseChain.equals(BaseChain.CANTO_MAIN)) {
             BigInteger privateKey = new BigInteger(key.getPrivateKeyAsHex(), 16);
             Sign.SignatureData sig = Sign.signMessage(toSignByte, ECKeyPair.create(privateKey));
             System.arraycopy(sig.getR(), 0, sigData, 0, 32);

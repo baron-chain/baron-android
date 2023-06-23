@@ -1,6 +1,7 @@
 package wannabit.io.cosmostaion.activities.setting;
 
 import static wannabit.io.cosmostaion.base.BaseChain.BNB_MAIN;
+import static wannabit.io.cosmostaion.base.BaseChain.KAVA_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.OKEX_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.isGRPC;
 
@@ -28,9 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import cosmos.base.v1beta1.CoinOuterClass;
@@ -299,19 +298,14 @@ public class WalletDeriveActivity extends BaseActivity implements View.OnClickLi
                     if (derive.selected) {
                         holder.accountCheck.setVisibility(View.VISIBLE);
                         holder.accountCard.setBackground(ContextCompat.getDrawable(WalletDeriveActivity.this, R.drawable.box_account_selected_photon));
-                        if (chainConfig.supportHdPaths().size() > 1 && !derive.fullPath.equalsIgnoreCase(chainConfig.defaultPath().replace("X", String.valueOf(mPath)))) {
-                            CommonAlertDialog.showDoubleButton(WalletDeriveActivity.this, Html.fromHtml("<font color=\"#f31963\">" + "<small>" + getString(R.string.str_key_path_warning) + "</small>" + "</font>", Html.FROM_HTML_MODE_COMPACT), null,
-                                    getString(R.string.str_cancel),
-                                    dialogView -> {
-                                        derive.selected = false;
-                                        holder.accountCheck.setVisibility(View.GONE);
-                                        holder.accountCard.setBackground(ContextCompat.getDrawable(WalletDeriveActivity.this, R.drawable.box_account_unselected));
-                                    },
-                                    Html.fromHtml("<font color=\"#05d2dd\">" + getString(R.string.str_confirm) + "</font>", Html.FROM_HTML_MODE_COMPACT),
-                                    dialogView -> {
-                                        holder.accountCheck.setVisibility(View.VISIBLE);
-                                        holder.accountCard.setBackground(ContextCompat.getDrawable(WalletDeriveActivity.this, R.drawable.box_account_selected_photon));
-                                    }, false);
+                        if (chainConfig.baseChain().equals(KAVA_MAIN)) {
+                            if (derive.fullPath.contains("118'")) {
+                                onShowNotDefaultDialog(derive, holder.accountCheck, holder.accountCard);
+                            }
+                        } else {
+                            if (chainConfig.supportHdPaths().size() > 1 && !derive.fullPath.equalsIgnoreCase(chainConfig.defaultPath().replace("X", String.valueOf(mPath)))) {
+                                onShowNotDefaultDialog(derive, holder.accountCheck, holder.accountCard);
+                            }
                         }
                     } else {
                         holder.accountCheck.setVisibility(View.GONE);
@@ -467,5 +461,20 @@ public class WalletDeriveActivity extends BaseActivity implements View.OnClickLi
             onStartMainActivity(0);
             finish();
         }
+    }
+
+    private void onShowNotDefaultDialog(Derive derive, ImageView accountCheck, FrameLayout accountCard) {
+        CommonAlertDialog.showDoubleButton(WalletDeriveActivity.this, Html.fromHtml("<font color=\"#f31963\">" + "<small>" + getString(R.string.str_key_path_warning) + "</small>" + "</font>", Html.FROM_HTML_MODE_COMPACT), null,
+                getString(R.string.str_cancel),
+                dialogView -> {
+                    derive.selected = false;
+                    accountCheck.setVisibility(View.GONE);
+                    accountCard.setBackground(ContextCompat.getDrawable(WalletDeriveActivity.this, R.drawable.box_account_unselected));
+                },
+                Html.fromHtml("<font color=\"#05d2dd\">" + getString(R.string.str_confirm) + "</font>", Html.FROM_HTML_MODE_COMPACT),
+                dialogView -> {
+                    accountCheck.setVisibility(View.VISIBLE);
+                    accountCard.setBackground(ContextCompat.getDrawable(WalletDeriveActivity.this, R.drawable.box_account_selected_photon));
+                }, false);
     }
 }

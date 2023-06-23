@@ -5,6 +5,7 @@ import static wannabit.io.cosmostaion.base.BaseChain.CANTO_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.EVMOS_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.FETCHAI_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.INJ_MAIN;
+import static wannabit.io.cosmostaion.base.BaseChain.KAVA_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.OKEX_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.XPLA_MAIN;
 import static wannabit.io.cosmostaion.base.BaseChain.getChain;
@@ -226,7 +227,7 @@ public class WKey {
             injective.crypto.v1beta1.ethsecp256k1.Keys.PubKey pubKey = injective.crypto.v1beta1.ethsecp256k1.Keys.PubKey.newBuilder().setKey(ByteString.copyFrom(ecKey.getPubKey())).build();
             return Any.newBuilder().setTypeUrl("/injective.crypto.v1beta1.ethsecp256k1.PubKey").setValue(pubKey.toByteString()).build();
 
-        } else if (baseChain.equals(EVMOS_MAIN) || (baseChain.equals(XPLA_MAIN) && pubkeyType == 1) || baseChain.equals(CANTO_MAIN)) {
+        } else if ((baseChain.equals(KAVA_MAIN) && pubkeyType == 2) || baseChain.equals(EVMOS_MAIN) || (baseChain.equals(XPLA_MAIN) && pubkeyType == 1) || baseChain.equals(CANTO_MAIN)) {
             ethermint.crypto.v1.ethsecp256k1.Keys.PubKey pubKey = ethermint.crypto.v1.ethsecp256k1.Keys.PubKey.newBuilder().setKey(ByteString.copyFrom(ecKey.getPubKey())).build();
             return Any.newBuilder().setTypeUrl("/ethermint.crypto.v1.ethsecp256k1.PubKey").setValue(pubKey.toByteString()).build();
 
@@ -295,6 +296,12 @@ public class WKey {
                 } else {
                     return genEthermintBech32Address(chainConfig.addressPrefix(), childKey.getPrivateKeyAsHex());
                 }
+            } else if (chain.equals(KAVA_MAIN)) {
+                if (customPath == 2) {
+                    return genEthermintBech32Address(chainConfig.addressPrefix(), childKey.getPrivateKeyAsHex());
+                } else {
+                    return genTendermintBech32Address(chain, childKey.getPublicKeyAsHex());
+                }
             } else {
                 return genEthermintBech32Address(chainConfig.addressPrefix(), childKey.getPrivateKeyAsHex());
             }
@@ -317,6 +324,12 @@ public class WKey {
                     return genTendermintBech32Address(chain, generatePubKeyHexFromPriv(pKey));
                 } else {
                     return genEthermintBech32Address(chainConfig.addressPrefix(), pKey);
+                }
+            } else if (chain.equals(KAVA_MAIN)) {
+                if (customPath == 2) {
+                    return genEthermintBech32Address(chainConfig.addressPrefix(), pKey);
+                } else {
+                    return genTendermintBech32Address(chain, generatePubKeyHexFromPriv(pKey));
                 }
             } else {
                 return genEthermintBech32Address(chainConfig.addressPrefix(), pKey);

@@ -150,7 +150,7 @@ public class MainTokensFragment extends BaseFragment {
         mCardView.setCardBackgroundColor(ContextCompat.getColor(getMainActivity(), mChainConfig.chainBgColor()));
         getMainActivity().setAccountKeyStatus(getActivity(), mAccount, mChainConfig, itemKeyStatus);
         mWalletAddress.setText(mAccount.address);
-        getMainActivity().setEthAddress(mChainConfig, mEthAddress);
+        getMainActivity().setEthAddress(mChainConfig, mAccount, mEthAddress);
         mTotalValue.setText(WDp.dpAllAssetValue(mBaseChain, getBaseDao(), mChainConfig));
     }
 
@@ -560,8 +560,16 @@ public class MainTokensFragment extends BaseFragment {
             int defaultCount = mNativeGrpc.size() + mIbcGrpc.size();
             if (isGRPC(mBaseChain)) {
                 if (mChainConfig.erc20CoinSupport()) {
-                    if (mCwGrpc.size() > 0) return defaultCount + mEtherGrpc.size() + mCwGrpc.size() + 1;
-                    else return defaultCount + mEtherGrpc.size() + mCwGrpc.size();
+                    if (mCwGrpc.size() > 0) {
+                        if (mChainConfig.baseChain().equals(KAVA_MAIN)) {
+                            if (mAccount.customPath == 2) return defaultCount + mEtherGrpc.size() + mCwGrpc.size() + 1;
+                            else return defaultCount + mEtherGrpc.size();
+                        } else {
+                            return defaultCount + mEtherGrpc.size() + mCwGrpc.size() + 1;
+                        }
+                    } else {
+                        return defaultCount + mEtherGrpc.size() + mCwGrpc.size();
+                    }
                 } else {
                     return defaultCount + mEtherGrpc.size();
                 }

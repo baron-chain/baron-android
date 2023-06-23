@@ -122,7 +122,7 @@ public class StakingTokenGrpcActivity extends BaseActivity implements View.OnCli
         mBtnAddressPopup.setCardBackgroundColor(ContextCompat.getColor(StakingTokenGrpcActivity.this, mChainConfig.chainBgColor()));
         setAccountKeyStatus(this, mAccount, mChainConfig, mKeyState);
         mAddress.setText(mAccount.address);
-        setEthAddress(mChainConfig, mEthAddress);
+        setEthAddress(mChainConfig, mAccount, mEthAddress);
         mSwipeRefreshLayout.setRefreshing(false);
     }
 

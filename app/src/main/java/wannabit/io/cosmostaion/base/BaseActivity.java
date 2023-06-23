@@ -272,15 +272,24 @@ public class BaseActivity extends AppCompatActivity implements TaskListener {
         }
     }
 
-    public void setEthAddress(ChainConfig chainConfig, TextView ethTxt) {
-        if (chainConfig.evmSupport()) {
-            ethTxt.setVisibility(View.VISIBLE);
-            try {
-                ethTxt.setText("(" + WKey.convertBech32ToEvm(mAccount.address) + ")");
-            } catch (Exception e) {
-                e.printStackTrace();
+    public void setEthAddress(ChainConfig chainConfig, Account account, TextView ethTxt) {
+        try {
+            if (chainConfig.evmSupport()) {
+                ethTxt.setVisibility(View.VISIBLE);
+                if (chainConfig.baseChain().equals(KAVA_MAIN)) {
+                    if (account.customPath == 2) {
+                        ethTxt.setText("(" + WKey.convertBech32ToEvm(mAccount.address) + ")");
+                    } else {
+                        ethTxt.setVisibility(View.GONE);
+                    }
+                } else {
+                    ethTxt.setText("(" + WKey.convertBech32ToEvm(mAccount.address) + ")");
+                }
+            } else {
+                ethTxt.setVisibility(View.GONE);
             }
-        } else {
+
+        } catch (Exception e) {
             ethTxt.setVisibility(View.GONE);
         }
     }
@@ -290,14 +299,22 @@ public class BaseActivity extends AppCompatActivity implements TaskListener {
         if (TextUtils.isEmpty(account.nickName)) nickName = getString(R.string.str_my_wallet) + account.id;
         else nickName = account.nickName;
 
-        if (chainConfig.evmSupport()) {
-            try {
-                String ethAddress = WKey.convertBech32ToEvm(account.address);
-                CommonAlertDialog.showDoubleButton(this, getString(R.string.str_address_type), "", getString(R.string.str_tender_type), view -> onClickShowAccountDialog(account.address, nickName), getString(R.string.str_eth_type), view -> onClickShowAccountDialog(ethAddress, nickName));
-            } catch (Exception e) {
-                e.printStackTrace();
+        try {
+            String ethAddress = WKey.convertBech32ToEvm(account.address);
+            if (chainConfig.evmSupport()) {
+                if (chainConfig.baseChain().equals(KAVA_MAIN)) {
+                    if (account.customPath == 2) {
+                        CommonAlertDialog.showDoubleButton(this, getString(R.string.str_address_type), "", getString(R.string.str_tender_type), view -> onClickShowAccountDialog(account.address, nickName), getString(R.string.str_eth_type), view -> onClickShowAccountDialog(ethAddress, nickName));
+                    } else {
+                        onClickShowAccountDialog(account.address, nickName);
+                    }
+                } else {
+                    CommonAlertDialog.showDoubleButton(this, getString(R.string.str_address_type), "", getString(R.string.str_tender_type), view -> onClickShowAccountDialog(account.address, nickName), getString(R.string.str_eth_type), view -> onClickShowAccountDialog(ethAddress, nickName));
+                }
+            } else {
+                onClickShowAccountDialog(account.address, nickName);
             }
-        } else {
+        } catch (Exception e) {
             onClickShowAccountDialog(account.address, nickName);
         }
     }
