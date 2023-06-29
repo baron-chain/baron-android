@@ -220,6 +220,9 @@ public class ChainFactory {
 
                 case NEUTRON_TEST:
                     return new NeutronTest();
+
+                case DYDX_TEST:
+                    return new DydxTest();
             }
         }
         return null;

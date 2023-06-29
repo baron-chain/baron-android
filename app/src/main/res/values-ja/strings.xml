@@ -284,6 +284,7 @@
     <string name="str_front_guide_msg_noble"><![CDATA[NobleはIBC生態系上、ネイティブトークン発行のために設計されたCosmosSDKベースのブロックチェーンです。]]></string>
     <string name="str_front_guide_msg_stafi"><![CDATA[StaFi Hubはクロスチェーンリキッドステーキングのために設計されたCosmos SDKベースのブロックチェーンネットワークです。]]></string>
     <string name="str_front_guide_msg_neutron"><![CDATA[Neutronは、CosmosハブのInterchain Securityを使用する非許可型CosmWasmプラットフォームです。]]></string>
+    <string name="str_front_guide_msg_dydx"><![CDATA[dYdXは手数料なしで無期限取引を支援する脱中央化取引所のために設計されたCosmosSDKベースのアプリチェーンです。]]></string>
 
 
     <string name="str_current_reward_address">現在利子支給アドレス</string>
